@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="id" x-data="failedPage()">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran Gagal - DEVACODE</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 4px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { transform: scale(1.1); }
+            70% { transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes ripple {
+            0% { transform: scale(0.8); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+        
+        .animate-fadeInUp { animation: fadeInUp 0.6s ease-out forwards; }
+        .animate-fadeInDown { animation: fadeInDown 0.6s ease-out forwards; }
+        .animate-scaleIn { animation: scaleIn 0.5s ease-out forwards; }
+        .animate-bounceIn { animation: bounceIn 0.8s ease-out forwards; }
+        .animate-shake { animation: shake 0.6s ease-out; }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-pulse-slow { animation: pulse 2s ease-in-out infinite; }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .delay-700 { animation-delay: 0.7s; }
+        
+        /* Failed X mark animation */
+        .failed-x-mark {
+            width: 100px;
+            height: 100px;
+            position: relative;
+        }
+        .failed-x-mark .x-icon {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            border-radius: 50%;
+        }
+        .failed-x-mark .x-icon::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        .failed-x-mark .x-icon .icon-line {
+            height: 4px;
+            background-color: white;
+            display: block;
+            border-radius: 2px;
+            position: absolute;
+            z-index: 10;
+            width: 50px;
+            left: 50%;
+            top: 50%;
+        }
+        .failed-x-mark .x-icon .icon-line.line-left {
+            transform: translate(-50%, -50%) rotate(45deg);
+            animation: scaleIn 0.3s ease-out 0.4s both;
+        }
+        .failed-x-mark .x-icon .icon-line.line-right {
+            transform: translate(-50%, -50%) rotate(-45deg);
+            animation: scaleIn 0.3s ease-out 0.5s both;
+        }
+        
+        /* Ripple effect */
+        .ripple-container {
+            position: absolute;
+            inset: -20px;
+            border-radius: 50%;
+        }
+        .ripple {
+            position: absolute;
+            inset: 0;
+            border: 2px solid #ef4444;
+            border-radius: 50%;
+            animation: ripple 2s ease-out infinite;
+        }
+        .ripple:nth-child(2) { animation-delay: 0.5s; }
+        .ripple:nth-child(3) { animation-delay: 1s; }
+        
+        /* Glass effect */
+        .glass {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        /* Button shine effect */
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-shine::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .btn-shine:hover::before { left: 100%; }
+        
+        /* Error card styles */
+        .error-pattern {
+            background-image: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(239, 68, 68, 0.03) 10px,
+                rgba(239, 68, 68, 0.03) 20px
+            );
+        }
+    </style>
+</head>
+<body class="bg-neutral-950 text-white min-h-screen">
+    
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass border-b border-neutral-800/50 animate-fadeInDown">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-2 group">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class='bx bx-code-alt text-black text-lg sm:text-xl'></i>
+                    </div>
+                    <span class="font-playfair text-lg sm:text-xl lg:text-2xl font-bold tracking-wide">DEVACODE</span>
+                </a>
+                
+                <!-- Desktop Links -->
+                <div class="hidden sm:flex items-center gap-4">
+                    <a href="index.html" class="text-neutral-400 hover:text-white text-sm transition-colors flex items-center gap-1">
+                        <i class='bx bx-home-alt'></i> Beranda
+                    </a>
+                    <a href="#" class="text-neutral-400 hover:text-white text-sm transition-colors flex items-center gap-1">
+                        <i class='bx bx-store'></i> Produk
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="pt-20 sm:pt-24 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center justify-center">
+        <div class="max-w-lg w-full">
+            
+            <!-- Failed Icon -->
+            <div class="text-center mb-6 sm:mb-8">
+                <div class="failed-x-mark mx-auto mb-6 animate-bounceIn relative">
+                    <div class="ripple-container">
+                        <div class="ripple"></div>
+                        <div class="ripple"></div>
+                        <div class="ripple"></div>
+                    </div>
+                    <div class="x-icon">
+                        <span class="icon-line line-left"></span>
+                        <span class="icon-line line-right"></span>
+                    </div>
+                </div>
+                <h1 class="font-playfair text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 animate-fadeInUp delay-300">
+                    Pembayaran Gagal
+                </h1>
+                <p class="text-neutral-400 text-sm sm:text-base animate-fadeInUp delay-400">
+                    Maaf, terjadi kesalahan saat memproses pembayaran Anda
+                </p>
+            </div>
+            
+            <!-- Error Info Card -->
+            <div class="animate-fadeInUp delay-500">
+                <div class="bg-neutral-900 border border-red-500/20 rounded-2xl overflow-hidden error-pattern">
+                    <!-- Error Header -->
+                    <div class="px-5 sm:px-6 py-4 bg-red-500/10 border-b border-red-500/20 flex items-center gap-3">
+                        <div class="w-10 h-10 bg-red-500/20 rounded-lg flex items-center justify-center">
+                            <i class='bx bx-error-circle text-red-400 text-xl'></i>
+                        </div>
+                        <div>
+                            <p class="font-medium text-sm sm:text-base text-red-400">Transaksi Dibatalkan</p>
+                            <p class="text-neutral-500 text-xs mt-0.5">Kode Error: <span class="font-mono" x-text="error.code">ERR_PAYMENT_001</span></p>
+                        </div>
+                    </div>
+                    
+                    <!-- Error Details -->
+                    <div class="px-5 sm:px-6 py-4 border-b border-neutral-800">
+                        <p class="text-neutral-500 text-xs mb-3 flex items-center gap-1">
+                            <i class='bx bx-info-circle'></i> Detail Kesalahan
+                        </p>
+                        <p class="text-neutral-300 text-sm sm:text-base" x-text="error.message">
+                            Pembayaran tidak dapat diproses karena sesi telah berakhir atau terjadi kesalahan koneksi.
+                        </p>
+                    </div>
+                    
+                    <!-- Transaction Info -->
+                    <div class="px-5 sm:px-6 py-4 border-b border-neutral-800">
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <p class="text-neutral-500 text-xs mb-1">ID Transaksi</p>
+                                <p class="font-mono text-sm" x-text="error.transactionId">TRX-0000000000</p>
+                            </div>
+                            <div>
+                                <p class="text-neutral-500 text-xs mb-1">Waktu</p>
+                                <p class="text-sm" x-text="error.timestamp">15 Jan 2024, 14:30</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Possible Reasons -->
+                    <div class="px-5 sm:px-6 py-4">
+                        <p class="text-neutral-500 text-xs mb-3 flex items-center gap-1">
+                            <i class='bx bx-question-mark'></i> Kemungkinan Penyebab
+                        </p>
+                        <ul class="space-y-2">
+                            <template x-for="reason in error.reasons" :key="reason">
+                                <li class="flex items-start gap-2 text-sm text-neutral-400">
+                                    <i class='bx bx-chevron-right text-neutral-600 mt-0.5'></i>
+                                    <span x-text="reason"></span>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tips Card -->
+            <div class="mt-4 animate-fadeInUp delay-600">
+                <div class="bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6">
+                    <p class="font-medium text-sm sm:text-base mb-3 flex items-center gap-2">
+                        <i class='bx bx-bulb text-yellow-400'></i> Tips untuk Mencoba Lagi
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-sm text-neutral-400">
+                            <div class="w-6 h-6 bg-neutral-800 rounded-lg flex items-center justify-center flex-shrink-0 text-xs font-bold">1</div>
+                            <span>Pastikan koneksi internet Anda stabil</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-neutral-400">
+                            <div class="w-6 h-6 bg-neutral-800 rounded-lg flex items-center justify-center flex-shrink-0 text-xs font-bold">2</div>
+                            <span>Periksa saldo atau limit kartu/e-wallet Anda</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-neutral-400">
+                            <div class="w-6 h-6 bg-neutral-800 rounded-lg flex items-center justify-center flex-shrink-0 text-xs font-bold">3</div>
+                            <span>Coba gunakan metode pembayaran lain</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-neutral-400">
+                            <div class="w-6 h-6 bg-neutral-800 rounded-lg flex items-center justify-center flex-shrink-0 text-xs font-bold">4</div>
+                            <span>Hubungi support jika masalah berlanjut</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="mt-6 sm:mt-8 space-y-3 animate-fadeInUp delay-700">
+                <a href="detail.html" class="btn-shine w-full bg-white text-black py-3.5 sm:py-4 rounded-xl font-bold text-sm sm:text-base hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2">
+                    <i class='bx bx-refresh text-lg'></i> Coba Lagi
+                </a>
+                <div class="grid grid-cols-2 gap-3">
+                    <a href="index.html" class="w-full bg-neutral-800 text-white py-3 sm:py-3.5 rounded-xl font-semibold text-sm hover:bg-neutral-700 transition-colors flex items-center justify-center gap-2 border border-neutral-700">
+                        <i class='bx bx-home-alt'></i> Beranda
+                    </a>
+                    <button @click="showSupport = true" class="w-full bg-neutral-800 text-white py-3 sm:py-3.5 rounded-xl font-semibold text-sm hover:bg-neutral-700 transition-colors flex items-center justify-center gap-2 border border-neutral-700">
+                        <i class='bx bx-support'></i> Bantuan
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Support Contact Info -->
+            <div class="mt-6 sm:mt-8 text-center animate-fadeInUp delay-700">
+                <p class="text-neutral-500 text-xs sm:text-sm mb-3">
+                    Butuh bantuan segera? Hubungi kami
+                </p>
+                <div class="flex items-center justify-center gap-3">
+                    <a href="https://wa.me/6282123456789" target="_blank" class="flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors">
+                        <i class='bx bxl-whatsapp text-lg'></i> WhatsApp
+                    </a>
+                    <a href="mailto:support@devacode.id" class="flex items-center gap-2 bg-neutral-800 hover:bg-neutral-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors border border-neutral-700">
+                        <i class='bx bx-envelope text-lg'></i> Email
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+    
+    <!-- Support Modal -->
+    <div x-show="showSupport" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 z-50 flex items-center justify-center p-4"
+         @click.self="showSupport = false">
+        
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" @click="showSupport = false"></div>
+        
+        <!-- Modal Content -->
+        <div x-show="showSupport"
+             x-transition:enter="transition ease-out duration-300 delay-100"
+             x-transition:enter-start="opacity-0 translate-y-8 scale-95"
+             x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+             x-transition:leave-end="opacity-0 translate-y-8 scale-95"
+             class="relative w-full max-w-md bg-neutral-900 rounded-2xl overflow-hidden border border-neutral-800">
+            
+            <!-- Header -->
+            <div class="px-5 sm:px-6 py-4 border-b border-neutral-800 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center">
+                        <i class='bx bx-support text-xl'></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-base sm:text-lg">Pusat Bantuan</h3>
+                        <p class="text-neutral-500 text-xs">Pilih cara menghubungi kami</p>
+                    </div>
+                </div>
+                <button @click="showSupport = false" class="w-8 h-8 bg-neutral-800 hover:bg-neutral-700 rounded-lg flex items-center justify-center transition-colors">
+                    <i class='bx bx-x text-xl'></i>
+                </button>
+            </div>
+            
+            <!-- Content -->
+            <div class="px-5 sm:px-6 py-5 space-y-3">
+                <a href="https://wa.me/6282123456789?text=Halo, saya mengalami masalah pembayaran dengan ID: TRX-0000000000" target="_blank" class="flex items-center gap-4 p-4 bg-neutral-800 hover:bg-neutral-700 rounded-xl transition-colors group">
+                    <div class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center">
+                        <i class='bx bxl-whatsapp text-2xl text-white'></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-medium text-sm sm:text-base">WhatsApp</p>
+                        <p class="text-neutral-500 text-xs">Respon cepat dalam 5 menit</p>
+                    </div>
+                    <i class='bx bx-chevron-right text-xl text-neutral-500 group-hover:text-white transition-colors'></i>
+                </a>
+                
+                <a href="mailto:support@devacode.id" class="flex items-center gap-4 p-4 bg-neutral-800 hover:bg-neutral-700 rounded-xl transition-colors group">
+                    <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center">
+                        <i class='bx bx-envelope text-2xl text-white'></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-medium text-sm sm:text-base">Email</p>
+                        <p class="text-neutral-500 text-xs">support@devacode.id</p>
+                    </div>
+                    <i class='bx bx-chevron-right text-xl text-neutral-500 group-hover:text-white transition-colors'></i>
+                </a>
+                
+                <a href="https://instagram.com/devacode.id" target="_blank" class="flex items-center gap-4 p-4 bg-neutral-800 hover:bg-neutral-700 rounded-xl transition-colors group">
+                    <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
+                        <i class='bx bxl-instagram text-2xl text-white'></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-medium text-sm sm:text-base">Instagram DM</p>
+                        <p class="text-neutral-500 text-xs">@devacode.id</p>
+                    </div>
+                    <i class='bx bx-chevron-right text-xl text-neutral-500 group-hover:text-white transition-colors'></i>
+                </a>
+                
+                <a href="#" class="flex items-center gap-4 p-4 bg-neutral-800 hover:bg-neutral-700 rounded-xl transition-colors group">
+                    <div class="w-12 h-12 bg-indigo-500 rounded-xl flex items-center justify-center">
+                        <i class='bx bxl-discord-alt text-2xl text-white'></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-medium text-sm sm:text-base">Discord Server</p>
+                        <p class="text-neutral-500 text-xs">Komunitas DEVACODE</p>
+                    </div>
+                    <i class='bx bx-chevron-right text-xl text-neutral-500 group-hover:text-white transition-colors'></i>
+                </a>
+            </div>
+            
+            <!-- Footer -->
+            <div class="px-5 sm:px-6 py-4 bg-neutral-800/50 border-t border-neutral-800">
+                <p class="text-neutral-500 text-xs text-center flex items-center justify-center gap-1">
+                    <i class='bx bx-time'></i> Jam Operasional: 09:00 - 21:00 WIB
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="border-t border-neutral-800 py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-neutral-500 text-xs text-center">
+                © 2024 <span class="font-playfair font-bold text-white">DEVACODE</span>. All rights reserved.
+            </p>
+        </div>
+    </footer>
+    
+    <script>
+        function failedPage() {
+            return {
+                showSupport: false,
+                error: {
+                    code: 'ERR_PAYMENT_001',
+                    message: 'Pembayaran tidak dapat diproses karena sesi telah berakhir atau terjadi kesalahan koneksi. Silakan coba lagi.',
+                    transactionId: 'TRX-0000000000',
+                    timestamp: '15 Jan 2024, 14:30',
+                    reasons: [
+                        'Sesi pembayaran telah kedaluwarsa (timeout)',
+                        'Koneksi internet terputus saat proses',
+                        'Saldo atau limit tidak mencukupi',
+                        'Pembayaran dibatalkan oleh pengguna',
+                        'Terjadi gangguan pada sistem pembayaran'
+                    ]
+                },
+                init() {
+                    // Generate current timestamp
+                    const now = new Date();
+                    const options = { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+                    this.error.timestamp = now.toLocaleDateString('id-ID', options);
+                    
+                    // Generate transaction ID
+                    const trxNum = String(Math.floor(Math.random() * 10000000000)).padStart(10, '0');
+                    this.error.transactionId = `TRX-${trxNum}`;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
