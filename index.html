@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="id" x-data="{ mobileMenu: false, searchOpen: false, activeFilter: 'semua' }">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REYHANDSHOOT - Digital Creative Store</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 4px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+        
+        /* Hide scrollbar for filter menu */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 5px rgba(255,255,255,0.1); }
+            50% { box-shadow: 0 0 20px rgba(255,255,255,0.2); }
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .animate-fadeInUp { animation: fadeInUp 0.6s ease-out forwards; }
+        .animate-fadeInDown { animation: fadeInDown 0.6s ease-out forwards; }
+        .animate-slideInLeft { animation: slideInLeft 0.6s ease-out forwards; }
+        .animate-slideInRight { animation: slideInRight 0.6s ease-out forwards; }
+        .animate-scaleIn { animation: scaleIn 0.5s ease-out forwards; }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-glow { animation: glow 2s ease-in-out infinite; }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+        
+        /* Card hover effects */
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.6);
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 0%, #888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Gradient border */
+        .gradient-border {
+            position: relative;
+        }
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            background: linear-gradient(135deg, #444, #222, #444);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            border-radius: inherit;
+        }
+        
+        /* Timer badge pulse */
+        .timer-pulse { animation: pulse 1s infinite; }
+        
+        /* Button shine effect */
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-shine::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .btn-shine:hover::before { left: 100%; }
+        
+        /* Code block style */
+        .code-block {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            border: 1px solid #2a2a2a;
+        }
+        
+        /* Glass effect */
+        .glass {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-neutral-950 text-white min-h-screen">
+    
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass border-b border-neutral-800/50 animate-fadeInDown">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="#" class="flex items-center space-x-2 group">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class='bx bx-code-alt text-black text-lg sm:text-xl'></i>
+                    </div>
+                    <span class="font-playfair text-xl sm:text-2xl lg:text-3xl font-bold tracking-wide">ReyhanDShoot</span>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center space-x-6 xl:space-x-8">
+                    <a href="#" class="relative group py-2 text-sm xl:text-base">
+                        <span class="hover:text-neutral-400 transition-colors flex items-center gap-1">
+                           Beranda
+                        </span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#" class="relative group py-2 text-sm xl:text-base">
+                        <span class="hover:text-neutral-400 transition-colors flex items-center gap-1">
+                            Produk
+                        </span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#" class="relative group py-2 text-sm xl:text-base">
+                        <span class="hover:text-neutral-400 transition-colors flex items-center gap-1">
+                            Portfolio
+                        </span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#" class="relative group py-2 text-sm xl:text-base">
+                        <span class="hover:text-neutral-400 transition-colors flex items-center gap-1">
+                            Tentang
+                        </span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#" class="relative group py-2 text-sm xl:text-base">
+                        <span class="hover:text-neutral-400 transition-colors flex items-center gap-1">
+                            Kontak
+                        </span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <button @click="searchOpen = !searchOpen" class="p-2 hover:bg-neutral-800 rounded-full transition-colors">
+                        <i class='bx bx-search text-xl'></i>
+                    </button>
+                </div>
+                
+                <!-- Mobile Menu Icons -->
+                <div class="flex lg:hidden items-center space-x-2">
+                    <button @click="searchOpen = !searchOpen" class="p-2 hover:bg-neutral-800 rounded-full transition-colors">
+                        <i class='bx bx-search text-xl'></i>
+                    </button>
+                    <button @click="mobileMenu = !mobileMenu" class="p-2 hover:bg-neutral-800 rounded-full transition-colors">
+                        <i class='bx text-2xl' :class="mobileMenu ? 'bx-x' : 'bx-menu'"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Search Bar -->
+            <div x-show="searchOpen" 
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0 -translate-y-4"
+                 x-transition:enter-end="opacity-100 translate-y-0"
+                 x-transition:leave="transition ease-in duration-200"
+                 x-transition:leave-start="opacity-100 translate-y-0"
+                 x-transition:leave-end="opacity-0 -translate-y-4"
+                 class="mt-4 pb-2">
+                <div class="relative">
+                    <input type="text" placeholder="Cari template, komponen, atau web..." class="w-full bg-neutral-900 border border-neutral-700 rounded-full px-5 py-3 pr-12 text-sm focus:outline-none focus:border-neutral-500 focus:ring-1 focus:ring-neutral-500 transition-all">
+                    <button class="absolute right-4 top-1/2 -translate-y-1/2">
+                        <i class='bx bx-search text-xl text-neutral-400'></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenu" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 -translate-y-4"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-4"
+             class="lg:hidden bg-neutral-900/95 border-t border-neutral-800">
+            <div class="px-4 py-4 space-y-2">
+                <a href="#" class="flex items-center gap-3 py-3 px-4 hover:bg-neutral-800 rounded-xl transition-colors">
+                    <i class='bx bx-home-alt text-xl'></i> Beranda
+                </a>
+                <a href="#" class="flex items-center gap-3 py-3 px-4 hover:bg-neutral-800 rounded-xl transition-colors">
+                    <i class='bx bx-store text-xl'></i> Produk
+                </a>
+                <a href="#" class="flex items-center gap-3 py-3 px-4 hover:bg-neutral-800 rounded-xl transition-colors">
+                    <i class='bx bx-briefcase text-xl'></i> Portfolio
+                </a>
+                <a href="#" class="flex items-center gap-3 py-3 px-4 hover:bg-neutral-800 rounded-xl transition-colors">
+                    <i class='bx bx-user text-xl'></i> Tentang
+                </a>
+                <a href="#" class="flex items-center gap-3 py-3 px-4 hover:bg-neutral-800 rounded-xl transition-colors">
+                    <i class='bx bx-envelope text-xl'></i> Kontak
+                </a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="pt-16 sm:pt-20">
+        <!-- Banner Section -->
+        <section class="relative">
+            <!-- Banner Image -->
+            <div class="relative aspect-[2/1] sm:aspect-[2.5/1] md:aspect-[3/1] lg:aspect-[3.5/1] overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800 to-black">
+                    <!-- Code Pattern Background -->
+                    <div class="absolute inset-0 opacity-10">
+                        <div class="font-mono text-[8px] sm:text-xs text-neutral-500 leading-relaxed p-4 overflow-hidden h-full">
+                            <pre class="animate-pulse">
+        const developer = {
+            name: "ReyhanDShoot",
+            skills: ["HTML", "CSS", "JS"],
+            passion: "Creating Digital Art"
+        };
+        
+        function createTemplate() {
+            return magic + creativity;
+        }
+        
+        // Building dreams...
+                            </pre>
+                        </div>
+                    </div>
+                    <!-- Gradient Overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent"></div>
+                    <div class="absolute inset-0 bg-gradient-to-r from-neutral-950/50 via-transparent to-neutral-950/50"></div>
+                </div>
+                
+                <!-- Banner Text - Desktop -->
+                <div class="hidden md:block absolute bottom-8 lg:bottom-12 left-6 lg:left-12 animate-slideInLeft delay-300 z-10">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        <p class="text-neutral-400 uppercase tracking-widest text-xs lg:text-sm font-mono">Available for Freelance</p>
+                    </div>
+                    <h1 class="font-playfair text-3xl lg:text-5xl xl:text-6xl font-bold mb-3 lg:mb-4 gradient-text">Digital Creative<br>Solutions</h1>
+                    <p class="text-neutral-400 max-w-md text-sm lg:text-base mb-4 lg:mb-6">Template premium, komponen siap pakai, dan solusi web untuk kreator digital. Kualitas terbaik dengan harga terjangkau.</p>
+                    <div class="flex gap-3">
+                        <button class="btn-shine bg-white text-black px-5 lg:px-8 py-2.5 lg:py-3 text-sm lg:text-base font-semibold rounded-xl hover:bg-neutral-200 transition-colors flex items-center gap-2">
+                            <i class='bx bx-rocket'></i> Lihat Produk
+                        </button>
+                        <button class="border border-neutral-600 px-5 lg:px-6 py-2.5 lg:py-3 text-sm lg:text-base font-semibold rounded-xl hover:bg-neutral-800 transition-colors flex items-center gap-2">
+                            <i class='bx bx-play-circle'></i> Demo
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Profile Section - UPDATED: Added md:mt-6 lg:mt-8 for desktop spacing -->
+            <div class="relative z-10 -mt-12 sm:-mt-16 md:mt-6 lg:mt-8 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex flex-col md:flex-row items-center md:items-end gap-4 md:gap-6">
+                        <!-- Profile Image -->
+                        <div class="relative animate-scaleIn delay-200">
+                            <div class="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-2xl border-4 border-neutral-950 overflow-hidden bg-neutral-800 animate-glow">
+                                <div class="w-full h-full bg-gradient-to-br from-neutral-700 to-neutral-900 flex items-center justify-center">
+                                    <i class='bx bx-code-alt text-4xl sm:text-5xl lg:text-6xl text-neutral-400'></i>
+                                </div>
+                            </div>
+                            <div class="absolute -bottom-1 -right-1 w-6 h-6 sm:w-7 sm:h-7 bg-green-500 rounded-lg border-2 border-neutral-950 flex items-center justify-center">
+                                <i class='bx bx-check text-black text-sm sm:text-base'></i>
+                            </div>
+                        </div>
+                        
+                        <!-- Profile Info -->
+                        <div class="text-center md:text-left md:pb-2 animate-fadeInUp delay-300 flex-1">
+                            <div class="flex items-center justify-center md:justify-start gap-2 mb-1">
+                                <h2 class="font-playfair text-xl sm:text-2xl md:text-3xl font-bold">@ReyhanDShoot</h2>
+                                <span class="bg-blue-500/20 text-blue-400 text-xs px-2 py-0.5 rounded-full font-medium flex items-center gap-1">
+                                    <i class='bx bxs-badge-check text-sm'></i> Verified
+                                </span>
+                            </div>
+                            <p class="text-neutral-400 mt-1 max-w-lg text-sm sm:text-base">Freelancer | Programmer & Digital Designer 🚀 | Menjual Template, Komponen Web, dan Solusi Digital Kreatif | Bandung, Indonesia</p>
+                            <div class="flex items-center justify-center md:justify-start flex-wrap gap-4 sm:gap-6 mt-3 text-xs sm:text-sm">
+                                <span class="flex items-center gap-1"><i class='bx bx-package text-neutral-500'></i> <strong class="text-white">150+</strong> <span class="text-neutral-500">Produk</span></span>
+                                <span class="flex items-center gap-1"><i class='bx bx-user-plus text-neutral-500'></i> <strong class="text-white">12K</strong> <span class="text-neutral-500">Followers</span></span>
+                                <span class="flex items-center gap-1"><i class='bx bx-star text-neutral-500'></i> <strong class="text-white">4.9</strong> <span class="text-neutral-500">Rating</span></span>
+                                <span class="flex items-center gap-1"><i class='bx bx-cart text-neutral-500'></i> <strong class="text-white">5K+</strong> <span class="text-neutral-500">Terjual</span></span>
+                            </div>
+                        </div>
+                        
+                        <!-- Mobile Banner Text - UPDATED: Added Chat button -->
+                        <div class="md:hidden text-center pt-4 animate-fadeInUp delay-400">
+                            <div class="flex items-center justify-center gap-2 mb-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                                <p class="text-neutral-400 uppercase tracking-widest text-[10px] font-mono">Available for Freelance</p>
+                            </div>
+                            <h1 class="font-playfair text-2xl sm:text-3xl font-bold mb-2 gradient-text">Digital Creative Solutions</h1>
+                            <p class="text-neutral-400 text-xs sm:text-sm mb-4 max-w-sm mx-auto">Template premium & komponen siap pakai untuk kreator digital</p>
+                            <div class="flex justify-center gap-2">
+                                <button class="btn-shine bg-white text-black px-4 py-2 text-sm font-semibold rounded-xl hover:bg-neutral-200 transition-colors flex items-center gap-1">
+                                    <i class='bx bx-rocket text-base'></i> Lihat Produk
+                                </button>
+                                <!-- ADDED: Chat button for mobile -->
+                                <button class="border border-neutral-600 px-4 py-2 text-sm font-semibold rounded-xl hover:bg-neutral-800 transition-colors flex items-center gap-1">
+                                    <i class='bx bx-message-rounded-dots text-base'></i> Chat
+                                </button>
+                                <button class="border border-neutral-600 px-3 py-2 text-sm font-semibold rounded-xl hover:bg-neutral-800 transition-colors">
+                                    <i class='bx bx-play-circle text-base'></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Action Buttons - Desktop - UPDATED: Removed Follow button -->
+                        <div class="hidden md:flex gap-3 pb-2 animate-slideInRight delay-400">
+                            <button class="btn-shine bg-white text-black px-5 lg:px-6 py-2.5 font-semibold rounded-xl hover:bg-neutral-200 transition-colors flex items-center gap-2 text-sm lg:text-base">
+                                <i class='bx bx-message-rounded-dots'></i> Chat
+                            </button>
+                            <button class="border border-neutral-600 p-2.5 rounded-xl hover:bg-neutral-800 transition-colors">
+                                <i class='bx bx-share-alt text-lg lg:text-xl'></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Filter Menu -->
+        <section class="mt-6 sm:mt-8 md:mt-10 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex overflow-x-auto hide-scrollbar gap-2 sm:gap-3 pb-4 animate-fadeInUp delay-500">
+                    <button @click="activeFilter = 'semua'" 
+                            :class="activeFilter === 'semua' ? 'bg-white text-black' : 'bg-neutral-900 text-white hover:bg-neutral-800 border border-neutral-800'"
+                            class="flex-shrink-0 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all duration-300 transform hover:scale-105 flex items-center gap-1.5">
+                        <i class='bx bx-grid-alt'></i> Semua
+                    </button>
+                    <button @click="activeFilter = 'webhtml'" 
+                            :class="activeFilter === 'webhtml' ? 'bg-white text-black' : 'bg-neutral-900 text-white hover:bg-neutral-800 border border-neutral-800'"
+                            class="flex-shrink-0 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all duration-300 transform hover:scale-105 flex items-center gap-1.5">
+                        <i class='bx bx-code-block'></i> Web HTML
+                    </button>
+                    <button @click="activeFilter = 'alightmotion'" 
+                            :class="activeFilter === 'alightmotion' ? 'bg-white text-black' : 'bg-neutral-900 text-white hover:bg-neutral-800 border border-neutral-800'"
+                            class="flex-shrink-0 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all duration-300 transform hover:scale-105 flex items-center gap-1.5">
+                        <i class='bx bx-movie-play'></i> Alight Motion
+                    </button>
+                    <button @click="activeFilter = 'pixellab'" 
+                            :class="activeFilter === 'pixellab' ? 'bg-white text-black' : 'bg-neutral-900 text-white hover:bg-neutral-800 border border-neutral-800'"
+                            class="flex-shrink-0 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all duration-300 transform hover:scale-105 flex items-center gap-1.5">
+                        <i class='bx bx-text'></i> PLP/Pixellab
+                    </button>
+                    <button @click="activeFilter = 'webonline'" 
+                            :class="activeFilter === 'webonline' ? 'bg-white text-black' : 'bg-neutral-900 text-white hover:bg-neutral-800 border border-neutral-800'"
+                            class="flex-shrink-0 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all duration-300 transform hover:scale-105 flex items-center gap-1.5">
+                        <i class='bx bx-globe'></i> Web Online
+                    </button>
+                    <button @click="activeFilter = 'komponen'" 
+                            :class="activeFilter === 'komponen' ? 'bg-white text-black' : 'bg-neutral-900 text-white hover:bg-neutral-800 border border-neutral-800'"
+                            class="flex-shrink-0 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all duration-300 transform hover:scale-105 flex items-center gap-1.5">
+                        <i class='bx bx-layer'></i> Komponen
+                    </button>
+                    <button @click="activeFilter = 'diskon'" 
+                            :class="activeFilter === 'diskon' ? 'bg-white text-black' : 'bg-neutral-900 text-white hover:bg-neutral-800 border border-neutral-800'"
+                            class="flex-shrink-0 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all duration-300 transform hover:scale-105 flex items-center gap-1.5">
+                        <i class='bx bxs-discount'></i> Promo
+                    </button>
+                    <button @click="activeFilter = 'bestseller'" 
+                            :class="activeFilter === 'bestseller' ? 'bg-white text-black' : 'bg-neutral-900 text-white hover:bg-neutral-800 border border-neutral-800'"
+                            class="flex-shrink-0 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all duration-300 transform hover:scale-105 flex items-center gap-1.5">
+                        <i class='bx bx-trending-up'></i> Bestseller
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Products Section -->
+        <section class="px-4 sm:px-6 lg:px-8 py-6 sm:py-8" x-data="productApp()">
+            <div class="max-w-7xl mx-auto">
+                <!-- Section Title -->
+                <div class="flex items-center justify-between mb-4 sm:mb-6">
+                    <h2 class="font-playfair text-xl sm:text-2xl md:text-3xl font-bold flex items-center gap-2">
+                        <i class='bx bx-package text-neutral-500'></i>
+                        <span x-text="activeFilter === 'semua' ? 'Semua Produk' : activeFilter === 'diskon' ? 'Promo Spesial 🔥' : activeFilter === 'webhtml' ? 'Web HTML Statis' : activeFilter === 'alightmotion' ? 'Template Alight Motion' : activeFilter === 'pixellab' ? 'Template Pixellab/PLP' : activeFilter === 'webonline' ? 'Web Siap Online' : activeFilter === 'komponen' ? 'Komponen HTML' : 'Bestseller'"></span>
+                    </h2>
+                    <a href="#" class="text-neutral-400 hover:text-white transition-colors flex items-center gap-1 text-xs sm:text-sm">
+                        <span class="hidden sm:inline">Lihat Semua</span>
+                        <i class='bx bx-chevron-right'></i>
+                    </a>
+                </div>
+                
+                <!-- Products Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                    
+                    <div x-show="activeFilter === 'semua' || activeFilter === 'diskon' || activeFilter === 'webhtml'"
+                         x-transition:enter="transition ease-out duration-500"
+                         class="flex flex-col bg-neutral-900 rounded-2xl overflow-hidden group border border-neutral-800/50 hover:border-neutral-700 transition-all duration-300">
+                        
+                        <div class="relative aspect-[4/3] overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=600" 
+                                 alt="Landing Page" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
+                            
+                            <div class="absolute top-3 right-3 bg-red-600 text-white px-2 py-1 rounded-lg text-[10px] font-bold flex items-center gap-1 shadow-lg shadow-red-900/20">
+                                <i class='bx bx-time-five'></i> <span x-text="timer1">02:45:30</span>
+                            </div>
+                            <div class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md text-white px-2 py-1 rounded-lg text-[10px] font-medium flex items-center gap-1">
+                                <i class='bx bx-code-block'></i> Web HTML
+                            </div>
+                        </div>
+                
+                        <div class="p-4 flex flex-col flex-grow">
+                            <div class="min-h-[50px] flex flex-col justify-center">
+                                <div class="flex items-center gap-2 mb-0.5">
+                                    <span class="text-neutral-500 line-through text-xs italic">Rp 150K</span>
+                                    <span class="bg-red-600/20 text-red-500 text-[10px] px-1.5 py-0.5 rounded font-bold">50% OFF</span>
+                                </div>
+                                <p class="text-lg font-bold text-white leading-none">Rp 75.000</p>
+                            </div>
+                
+                            <h3 class="font-medium text-neutral-300 mt-2 line-clamp-2 text-sm leading-relaxed h-[40px]">
+                                Landing Page Starter Pack - 5 Template Modern
+                            </h3>
+                
+                            <div class="flex items-center gap-3 mt-3 text-[10px] text-neutral-500 border-t border-neutral-800 pt-3">
+                                <span class="flex items-center gap-1"><i class='bx bx-download text-sm'></i> 234</span>
+                                <span class="flex items-center gap-1"><i class='bx bx-star text-sm text-yellow-500'></i> 4.9</span>
+                            </div>
+                
+                            <button class="w-full mt-4 bg-white text-black py-2.5 rounded-xl text-xs font-bold hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2">
+                                <i class='bx bx-cart-add text-lg'></i> Beli Sekarang
+                            </button>
+                        </div>
+                    </div>
+                
+                    <div x-show="activeFilter === 'semua' || activeFilter === 'alightmotion' || activeFilter === 'bestseller'"
+                         x-transition:enter="transition ease-out duration-500 delay-75"
+                         class="flex flex-col bg-neutral-900 rounded-2xl overflow-hidden group border border-neutral-800/50 hover:border-neutral-700 transition-all duration-300">
+                        
+                        <div class="relative aspect-[4/3] overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&q=80&w=600" 
+                                 alt="Motion Design" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
+                            
+                            <div class="absolute top-3 right-3 bg-amber-500 text-black px-2 py-1 rounded-lg text-[10px] font-bold flex items-center gap-1 shadow-lg">
+                                <i class='bx bxs-hot'></i> HOT
+                            </div>
+                            <div class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md text-white px-2 py-1 rounded-lg text-[10px] font-medium flex items-center gap-1">
+                                <i class='bx bx-movie-play'></i> Alight Motion
+                            </div>
+                        </div>
+                
+                        <div class="p-4 flex flex-col flex-grow">
+                            <div class="min-h-[50px] flex flex-col justify-center">
+                                <div class="h-4 mb-0.5"></div> 
+                                <p class="text-lg font-bold text-white leading-none">Rp 25.000</p>
+                            </div>
+                
+                            <h3 class="font-medium text-neutral-300 mt-2 line-clamp-2 text-sm leading-relaxed h-[40px]">
+                                Preset Smooth Transition Pack - 20 Pro Effects
+                            </h3>
+                
+                            <div class="flex items-center gap-3 mt-3 text-[10px] text-neutral-500 border-t border-neutral-800 pt-3">
+                                <span class="flex items-center gap-1"><i class='bx bx-download text-sm'></i> 1.2K</span>
+                                <span class="flex items-center gap-1"><i class='bx bx-star text-sm text-yellow-500'></i> 5.0</span>
+                            </div>
+                
+                            <button class="w-full mt-4 bg-white text-black py-2.5 rounded-xl text-xs font-bold hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2">
+                                <i class='bx bx-cart-add text-lg'></i> Beli Sekarang
+                            </button>
+                        </div>
+                    </div>
+                
+                    <div x-show="activeFilter === 'semua' || activeFilter === 'diskon' || activeFilter === 'pixellab'"
+                         x-transition:enter="transition ease-out duration-500 delay-150"
+                         class="flex flex-col bg-neutral-900 rounded-2xl overflow-hidden group border border-neutral-800/50 hover:border-neutral-700 transition-all duration-300">
+                        
+                        <div class="relative aspect-[4/3] overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&q=80&w=600" 
+                                 alt="Design Tool" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
+                            
+                            <div class="absolute top-3 right-3 bg-red-600 text-white px-2 py-1 rounded-lg text-[10px] font-bold flex items-center gap-1 shadow-lg">
+                                <i class='bx bx-time-five'></i> <span x-text="timer2">05:12:45</span>
+                            </div>
+                            <div class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md text-white px-2 py-1 rounded-lg text-[10px] font-medium flex items-center gap-1">
+                                <i class='bx bx-text'></i> Pixellab
+                            </div>
+                        </div>
+                
+                        <div class="p-4 flex flex-col flex-grow">
+                            <div class="min-h-[50px] flex flex-col justify-center">
+                                <div class="flex items-center gap-2 mb-0.5">
+                                    <span class="text-neutral-500 line-through text-xs italic">Rp 50K</span>
+                                    <span class="bg-red-600/20 text-red-500 text-[10px] px-1.5 py-0.5 rounded font-bold">40% OFF</span>
+                                </div>
+                                <p class="text-lg font-bold text-white leading-none">Rp 30.000</p>
+                            </div>
+                
+                            <h3 class="font-medium text-neutral-300 mt-2 line-clamp-2 text-sm leading-relaxed h-[40px]">
+                                PLP Typography Bundle - 100+ Premium Styles
+                            </h3>
+                
+                            <div class="flex items-center gap-3 mt-3 text-[10px] text-neutral-500 border-t border-neutral-800 pt-3">
+                                <span class="flex items-center gap-1"><i class='bx bx-download text-sm'></i> 567</span>
+                                <span class="flex items-center gap-1"><i class='bx bx-star text-sm text-yellow-500'></i> 4.8</span>
+                            </div>
+                
+                            <button class="w-full mt-4 bg-white text-black py-2.5 rounded-xl text-xs font-bold hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2">
+                                <i class='bx bx-cart-add text-lg'></i> Beli Sekarang
+                            </button>
+                        </div>
+                    </div>
+                
+                    <div x-show="activeFilter === 'semua' || activeFilter === 'webonline'"
+                         x-transition:enter="transition ease-out duration-500 delay-200"
+                         class="flex flex-col bg-neutral-900 rounded-2xl overflow-hidden group border border-neutral-800/50 hover:border-neutral-700 transition-all duration-300">
+                        
+                        <div class="relative aspect-[4/3] overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=600" 
+                                 alt="Web Development" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
+                            
+                            <div class="absolute top-3 right-3 bg-green-600 text-white px-2 py-1 rounded-lg text-[10px] font-bold flex items-center gap-1">
+                                <i class='bx bx-check-circle'></i> Ready
+                            </div>
+                            <div class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md text-white px-2 py-1 rounded-lg text-[10px] font-medium flex items-center gap-1">
+                                <i class='bx bx-globe'></i> Web Online
+                            </div>
+                        </div>
+                
+                        <div class="p-4 flex flex-col flex-grow">
+                            <div class="min-h-[50px] flex flex-col justify-center">
+                                <div class="h-4 mb-0.5"></div>
+                                <p class="text-lg font-bold text-white leading-none">Rp 350.000</p>
+                            </div>
+                
+                            <h3 class="font-medium text-neutral-300 mt-2 line-clamp-2 text-sm leading-relaxed h-[40px]">
+                                Portfolio Website + Hosting Pro 1 Tahun
+                            </h3>
+                
+                            <div class="flex items-center gap-3 mt-3 text-[10px] text-neutral-500 border-t border-neutral-800 pt-3">
+                                <span class="flex items-center gap-1"><i class='bx bx-purchase-tag text-sm'></i> 89</span>
+                                <span class="flex items-center gap-1"><i class='bx bx-star text-sm text-yellow-500'></i> 5.0</span>
+                            </div>
+                
+                            <button class="w-full mt-4 bg-white text-black py-2.5 rounded-xl text-xs font-bold hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2">
+                                <i class='bx bx-cart-add text-lg'></i> Beli Sekarang
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Load More Button -->
+                <div class="text-center mt-8 sm:mt-10">
+                    <button class="btn-shine border-2 border-neutral-700 px-6 sm:px-10 py-2.5 sm:py-3 rounded-xl font-semibold text-sm hover:bg-white hover:text-black hover:border-white transition-all duration-300 transform hover:scale-105 flex items-center gap-2 mx-auto">
+                        <i class='bx bx-loader-alt'></i> Muat Lebih Banyak
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Services/Features Section -->
+        <section class="px-4 sm:px-6 lg:px-8 py-10 sm:py-12 md:py-16 bg-neutral-900/50">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-8 sm:mb-12">
+                    <h2 class="font-playfair text-2xl sm:text-3xl md:text-4xl font-bold mb-3 gradient-text">Kenapa Pilih Kami?</h2>
+                    <p class="text-neutral-400 text-sm sm:text-base max-w-2xl mx-auto">Kualitas premium dengan harga terjangkau untuk semua kebutuhan digital creative kamu</p>
+                </div>
+                
+                <!-- All Services in 2 Rows -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+                    <!-- Row 1 -->
+                    <div class="text-center p-4 sm:p-6 animate-fadeInUp group">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-neutral-800 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 animate-float group-hover:bg-white group-hover:text-black transition-colors">
+                            <i class='bx bx-code-curly text-2xl sm:text-3xl'></i>
+                        </div>
+                        <h4 class="font-semibold text-sm sm:text-base mb-1">Clean Code</h4>
+                        <p class="text-neutral-500 text-xs sm:text-sm">Kode rapi & terstruktur</p>
+                    </div>
+                    
+                    <div class="text-center p-4 sm:p-6 animate-fadeInUp delay-100 group">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-neutral-800 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 animate-float group-hover:bg-white group-hover:text-black transition-colors" style="animation-delay: 0.5s">
+                            <i class='bx bx-devices text-2xl sm:text-3xl'></i>
+                        </div>
+                        <h4 class="font-semibold text-sm sm:text-base mb-1">Responsive</h4>
+                        <p class="text-neutral-500 text-xs sm:text-sm">Tampilan di semua device</p>
+                    </div>
+                    
+                    <div class="text-center p-4 sm:p-6 animate-fadeInUp delay-200 group">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-neutral-800 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 animate-float group-hover:bg-white group-hover:text-black transition-colors" style="animation-delay: 1s">
+                            <i class='bx bx-palette text-2xl sm:text-3xl'></i>
+                        </div>
+                        <h4 class="font-semibold text-sm sm:text-base mb-1">UI/UX Design</h4>
+                        <p class="text-neutral-500 text-xs sm:text-sm">Desain modern & intuitif</p>
+                    </div>
+                    
+                    <div class="text-center p-4 sm:p-6 animate-fadeInUp delay-300 group">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-neutral-800 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 animate-float group-hover:bg-white group-hover:text-black transition-colors" style="animation-delay: 1.5s">
+                            <i class='bx bx-brush text-2xl sm:text-3xl'></i>
+                        </div>
+                        <h4 class="font-semibold text-sm sm:text-base mb-1">Custom Design</h4>
+                        <p class="text-neutral-500 text-xs sm:text-sm">Desain sesuai keinginan</p>
+                    </div>
+                    
+                    <!-- Row 2 -->
+                    <div class="text-center p-4 sm:p-6 animate-fadeInUp delay-400 group">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-neutral-800 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 animate-float group-hover:bg-white group-hover:text-black transition-colors" style="animation-delay: 2s">
+                            <i class='bx bx-rocket text-2xl sm:text-3xl'></i>
+                        </div>
+                        <h4 class="font-semibold text-sm sm:text-base mb-1">Fast Delivery</h4>
+                        <p class="text-neutral-500 text-xs sm:text-sm">Pengerjaan cepat & tepat</p>
+                    </div>
+                    
+                    <div class="text-center p-4 sm:p-6 animate-fadeInUp delay-500 group">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-neutral-800 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 animate-float group-hover:bg-white group-hover:text-black transition-colors" style="animation-delay: 2.5s">
+                            <i class='bx bx-customize text-2xl sm:text-3xl'></i>
+                        </div>
+                        <h4 class="font-semibold text-sm sm:text-base mb-1">Full Customize</h4>
+                        <p class="text-neutral-500 text-xs sm:text-sm">Modifikasi tanpa batas</p>
+                    </div>
+                    
+                    <div class="text-center p-4 sm:p-6 animate-fadeInUp delay-600 group">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-neutral-800 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 animate-float group-hover:bg-white group-hover:text-black transition-colors" style="animation-delay: 3s">
+                            <i class='bx bx-support text-2xl sm:text-3xl'></i>
+                        </div>
+                        <h4 class="font-semibold text-sm sm:text-base mb-1">Free Support</h4>
+                        <p class="text-neutral-500 text-xs sm:text-sm">Bantuan gratis selamanya</p>
+                    </div>
+                    
+                    <div class="text-center p-4 sm:p-6 animate-fadeInUp delay-700 group">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-neutral-800 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 animate-float group-hover:bg-white group-hover:text-black transition-colors" style="animation-delay: 3.5s">
+                            <i class='bx bx-refresh text-2xl sm:text-3xl'></i>
+                        </div>
+                        <h4 class="font-semibold text-sm sm:text-base mb-1">Free Update</h4>
+                        <p class="text-neutral-500 text-xs sm:text-sm">Update seumur hidup</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-neutral-900 border-t border-neutral-800">
+        <!-- Main Footer -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+            <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 sm:gap-8">
+                <!-- Brand -->
+                <div class="col-span-2 sm:col-span-2 md:col-span-2 lg:col-span-2">
+                    <a href="#" class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-lg flex items-center justify-center">
+                            <i class='bx bx-code-alt text-black text-lg sm:text-xl'></i>
+                        </div>
+                        <span class="font-playfair text-xl sm:text-2xl lg:text-3xl font-bold">ReyhanDShoot</span>
+                    </a>
+                    <p class="text-neutral-400 text-xs sm:text-sm max-w-sm mb-4">Freelancer, Programmer & Digital Designer dari Bandung. Menyediakan template premium, komponen siap pakai, dan solusi web kreatif untuk kebutuhan digital kamu.</p>
+                    <div class="flex flex-wrap gap-2 sm:gap-3">
+                        <a href="#" class="w-9 h-9 sm:w-10 sm:h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-110">
+                            <i class='bx bxl-instagram text-lg sm:text-xl'></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 sm:w-10 sm:h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-110">
+                            <i class='bx bxl-tiktok text-lg sm:text-xl'></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 sm:w-10 sm:h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-110">
+                            <i class='bx bxl-twitter text-lg sm:text-xl'></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 sm:w-10 sm:h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-110">
+                            <i class='bx bxl-discord-alt text-lg sm:text-xl'></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 sm:w-10 sm:h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-110">
+                            <i class='bx bxl-youtube text-lg sm:text-xl'></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 sm:w-10 sm:h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-110">
+                            <i class='bx bxl-whatsapp text-lg sm:text-xl'></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 sm:w-10 sm:h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-110">
+                            <i class='bx bxl-github text-lg sm:text-xl'></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-semibold text-sm sm:text-base mb-3 sm:mb-4 flex items-center gap-2">
+                        <i class='bx bx-link text-neutral-500'></i> Quick Links
+                    </h4>
+                    <ul class="space-y-2 sm:space-y-3 text-xs sm:text-sm">
+                        <li><a href="#" class="text-neutral-400 hover:text-white transition-colors flex items-center gap-1"><i class='bx bx-chevron-right text-neutral-600'></i>Beranda</a></li>
+                        <li><a href="#" class="text-neutral-400 hover:text-white transition-colors flex items-center gap-1"><i class='bx bx-chevron-right text-neutral-600'></i>Produk</a></li>
+                        <li><a href="#" class="text-neutral-400 hover:text-white transition-colors flex items-center gap-1"><i class='bx bx-chevron-right text-neutral-600'></i>Portfolio</a></li>
+                        <li><a href="#" class="text-neutral-400 hover:text-white transition-colors flex items-center gap-1"><i class='bx bx-chevron-right text-neutral-600'></i>Blog</a></li>
+                        <li><a href="#" class="text-neutral-400 hover:text-white transition-colors flex items-center gap-1"><i class='bx bx-chevron-right text-neutral-600'></i>Promo</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Information -->
+                <div>
+                    <h4 class="font-semibold text-sm sm:text-base mb-3 sm:mb-4 flex items-center gap-2">
+                        <i class='bx bx-info-circle text-neutral-500'></i> Informasi
+                    </h4>
+                    <ul class="space-y-2 sm:space-y-3 text-xs sm:text-sm">
+                        <li><a href="#" class="text-neutral-400 hover:text-white transition-colors flex items-center gap-1"><i class='bx bx-chevron-right text-neutral-600'></i>Tentang Kami</a></li>
+                        <li><a href="#" class="text-neutral-400 hover:text-white transition-colors flex items-center gap-1"><i class='bx bx-chevron-right text-neutral-600'></i>Syarat & Ketentuan</a></li>
+                        <li><a href="#" class="text-neutral-400 hover:text-white transition-colors flex items-center gap-1"><i class='bx bx-chevron-right text-neutral-600'></i>Kebijakan Privasi</a></li>
+                        <li><a href="#" class="text-neutral-400 hover:text-white transition-colors flex items-center gap-1"><i class='bx bx-chevron-right text-neutral-600'></i>FAQ</a></li>
+                        <li><a href="#" class="text-neutral-400 hover:text-white transition-colors flex items-center gap-1"><i class='bx bx-chevron-right text-neutral-600'></i>Cara Order</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-semibold text-sm sm:text-base mb-3 sm:mb-4 flex items-center gap-2">
+                        <i class='bx bx-phone text-neutral-500'></i> Kontak
+                    </h4>
+                    <ul class="space-y-2 sm:space-y-3 text-xs sm:text-sm">
+                        <li class="flex items-start gap-2">
+                            <i class='bx bx-map text-neutral-500 mt-0.5'></i>
+                            <span class="text-neutral-400">Bandung, Jawa Barat, Indonesia</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class='bx bx-phone text-neutral-500'></i>
+                            <a href="tel:+6282123456789" class="text-neutral-400 hover:text-white transition-colors">+62 821-xxxx-xxxx</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class='bx bx-envelope text-neutral-500'></i>
+                            <a href="mailto:hello@devacode.id" class="text-neutral-400 hover:text-white transition-colors">hello@devacode.id</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class='bx bx-time text-neutral-500'></i>
+                            <span class="text-neutral-400">24/7 Online Support</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Newsletter -->
+            <div class="border-t border-neutral-800 mt-8 sm:mt-10 pt-8 sm:pt-10">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
+                    <div class="text-center md:text-left flex-shrink-0">
+                        <h4 class="font-semibold text-sm sm:text-base flex items-center justify-center md:justify-start gap-2">
+                            <i class='bx bx-bell text-neutral-500'></i> Berlangganan Newsletter
+                        </h4>
+                        <p class="text-neutral-500 text-xs sm:text-sm mt-1">Dapatkan update produk terbaru & promo eksklusif</p>
+                    </div>
+                    <div class="flex w-full md:w-auto max-w-md md:max-w-none">
+                        <input type="email" placeholder="Masukkan email kamu" class="flex-1 md:w-48 lg:w-64 bg-neutral-800 border border-neutral-700 border-r-0 rounded-l-xl px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm focus:outline-none focus:border-neutral-500 transition-colors placeholder:text-neutral-500">
+                        <button class="btn-shine bg-white text-black px-4 sm:px-5 py-2.5 sm:py-3 rounded-r-xl font-semibold hover:bg-neutral-200 transition-colors flex items-center gap-2 flex-shrink-0">
+                            <span class="hidden sm:inline text-sm">Langganan</span>
+                            <i class='bx bx-send text-base sm:text-lg'></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        
+        <!-- Bottom Footer -->
+        <div class="border-t border-neutral-800 py-4 sm:py-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
+                    <!-- Copyright -->
+                    <p class="text-neutral-500 text-[10px] sm:text-xs text-center sm:text-left">
+                        © 2024 <span class="font-playfair font-bold text-white">REYHANDSHOOT</span>. All rights reserved. 
+                        Made with <i class='bx bx-heart text-red-500'></i> in Bandung
+                    </p>
+                    
+                    <!-- Payment Methods -->
+                    <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+                        <!-- Secure Payment Badge -->
+                        <div class="flex items-center gap-1.5 text-neutral-500 text-[10px] sm:text-xs">
+                            <i class='bx bx-lock-alt text-sm'></i>
+                            <span>Secure Payment</span>
+                        </div>
+                        
+                        <!-- Payment Icons -->
+                        <div class="flex items-center gap-2">
+                            <i class='bx bxl-visa text-xl sm:text-2xl text-neutral-500 hover:text-white transition-colors cursor-pointer'></i>
+                            <i class='bx bxl-mastercard text-xl sm:text-2xl text-neutral-500 hover:text-white transition-colors cursor-pointer'></i>
+                            <i class='bx bxl-paypal text-xl sm:text-2xl text-neutral-500 hover:text-white transition-colors cursor-pointer'></i>
+                        </div>
+                        
+                        <!-- Indonesian Payment Methods -->
+                        <div class="flex items-center gap-1.5 sm:gap-2 text-neutral-400 text-[10px] sm:text-xs font-medium">
+                            <span class="hover:text-white transition-colors cursor-default">QRIS</span>
+                            <span class="text-neutral-600">•</span>
+                            <span class="hover:text-white transition-colors cursor-default">GoPay</span>
+                            <span class="text-neutral-600">•</span>
+                            <span class="hover:text-white transition-colors cursor-default">DANA</span>
+                            <span class="text-neutral-600">•</span>
+                            <span class="hover:text-white transition-colors cursor-default">OVO</span>
+                            <span class="text-neutral-600 hidden sm:inline">•</span>
+                            <span class="hover:text-white transition-colors cursor-default hidden sm:inline">ShopeePay</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Floating Action Button - WhatsApp -->
+    <div class="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50 flex flex-col gap-3">
+        <a href="#" class="w-12 h-12 sm:w-14 sm:h-14 bg-green-500 text-white rounded-full shadow-2xl flex items-center justify-center animate-float hover:scale-110 transition-transform hover:bg-green-600">
+            <i class='bx bxl-whatsapp text-2xl sm:text-3xl'></i>
+        </a>
+    </div>
+    
+    <!-- Back to Top Button -->
+    <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-4 sm:bottom-6 left-4 sm:left-6 w-10 h-10 sm:w-12 sm:h-12 bg-neutral-800 text-white rounded-full shadow-xl items-center justify-center hover:bg-white hover:text-black transition-all duration-300 opacity-0 invisible z-50 hidden sm:flex">
+        <i class='bx bx-chevron-up text-xl sm:text-2xl'></i>
+    </button>
+    
+    <script>
+        // Product App with Timer
+        function productApp() {
+            return {
+                timer1: '02:45:30',
+                timer2: '05:12:45',
+                timer3: '01:30:15',
+                times: {
+                    timer1: 2*3600 + 45*60 + 30,
+                    timer2: 5*3600 + 12*60 + 45,
+                    timer3: 1*3600 + 30*60 + 15
+                },
+                init() {
+                    setInterval(() => {
+                        for (let key in this.times) {
+                            if (this.times[key] > 0) {
+                                this.times[key]--;
+                                let h = Math.floor(this.times[key] / 3600);
+                                let m = Math.floor((this.times[key] % 3600) / 60);
+                                let s = this.times[key] % 60;
+                                this[key] = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+                            }
+                        }
+                    }, 1000);
+                }
+            }
+        }
+        
+        // Back to Top Button visibility
+        window.addEventListener('scroll', function() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 500) {
+                backToTop.classList.remove('opacity-0', 'invisible');
+                backToTop.classList.add('opacity-100', 'visible', 'flex');
+            } else {
+                backToTop.classList.add('opacity-0', 'invisible');
+                backToTop.classList.remove('opacity-100', 'visible', 'flex');
+            }
+        });
+        
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeInUp');
+                    entry.target.style.opacity = '1';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe cards with delay
+        document.querySelectorAll('.card-hover').forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.animationDelay = `${index * 0.1}s`;
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
