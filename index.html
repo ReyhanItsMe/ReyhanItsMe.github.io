@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REYHANDSHOOT - Digital Creative Store</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="./lib/link.js"></script>
+    <script src="./lib/load.js"></script>
+    <script src="./lib/product.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/duration.min.js"></script>
+    <script>dayjs.extend(window.dayjs_plugin_duration)</script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -152,117 +158,39 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-150%) translateY(-150%) rotate(45deg); }
+            100% { transform: translateX(150%) translateY(150%) rotate(45deg); }
+        }
+        
+        .skeleton-glow {
+            position: relative;
+            overflow: hidden;
+            background: #171717; /* neutral-900 */
+        }
+        
+        .skeleton-glow::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 200%; height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.05) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            animation: shimmer 1.5s infinite;
+        }
+
+        
+        [x-cloak] { display: none !important; }
     </style>
 </head>
 <body class="bg-neutral-950 text-white min-h-screen">
     
-    <!-- Navbar -->
-    <nav class="fixed top-0 left-0 right-0 z-50 glass border-b border-neutral-800/50 animate-fadeInDown">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
-            <div class="flex items-center justify-between">
-                <!-- Logo -->
-                <a href="#" class="flex items-center space-x-2 group">
-                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <i class='bx bx-code-alt text-black text-lg sm:text-xl'></i>
-                    </div>
-                    <span class="font-playfair text-xl sm:text-2xl lg:text-3xl font-bold tracking-wide">ReyhanDShoot</span>
-                </a>
-                
-                <!-- Desktop Menu -->
-                <div class="hidden lg:flex items-center space-x-6 xl:space-x-8">
-                    <a href="#" class="relative group py-2 text-sm xl:text-base">
-                        <span class="hover:text-neutral-400 transition-colors flex items-center gap-1">
-                           Beranda
-                        </span>
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
-                    </a>
-                    <a href="#" class="relative group py-2 text-sm xl:text-base">
-                        <span class="hover:text-neutral-400 transition-colors flex items-center gap-1">
-                            Produk
-                        </span>
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
-                    </a>
-                    <a href="#" class="relative group py-2 text-sm xl:text-base">
-                        <span class="hover:text-neutral-400 transition-colors flex items-center gap-1">
-                            Portfolio
-                        </span>
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
-                    </a>
-                    <a href="#" class="relative group py-2 text-sm xl:text-base">
-                        <span class="hover:text-neutral-400 transition-colors flex items-center gap-1">
-                            Tentang
-                        </span>
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
-                    </a>
-                    <a href="#" class="relative group py-2 text-sm xl:text-base">
-                        <span class="hover:text-neutral-400 transition-colors flex items-center gap-1">
-                            Kontak
-                        </span>
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
-                    </a>
-                    <button @click="searchOpen = !searchOpen" class="p-2 hover:bg-neutral-800 rounded-full transition-colors">
-                        <i class='bx bx-search text-xl'></i>
-                    </button>
-                </div>
-                
-                <!-- Mobile Menu Icons -->
-                <div class="flex lg:hidden items-center space-x-2">
-                    <button @click="searchOpen = !searchOpen" class="p-2 hover:bg-neutral-800 rounded-full transition-colors">
-                        <i class='bx bx-search text-xl'></i>
-                    </button>
-                    <button @click="mobileMenu = !mobileMenu" class="p-2 hover:bg-neutral-800 rounded-full transition-colors">
-                        <i class='bx text-2xl' :class="mobileMenu ? 'bx-x' : 'bx-menu'"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Search Bar -->
-            <div x-show="searchOpen" 
-                 x-transition:enter="transition ease-out duration-300"
-                 x-transition:enter-start="opacity-0 -translate-y-4"
-                 x-transition:enter-end="opacity-100 translate-y-0"
-                 x-transition:leave="transition ease-in duration-200"
-                 x-transition:leave-start="opacity-100 translate-y-0"
-                 x-transition:leave-end="opacity-0 -translate-y-4"
-                 class="mt-4 pb-2">
-                <div class="relative">
-                    <input type="text" placeholder="Cari template, komponen, atau web..." class="w-full bg-neutral-900 border border-neutral-700 rounded-full px-5 py-3 pr-12 text-sm focus:outline-none focus:border-neutral-500 focus:ring-1 focus:ring-neutral-500 transition-all">
-                    <button class="absolute right-4 top-1/2 -translate-y-1/2">
-                        <i class='bx bx-search text-xl text-neutral-400'></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Mobile Menu -->
-        <div x-show="mobileMenu" 
-             x-transition:enter="transition ease-out duration-300"
-             x-transition:enter-start="opacity-0 -translate-y-4"
-             x-transition:enter-end="opacity-100 translate-y-0"
-             x-transition:leave="transition ease-in duration-200"
-             x-transition:leave-start="opacity-100 translate-y-0"
-             x-transition:leave-end="opacity-0 -translate-y-4"
-             class="lg:hidden bg-neutral-900/95 border-t border-neutral-800">
-            <div class="px-4 py-4 space-y-2">
-                <a href="#" class="flex items-center gap-3 py-3 px-4 hover:bg-neutral-800 rounded-xl transition-colors">
-                    <i class='bx bx-home-alt text-xl'></i> Beranda
-                </a>
-                <a href="#" class="flex items-center gap-3 py-3 px-4 hover:bg-neutral-800 rounded-xl transition-colors">
-                    <i class='bx bx-store text-xl'></i> Produk
-                </a>
-                <a href="#" class="flex items-center gap-3 py-3 px-4 hover:bg-neutral-800 rounded-xl transition-colors">
-                    <i class='bx bx-briefcase text-xl'></i> Portfolio
-                </a>
-                <a href="#" class="flex items-center gap-3 py-3 px-4 hover:bg-neutral-800 rounded-xl transition-colors">
-                    <i class='bx bx-user text-xl'></i> Tentang
-                </a>
-                <a href="#" class="flex items-center gap-3 py-3 px-4 hover:bg-neutral-800 rounded-xl transition-colors">
-                    <i class='bx bx-envelope text-xl'></i> Kontak
-                </a>
-            </div>
-        </div>
-    </nav>
-    
+    <div id="navbar-placeholder"></div>
+
     <!-- Main Content -->
     <main class="pt-16 sm:pt-20">
         <!-- Banner Section -->
@@ -382,239 +310,152 @@
         </section>
         
         <!-- Filter Menu -->
-        <section class="mt-6 sm:mt-8 md:mt-10 px-4 sm:px-6 lg:px-8">
-            <div class="max-w-7xl mx-auto">
-                <div class="flex overflow-x-auto hide-scrollbar gap-2 sm:gap-3 pb-4 animate-fadeInUp delay-500">
-                    <button @click="activeFilter = 'semua'" 
-                            :class="activeFilter === 'semua' ? 'bg-white text-black' : 'bg-neutral-900 text-white hover:bg-neutral-800 border border-neutral-800'"
-                            class="flex-shrink-0 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all duration-300 transform hover:scale-105 flex items-center gap-1.5">
-                        <i class='bx bx-grid-alt'></i> Semua
-                    </button>
-                    <button @click="activeFilter = 'webhtml'" 
-                            :class="activeFilter === 'webhtml' ? 'bg-white text-black' : 'bg-neutral-900 text-white hover:bg-neutral-800 border border-neutral-800'"
-                            class="flex-shrink-0 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all duration-300 transform hover:scale-105 flex items-center gap-1.5">
-                        <i class='bx bx-code-block'></i> Web HTML
-                    </button>
-                    <button @click="activeFilter = 'alightmotion'" 
-                            :class="activeFilter === 'alightmotion' ? 'bg-white text-black' : 'bg-neutral-900 text-white hover:bg-neutral-800 border border-neutral-800'"
-                            class="flex-shrink-0 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all duration-300 transform hover:scale-105 flex items-center gap-1.5">
-                        <i class='bx bx-movie-play'></i> Alight Motion
-                    </button>
-                    <button @click="activeFilter = 'pixellab'" 
-                            :class="activeFilter === 'pixellab' ? 'bg-white text-black' : 'bg-neutral-900 text-white hover:bg-neutral-800 border border-neutral-800'"
-                            class="flex-shrink-0 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all duration-300 transform hover:scale-105 flex items-center gap-1.5">
-                        <i class='bx bx-text'></i> PLP/Pixellab
-                    </button>
-                    <button @click="activeFilter = 'webonline'" 
-                            :class="activeFilter === 'webonline' ? 'bg-white text-black' : 'bg-neutral-900 text-white hover:bg-neutral-800 border border-neutral-800'"
-                            class="flex-shrink-0 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all duration-300 transform hover:scale-105 flex items-center gap-1.5">
-                        <i class='bx bx-globe'></i> Web Online
-                    </button>
-                    <button @click="activeFilter = 'komponen'" 
-                            :class="activeFilter === 'komponen' ? 'bg-white text-black' : 'bg-neutral-900 text-white hover:bg-neutral-800 border border-neutral-800'"
-                            class="flex-shrink-0 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all duration-300 transform hover:scale-105 flex items-center gap-1.5">
-                        <i class='bx bx-layer'></i> Komponen
-                    </button>
-                    <button @click="activeFilter = 'diskon'" 
-                            :class="activeFilter === 'diskon' ? 'bg-white text-black' : 'bg-neutral-900 text-white hover:bg-neutral-800 border border-neutral-800'"
-                            class="flex-shrink-0 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all duration-300 transform hover:scale-105 flex items-center gap-1.5">
-                        <i class='bx bxs-discount'></i> Promo
-                    </button>
-                    <button @click="activeFilter = 'bestseller'" 
-                            :class="activeFilter === 'bestseller' ? 'bg-white text-black' : 'bg-neutral-900 text-white hover:bg-neutral-800 border border-neutral-800'"
-                            class="flex-shrink-0 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all duration-300 transform hover:scale-105 flex items-center gap-1.5">
-                        <i class='bx bx-trending-up'></i> Bestseller
-                    </button>
-                </div>
+<div x-data="productApp">
+    
+<section class="mt-10 px-4">
+    <div class="max-w-7xl mx-auto flex gap-2">
+        <button @click="selectedCategories = ['semua']; selectedPrice = 'all'; limit = 8"
+                :class="selectedCategories.includes('semua') && selectedPrice === 'all' ? 'bg-white text-black' : 'bg-neutral-900 text-white border-neutral-800'"
+                class="px-6 py-3 rounded-2xl text-sm font-bold border transition-all flex items-center gap-2">
+            <i class='bx bx-grid-alt'></i> Semua
+        </button>
+
+        <button @click="showFilter = true"
+                class="flex-1 bg-neutral-900 text-white border border-neutral-800 px-6 py-3 rounded-2xl text-sm font-bold flex items-center justify-between hover:bg-neutral-800 transition-all">
+            <div class="flex items-center gap-2">
+                <i class='bx bx-filter-alt'></i>
+                <span>Filter & Harga</span>
             </div>
-        </section>
+            <span x-show="!selectedCategories.includes('semua') || selectedPrice !== 'all'" 
+                  class="bg-white text-black text-[10px] px-2 py-0.5 rounded-full" 
+                  x-text="(selectedCategories.filter(c => c !== 'semua').length) + (selectedPrice !== 'all' ? 1 : 0)"></span>
+        </button>
+    </div>
+</section>
+
+<div x-show="showFilter" style="display: none;" class="fixed inset-0 z-[100] flex items-end justify-center">
+    <div x-show="showFilter" x-transition.opacity class="absolute inset-0 bg-black/80 backdrop-blur-sm" @click="showFilter = false"></div>
+    
+    <div x-show="showFilter" 
+         x-transition:enter="transition ease-out duration-300 transform"
+         x-transition:enter-start="translate-y-full"
+         x-transition:enter-end="translate-y-0"
+         class="relative w-full max-w-2xl bg-neutral-900 rounded-t-[2.5rem] border-t border-neutral-800 p-8 shadow-2xl overflow-y-auto max-h-[85vh]">
         
-        <!-- Products Section -->
-        <section class="px-4 sm:px-6 lg:px-8 py-6 sm:py-8" x-data="productApp()">
-            <div class="max-w-7xl mx-auto">
-                <!-- Section Title -->
-                <div class="flex items-center justify-between mb-4 sm:mb-6">
-                    <h2 class="font-playfair text-xl sm:text-2xl md:text-3xl font-bold flex items-center gap-2">
-                        <i class='bx bx-package text-neutral-500'></i>
-                        <span x-text="activeFilter === 'semua' ? 'Semua Produk' : activeFilter === 'diskon' ? 'Promo Spesial 🔥' : activeFilter === 'webhtml' ? 'Web HTML Statis' : activeFilter === 'alightmotion' ? 'Template Alight Motion' : activeFilter === 'pixellab' ? 'Template Pixellab/PLP' : activeFilter === 'webonline' ? 'Web Siap Online' : activeFilter === 'komponen' ? 'Komponen HTML' : 'Bestseller'"></span>
-                    </h2>
-                    <a href="#" class="text-neutral-400 hover:text-white transition-colors flex items-center gap-1 text-xs sm:text-sm">
-                        <span class="hidden sm:inline">Lihat Semua</span>
-                        <i class='bx bx-chevron-right'></i>
-                    </a>
-                </div>
+        <div class="flex items-center justify-between mb-8">
+            <h3 class="text-xl font-bold text-white">Filter Produk</h3>
+            <button @click="showFilter = false" class="text-neutral-500 text-3xl"><i class='bx bx-x'></i></button>
+        </div>
+
+        <div class="mb-8">
+            <p class="text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-4">Pilih Kategori (Bisa lebih dari 1)</p>
+            <div class="flex flex-wrap gap-2">
+                <template x-for="cat in categories" :key="cat.id">
+                    <button @click="toggleCategory(cat.id)"
+                            :class="selectedCategories.includes(cat.id) ? 'bg-white text-black border-white' : 'bg-neutral-800 text-neutral-400 border-neutral-700'"
+                            class="px-4 py-2 rounded-xl text-xs font-bold border transition-all flex items-center gap-2">
+                        <i :class="'bx ' + cat.icon"></i>
+                        <span x-text="cat.label"></span>
+                    </button>
+                </template>
+            </div>
+        </div>
+
+        <div class="mb-10">
+            <p class="text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-4">Rentang Harga (Pilih 1)</p>
+            <div class="grid grid-cols-2 gap-2">
+                <template x-for="range in priceRanges" :key="range.id">
+                    <button @click="selectedPrice = range.id"
+                            :class="selectedPrice === range.id ? 'bg-white text-black border-white' : 'bg-neutral-800 text-neutral-400 border-neutral-700'"
+                            class="px-4 py-3 rounded-xl text-xs font-bold border transition-all text-left flex items-center justify-between">
+                        <span x-text="range.label"></span>
+                        <i x-show="selectedPrice === range.id" class='bx bxs-check-circle'></i>
+                    </button>
+                </template>
+            </div>
+        </div>
+
+        <div class="flex gap-3 sticky bottom-0 bg-neutral-900 pt-4">
+            <button @click="selectedCategories = ['semua']; selectedPrice = 'all'; showFilter = false" 
+                    class="flex-1 bg-neutral-800 text-white py-4 rounded-2xl font-bold text-sm">Reset</button>
+            <button @click="showFilter = false" 
+                    class="flex-[2] bg-white text-black py-4 rounded-2xl font-bold text-sm shadow-xl">Terapkan Filter</button>
+        </div>
+    </div>
+</div>
+
+<section x-data="productApp" class="max-w-7xl mx-auto px-4 py-10" x-cloak>
+    
+    <div x-show="loading" class="flex justify-center py-20">
+        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
+    </div>
+
+    <div x-show="!loading" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+        <template x-for="product in filteredProducts" :key="product.id">
+            <div class="flex flex-col bg-neutral-900 rounded-3xl overflow-hidden group border border-neutral-800/50 hover:border-neutral-700 transition-all duration-300 animate-fadeInUp">
                 
-                <!-- Products Grid -->
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                <div class="relative aspect-[4/3] overflow-hidden bg-neutral-800">
+                    <img :src="product.image" :alt="product.name" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     
-                    <div x-show="activeFilter === 'semua' || activeFilter === 'diskon' || activeFilter === 'webhtml'"
-                         x-transition:enter="transition ease-out duration-500"
-                         class="flex flex-col bg-neutral-900 rounded-2xl overflow-hidden group border border-neutral-800/50 hover:border-neutral-700 transition-all duration-300">
-                        
-                        <div class="relative aspect-[4/3] overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=600" 
-                                 alt="Landing Page" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
-                            
-                            <div class="absolute top-3 right-3 bg-red-600 text-white px-2 py-1 rounded-lg text-[10px] font-bold flex items-center gap-1 shadow-lg shadow-red-900/20">
-                                <i class='bx bx-time-five'></i> <span x-text="timer1">02:45:30</span>
-                            </div>
-                            <div class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md text-white px-2 py-1 rounded-lg text-[10px] font-medium flex items-center gap-1">
-                                <i class='bx bx-code-block'></i> Web HTML
-                            </div>
+                    <template x-if="product.flash_sale">
+                        <div class="absolute top-3 right-3 bg-red-600 text-white px-2 py-1 rounded-lg text-[10px] font-bold flex items-center gap-1 shadow-lg animate-pulse">
+                            <i class='bx bx-time-five'></i> <span x-text="product.display_timer || '00:00:00'"></span>
                         </div>
-                
-                        <div class="p-4 flex flex-col flex-grow">
-                            <div class="min-h-[50px] flex flex-col justify-center">
-                                <div class="flex items-center gap-2 mb-0.5">
-                                    <span class="text-neutral-500 line-through text-xs italic">Rp 150K</span>
-                                    <span class="bg-red-600/20 text-red-500 text-[10px] px-1.5 py-0.5 rounded font-bold">50% OFF</span>
-                                </div>
-                                <p class="text-lg font-bold text-white leading-none">Rp 75.000</p>
-                            </div>
-                
-                            <h3 class="font-medium text-neutral-300 mt-2 line-clamp-2 text-sm leading-relaxed h-[40px]">
-                                Landing Page Starter Pack - 5 Template Modern
-                            </h3>
-                
-                            <div class="flex items-center gap-3 mt-3 text-[10px] text-neutral-500 border-t border-neutral-800 pt-3">
-                                <span class="flex items-center gap-1"><i class='bx bx-download text-sm'></i> 234</span>
-                                <span class="flex items-center gap-1"><i class='bx bx-star text-sm text-yellow-500'></i> 4.9</span>
-                            </div>
-                
-                            <button class="w-full mt-4 bg-white text-black py-2.5 rounded-xl text-xs font-bold hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2">
-                                <i class='bx bx-cart-add text-lg'></i> Beli Sekarang
-                            </button>
-                        </div>
-                    </div>
-                
-                    <div x-show="activeFilter === 'semua' || activeFilter === 'alightmotion' || activeFilter === 'bestseller'"
-                         x-transition:enter="transition ease-out duration-500 delay-75"
-                         class="flex flex-col bg-neutral-900 rounded-2xl overflow-hidden group border border-neutral-800/50 hover:border-neutral-700 transition-all duration-300">
-                        
-                        <div class="relative aspect-[4/3] overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&q=80&w=600" 
-                                 alt="Motion Design" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
-                            
-                            <div class="absolute top-3 right-3 bg-amber-500 text-black px-2 py-1 rounded-lg text-[10px] font-bold flex items-center gap-1 shadow-lg">
-                                <i class='bx bxs-hot'></i> HOT
-                            </div>
-                            <div class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md text-white px-2 py-1 rounded-lg text-[10px] font-medium flex items-center gap-1">
-                                <i class='bx bx-movie-play'></i> Alight Motion
-                            </div>
-                        </div>
-                
-                        <div class="p-4 flex flex-col flex-grow">
-                            <div class="min-h-[50px] flex flex-col justify-center">
-                                <div class="h-4 mb-0.5"></div> 
-                                <p class="text-lg font-bold text-white leading-none">Rp 25.000</p>
-                            </div>
-                
-                            <h3 class="font-medium text-neutral-300 mt-2 line-clamp-2 text-sm leading-relaxed h-[40px]">
-                                Preset Smooth Transition Pack - 20 Pro Effects
-                            </h3>
-                
-                            <div class="flex items-center gap-3 mt-3 text-[10px] text-neutral-500 border-t border-neutral-800 pt-3">
-                                <span class="flex items-center gap-1"><i class='bx bx-download text-sm'></i> 1.2K</span>
-                                <span class="flex items-center gap-1"><i class='bx bx-star text-sm text-yellow-500'></i> 5.0</span>
-                            </div>
-                
-                            <button class="w-full mt-4 bg-white text-black py-2.5 rounded-xl text-xs font-bold hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2">
-                                <i class='bx bx-cart-add text-lg'></i> Beli Sekarang
-                            </button>
-                        </div>
-                    </div>
-                
-                    <div x-show="activeFilter === 'semua' || activeFilter === 'diskon' || activeFilter === 'pixellab'"
-                         x-transition:enter="transition ease-out duration-500 delay-150"
-                         class="flex flex-col bg-neutral-900 rounded-2xl overflow-hidden group border border-neutral-800/50 hover:border-neutral-700 transition-all duration-300">
-                        
-                        <div class="relative aspect-[4/3] overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&q=80&w=600" 
-                                 alt="Design Tool" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
-                            
-                            <div class="absolute top-3 right-3 bg-red-600 text-white px-2 py-1 rounded-lg text-[10px] font-bold flex items-center gap-1 shadow-lg">
-                                <i class='bx bx-time-five'></i> <span x-text="timer2">05:12:45</span>
-                            </div>
-                            <div class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md text-white px-2 py-1 rounded-lg text-[10px] font-medium flex items-center gap-1">
-                                <i class='bx bx-text'></i> Pixellab
-                            </div>
-                        </div>
-                
-                        <div class="p-4 flex flex-col flex-grow">
-                            <div class="min-h-[50px] flex flex-col justify-center">
-                                <div class="flex items-center gap-2 mb-0.5">
-                                    <span class="text-neutral-500 line-through text-xs italic">Rp 50K</span>
-                                    <span class="bg-red-600/20 text-red-500 text-[10px] px-1.5 py-0.5 rounded font-bold">40% OFF</span>
-                                </div>
-                                <p class="text-lg font-bold text-white leading-none">Rp 30.000</p>
-                            </div>
-                
-                            <h3 class="font-medium text-neutral-300 mt-2 line-clamp-2 text-sm leading-relaxed h-[40px]">
-                                PLP Typography Bundle - 100+ Premium Styles
-                            </h3>
-                
-                            <div class="flex items-center gap-3 mt-3 text-[10px] text-neutral-500 border-t border-neutral-800 pt-3">
-                                <span class="flex items-center gap-1"><i class='bx bx-download text-sm'></i> 567</span>
-                                <span class="flex items-center gap-1"><i class='bx bx-star text-sm text-yellow-500'></i> 4.8</span>
-                            </div>
-                
-                            <button class="w-full mt-4 bg-white text-black py-2.5 rounded-xl text-xs font-bold hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2">
-                                <i class='bx bx-cart-add text-lg'></i> Beli Sekarang
-                            </button>
-                        </div>
-                    </div>
-                
-                    <div x-show="activeFilter === 'semua' || activeFilter === 'webonline'"
-                         x-transition:enter="transition ease-out duration-500 delay-200"
-                         class="flex flex-col bg-neutral-900 rounded-2xl overflow-hidden group border border-neutral-800/50 hover:border-neutral-700 transition-all duration-300">
-                        
-                        <div class="relative aspect-[4/3] overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=600" 
-                                 alt="Web Development" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
-                            
-                            <div class="absolute top-3 right-3 bg-green-600 text-white px-2 py-1 rounded-lg text-[10px] font-bold flex items-center gap-1">
-                                <i class='bx bx-check-circle'></i> Ready
-                            </div>
-                            <div class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md text-white px-2 py-1 rounded-lg text-[10px] font-medium flex items-center gap-1">
-                                <i class='bx bx-globe'></i> Web Online
-                            </div>
-                        </div>
-                
-                        <div class="p-4 flex flex-col flex-grow">
-                            <div class="min-h-[50px] flex flex-col justify-center">
-                                <div class="h-4 mb-0.5"></div>
-                                <p class="text-lg font-bold text-white leading-none">Rp 350.000</p>
-                            </div>
-                
-                            <h3 class="font-medium text-neutral-300 mt-2 line-clamp-2 text-sm leading-relaxed h-[40px]">
-                                Portfolio Website + Hosting Pro 1 Tahun
-                            </h3>
-                
-                            <div class="flex items-center gap-3 mt-3 text-[10px] text-neutral-500 border-t border-neutral-800 pt-3">
-                                <span class="flex items-center gap-1"><i class='bx bx-purchase-tag text-sm'></i> 89</span>
-                                <span class="flex items-center gap-1"><i class='bx bx-star text-sm text-yellow-500'></i> 5.0</span>
-                            </div>
-                
-                            <button class="w-full mt-4 bg-white text-black py-2.5 rounded-xl text-xs font-bold hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2">
-                                <i class='bx bx-cart-add text-lg'></i> Beli Sekarang
-                            </button>
-                        </div>
+                    </template>
+
+                    <div class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md text-white px-2 py-1 rounded-lg text-[9px] font-medium flex items-center gap-1 border border-white/10">
+                        <i :class="'bx ' + (categories.find(c => c.id === (Array.isArray(product.type) ? product.type[0] : product.type))?.icon || 'bx-package')"></i> 
+                        <span x-text="categories.find(c => c.id === (Array.isArray(product.type) ? product.type[0] : product.type))?.label || 'Produk'"></span>
                     </div>
                 </div>
 
-                <!-- Load More Button -->
-                <div class="text-center mt-8 sm:mt-10">
-                    <button class="btn-shine border-2 border-neutral-700 px-6 sm:px-10 py-2.5 sm:py-3 rounded-xl font-semibold text-sm hover:bg-white hover:text-black hover:border-white transition-all duration-300 transform hover:scale-105 flex items-center gap-2 mx-auto">
-                        <i class='bx bx-loader-alt'></i> Muat Lebih Banyak
-                    </button>
+                <div class="p-4 flex flex-col flex-grow">
+                    <div class="min-h-[45px]">
+                        <template x-if="product.original_price">
+                            <div class="flex items-center gap-2 mb-0.5">
+                                <span class="text-neutral-500 line-through text-[10px] italic" x-text="'Rp ' + formatPrice(product.original_price)"></span>
+                                <span class="bg-red-600/20 text-red-500 text-[9px] px-1.5 py-0.5 rounded font-bold" x-text="product.discount_label"></span>
+                            </div>
+                        </template>
+                        <p class="text-lg font-black text-white leading-none" x-text="'Rp ' + formatPrice(product.price)"></p>
+                    </div>
+
+                    <h3 class="font-bold text-neutral-200 mt-2 line-clamp-2 text-sm leading-snug h-[40px]" x-text="product.name"></h3>
+
+                    <a :href="'./pages/product/detail.html?id=' + product.id" class="w-full mt-4 bg-white text-black py-3 rounded-2xl text-xs font-bold hover:bg-neutral-200 transition-colors text-center shadow-lg shadow-white/5">
+                        Beli Sekarang
+                    </a>
                 </div>
             </div>
-        </section>
-        
+        </template>
+    </div>
+
+    <div x-show="!loading && filteredProducts.length === 0" class="py-20 text-center">
+        <i class='bx bx-search-alt text-5xl text-neutral-700 mb-4'></i>
+        <p class="text-neutral-500">Duh, produk yang kamu cari nggak ada nih...</p>
+    </div>
+
+    <div class="mt-16 flex flex-col items-center gap-6">
+        <div x-show="hasMore && !loading">
+            <button @click="loadMore()" 
+                    class="px-10 py-4 bg-white text-black rounded-2xl font-bold hover:bg-neutral-200 transition-all flex items-center gap-2 group shadow-xl">
+                <span>Tampilkan Lebih Banyak</span>
+                <i class='bx bx-chevron-down text-xl group-hover:translate-y-1 transition-transform'></i>
+            </button>
+        </div>
+
+        <div x-show="!hasMore && !loading && filteredProducts.length > 0" class="animate-fadeIn">
+            <div class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-500 text-sm italic">
+                <i class='bx bx-check-double text-lg text-green-500'></i>
+                <span>Yey! Kamu sudah melihat semua produk kami ✨</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+</div>
+
+
         <!-- Services/Features Section -->
         <section class="px-4 sm:px-6 lg:px-8 py-10 sm:py-12 md:py-16 bg-neutral-900/50">
             <div class="max-w-7xl mx-auto">
@@ -696,235 +537,86 @@
 
     </main>
     
-    <!-- Footer -->
-    <footer class="bg-neutral-900 border-t border-neutral-800">
-        <!-- Main Footer -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
-            <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 sm:gap-8">
-                <!-- Brand -->
-                <div class="col-span-2 sm:col-span-2 md:col-span-2 lg:col-span-2">
-                    <a href="#" class="flex items-center space-x-2 mb-4">
-                        <div class="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-lg flex items-center justify-center">
-                            <i class='bx bx-code-alt text-black text-lg sm:text-xl'></i>
-                        </div>
-                        <span class="font-playfair text-xl sm:text-2xl lg:text-3xl font-bold">ReyhanDShoot</span>
-                    </a>
-                    <p class="text-neutral-400 text-xs sm:text-sm max-w-sm mb-4">Freelancer, Programmer & Digital Designer dari Bandung. Menyediakan template premium, komponen siap pakai, dan solusi web kreatif untuk kebutuhan digital kamu.</p>
-                    <div class="flex flex-wrap gap-2 sm:gap-3">
-                        <a href="#" class="w-9 h-9 sm:w-10 sm:h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-110">
-                            <i class='bx bxl-instagram text-lg sm:text-xl'></i>
-                        </a>
-                        <a href="#" class="w-9 h-9 sm:w-10 sm:h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-110">
-                            <i class='bx bxl-tiktok text-lg sm:text-xl'></i>
-                        </a>
-                        <a href="#" class="w-9 h-9 sm:w-10 sm:h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-110">
-                            <i class='bx bxl-twitter text-lg sm:text-xl'></i>
-                        </a>
-                        <a href="#" class="w-9 h-9 sm:w-10 sm:h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-110">
-                            <i class='bx bxl-discord-alt text-lg sm:text-xl'></i>
-                        </a>
-                        <a href="#" class="w-9 h-9 sm:w-10 sm:h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-110">
-                            <i class='bx bxl-youtube text-lg sm:text-xl'></i>
-                        </a>
-                        <a href="#" class="w-9 h-9 sm:w-10 sm:h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-110">
-                            <i class='bx bxl-whatsapp text-lg sm:text-xl'></i>
-                        </a>
-                        <a href="#" class="w-9 h-9 sm:w-10 sm:h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-110">
-                            <i class='bx bxl-github text-lg sm:text-xl'></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Quick Links -->
-                <div>
-                    <h4 class="font-semibold text-sm sm:text-base mb-3 sm:mb-4 flex items-center gap-2">
-                        <i class='bx bx-link text-neutral-500'></i> Quick Links
-                    </h4>
-                    <ul class="space-y-2 sm:space-y-3 text-xs sm:text-sm">
-                        <li><a href="#" class="text-neutral-400 hover:text-white transition-colors flex items-center gap-1"><i class='bx bx-chevron-right text-neutral-600'></i>Beranda</a></li>
-                        <li><a href="#" class="text-neutral-400 hover:text-white transition-colors flex items-center gap-1"><i class='bx bx-chevron-right text-neutral-600'></i>Produk</a></li>
-                        <li><a href="#" class="text-neutral-400 hover:text-white transition-colors flex items-center gap-1"><i class='bx bx-chevron-right text-neutral-600'></i>Portfolio</a></li>
-                        <li><a href="#" class="text-neutral-400 hover:text-white transition-colors flex items-center gap-1"><i class='bx bx-chevron-right text-neutral-600'></i>Blog</a></li>
-                        <li><a href="#" class="text-neutral-400 hover:text-white transition-colors flex items-center gap-1"><i class='bx bx-chevron-right text-neutral-600'></i>Promo</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Information -->
-                <div>
-                    <h4 class="font-semibold text-sm sm:text-base mb-3 sm:mb-4 flex items-center gap-2">
-                        <i class='bx bx-info-circle text-neutral-500'></i> Informasi
-                    </h4>
-                    <ul class="space-y-2 sm:space-y-3 text-xs sm:text-sm">
-                        <li><a href="#" class="text-neutral-400 hover:text-white transition-colors flex items-center gap-1"><i class='bx bx-chevron-right text-neutral-600'></i>Tentang Kami</a></li>
-                        <li><a href="#" class="text-neutral-400 hover:text-white transition-colors flex items-center gap-1"><i class='bx bx-chevron-right text-neutral-600'></i>Syarat & Ketentuan</a></li>
-                        <li><a href="#" class="text-neutral-400 hover:text-white transition-colors flex items-center gap-1"><i class='bx bx-chevron-right text-neutral-600'></i>Kebijakan Privasi</a></li>
-                        <li><a href="#" class="text-neutral-400 hover:text-white transition-colors flex items-center gap-1"><i class='bx bx-chevron-right text-neutral-600'></i>FAQ</a></li>
-                        <li><a href="#" class="text-neutral-400 hover:text-white transition-colors flex items-center gap-1"><i class='bx bx-chevron-right text-neutral-600'></i>Cara Order</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Contact -->
-                <div>
-                    <h4 class="font-semibold text-sm sm:text-base mb-3 sm:mb-4 flex items-center gap-2">
-                        <i class='bx bx-phone text-neutral-500'></i> Kontak
-                    </h4>
-                    <ul class="space-y-2 sm:space-y-3 text-xs sm:text-sm">
-                        <li class="flex items-start gap-2">
-                            <i class='bx bx-map text-neutral-500 mt-0.5'></i>
-                            <span class="text-neutral-400">Bandung, Jawa Barat, Indonesia</span>
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <i class='bx bx-phone text-neutral-500'></i>
-                            <a href="tel:+6282123456789" class="text-neutral-400 hover:text-white transition-colors">+62 821-xxxx-xxxx</a>
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <i class='bx bx-envelope text-neutral-500'></i>
-                            <a href="mailto:hello@devacode.id" class="text-neutral-400 hover:text-white transition-colors">hello@devacode.id</a>
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <i class='bx bx-time text-neutral-500'></i>
-                            <span class="text-neutral-400">24/7 Online Support</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- Newsletter -->
-            <div class="border-t border-neutral-800 mt-8 sm:mt-10 pt-8 sm:pt-10">
-                <div class="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
-                    <div class="text-center md:text-left flex-shrink-0">
-                        <h4 class="font-semibold text-sm sm:text-base flex items-center justify-center md:justify-start gap-2">
-                            <i class='bx bx-bell text-neutral-500'></i> Berlangganan Newsletter
-                        </h4>
-                        <p class="text-neutral-500 text-xs sm:text-sm mt-1">Dapatkan update produk terbaru & promo eksklusif</p>
-                    </div>
-                    <div class="flex w-full md:w-auto max-w-md md:max-w-none">
-                        <input type="email" placeholder="Masukkan email kamu" class="flex-1 md:w-48 lg:w-64 bg-neutral-800 border border-neutral-700 border-r-0 rounded-l-xl px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm focus:outline-none focus:border-neutral-500 transition-colors placeholder:text-neutral-500">
-                        <button class="btn-shine bg-white text-black px-4 sm:px-5 py-2.5 sm:py-3 rounded-r-xl font-semibold hover:bg-neutral-200 transition-colors flex items-center gap-2 flex-shrink-0">
-                            <span class="hidden sm:inline text-sm">Langganan</span>
-                            <i class='bx bx-send text-base sm:text-lg'></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            </div>
-        
-        <!-- Bottom Footer -->
-        <div class="border-t border-neutral-800 py-4 sm:py-6">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
-                    <!-- Copyright -->
-                    <p class="text-neutral-500 text-[10px] sm:text-xs text-center sm:text-left">
-                        © 2024 <span class="font-playfair font-bold text-white">REYHANDSHOOT</span>. All rights reserved. 
-                        Made with <i class='bx bx-heart text-red-500'></i> in Bandung
-                    </p>
-                    
-                    <!-- Payment Methods -->
-                    <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
-                        <!-- Secure Payment Badge -->
-                        <div class="flex items-center gap-1.5 text-neutral-500 text-[10px] sm:text-xs">
-                            <i class='bx bx-lock-alt text-sm'></i>
-                            <span>Secure Payment</span>
-                        </div>
-                        
-                        <!-- Payment Icons -->
-                        <div class="flex items-center gap-2">
-                            <i class='bx bxl-visa text-xl sm:text-2xl text-neutral-500 hover:text-white transition-colors cursor-pointer'></i>
-                            <i class='bx bxl-mastercard text-xl sm:text-2xl text-neutral-500 hover:text-white transition-colors cursor-pointer'></i>
-                            <i class='bx bxl-paypal text-xl sm:text-2xl text-neutral-500 hover:text-white transition-colors cursor-pointer'></i>
-                        </div>
-                        
-                        <!-- Indonesian Payment Methods -->
-                        <div class="flex items-center gap-1.5 sm:gap-2 text-neutral-400 text-[10px] sm:text-xs font-medium">
-                            <span class="hover:text-white transition-colors cursor-default">QRIS</span>
-                            <span class="text-neutral-600">•</span>
-                            <span class="hover:text-white transition-colors cursor-default">GoPay</span>
-                            <span class="text-neutral-600">•</span>
-                            <span class="hover:text-white transition-colors cursor-default">DANA</span>
-                            <span class="text-neutral-600">•</span>
-                            <span class="hover:text-white transition-colors cursor-default">OVO</span>
-                            <span class="text-neutral-600 hidden sm:inline">•</span>
-                            <span class="hover:text-white transition-colors cursor-default hidden sm:inline">ShopeePay</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    
+    <!-- Footer -->    
+    <div id="footer-placeholder"></div>
+
     <!-- Floating Action Button - WhatsApp -->
-    <div class="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50 flex flex-col gap-3">
-        <a href="#" class="w-12 h-12 sm:w-14 sm:h-14 bg-green-500 text-white rounded-full shadow-2xl flex items-center justify-center animate-float hover:scale-110 transition-transform hover:bg-green-600">
-            <i class='bx bxl-whatsapp text-2xl sm:text-3xl'></i>
-        </a>
-    </div>
+    <div id="floating-button-whatsapp-placeholder"></div>
+
+
     
-    <!-- Back to Top Button -->
-    <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-4 sm:bottom-6 left-4 sm:left-6 w-10 h-10 sm:w-12 sm:h-12 bg-neutral-800 text-white rounded-full shadow-xl items-center justify-center hover:bg-white hover:text-black transition-all duration-300 opacity-0 invisible z-50 hidden sm:flex">
-        <i class='bx bx-chevron-up text-xl sm:text-2xl'></i>
-    </button>
-    
-    <script>
-        // Product App with Timer
-        function productApp() {
-            return {
-                timer1: '02:45:30',
-                timer2: '05:12:45',
-                timer3: '01:30:15',
-                times: {
-                    timer1: 2*3600 + 45*60 + 30,
-                    timer2: 5*3600 + 12*60 + 45,
-                    timer3: 1*3600 + 30*60 + 15
-                },
-                init() {
-                    setInterval(() => {
-                        for (let key in this.times) {
-                            if (this.times[key] > 0) {
-                                this.times[key]--;
-                                let h = Math.floor(this.times[key] / 3600);
-                                let m = Math.floor((this.times[key] % 3600) / 60);
-                                let s = this.times[key] % 60;
-                                this[key] = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
-                            }
-                        }
-                    }, 1000);
+<script>
+    function productApp() {
+        return {
+            links: window.PAGE_LINKS || {}, // Ambil link dari pages-link.js
+            mobileMenu: false,
+            searchOpen: false,
+            // Simpan target waktu di sini (Nanti bisa ditarik dari JSON)
+            // Format: YYYY-MM-DDTHH:mm:ss
+            deadlines: {
+                timer1: "2026-02-10T23:59:59",
+                timer2: "2026-02-12T12:00:00",
+                timer3: "2026-02-15T00:00:00"
+            },
+            // Objek untuk nampilin teks di HTML
+            displayTimers: {
+                timer1: '00:00:00',
+                timer2: '00:00:00',
+                timer3: '00:00:00'
+            },
+            
+            init() {
+                // Jalankan timer setiap detik
+                this.updateTimers();
+                setInterval(() => this.updateTimers(), 1000);
+
+                // Jalankan Scroll Animation
+                this.initScrollAnimations();
+            },
+
+            updateTimers() {
+                const now = dayjs();
+                for (let key in this.deadlines) {
+                    const target = dayjs(this.deadlines[key]);
+                    const diff = target.diff(now);
+
+                    if (diff > 0) {
+                        // Pakai plugin duration Day.js
+                        const dur = dayjs.duration(diff);
+                        const h = Math.floor(dur.asHours()); // Pakai asHours supaya bisa lebih dari 24 jam
+                        const m = dur.minutes();
+                        const s = dur.seconds();
+                        
+                        this.displayTimers[key] = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+                    } else {
+                        this.displayTimers[key] = "PROMO HABIS";
+                    }
                 }
+            },
+
+            initScrollAnimations() {
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animate-fadeInUp');
+                            entry.target.style.opacity = '1';
+                        }
+                    });
+                }, observerOptions);
+                
+                document.querySelectorAll('.card-hover').forEach((el, index) => {
+                    el.style.opacity = '0';
+                    el.style.animationDelay = `${index * 0.1}s`;
+                    observer.observe(el);
+                });
             }
         }
-        
-        // Back to Top Button visibility
-        window.addEventListener('scroll', function() {
-            const backToTop = document.getElementById('backToTop');
-            if (window.scrollY > 500) {
-                backToTop.classList.remove('opacity-0', 'invisible');
-                backToTop.classList.add('opacity-100', 'visible', 'flex');
-            } else {
-                backToTop.classList.add('opacity-0', 'invisible');
-                backToTop.classList.remove('opacity-100', 'visible', 'flex');
-            }
-        });
-        
-        // Intersection Observer for scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-fadeInUp');
-                    entry.target.style.opacity = '1';
-                }
-            });
-        }, observerOptions);
-        
-        // Observe cards with delay
-        document.querySelectorAll('.card-hover').forEach((el, index) => {
-            el.style.opacity = '0';
-            el.style.animationDelay = `${index * 0.1}s`;
-            observer.observe(el);
-        });
-    </script>
+    }
+</script>
 </body>
 </html>

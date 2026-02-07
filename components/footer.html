@@ -1,0 +1,144 @@
+<footer x-data="{ links: window.PAGE_LINKS }" class="bg-neutral-900 border-t border-neutral-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
+            
+            <div class="col-span-2 lg:col-span-2">
+                <a :href="links.home" class="flex items-center space-x-2 mb-4 group">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform">
+                        <i class='bx bx-code-alt text-black text-lg sm:text-xl'></i>
+                    </div>
+                    <span class="font-playfair text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-wide">ReyhanDShoot</span>
+                </a>
+                <p class="text-neutral-400 text-xs sm:text-sm max-w-sm mb-6 leading-relaxed">
+                    Freelancer, Programmer & Digital Designer dari Bandung. Menyediakan template premium, komponen siap pakai, dan solusi web kreatif untuk kebutuhan digital kamu.
+                </p>
+                
+                <div class="flex flex-wrap gap-3">
+                    <a :href="links.instagram" target="_blank" class="w-10 h-10 bg-neutral-800 rounded-xl flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 transform hover:-translate-y-1">
+                        <i class='bx bxl-instagram text-xl'></i>
+                    </a>
+                    <a :href="links.discord" target="_blank" class="w-10 h-10 bg-neutral-800 rounded-xl flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 transform hover:-translate-y-1">
+                        <i class='bx bxl-discord-alt text-xl'></i>
+                    </a>
+                    <a :href="links.whatsapp" target="_blank" class="w-10 h-10 bg-neutral-800 rounded-xl flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 transform hover:-translate-y-1">
+                        <i class='bx bxl-whatsapp text-xl'></i>
+                    </a>
+                    <a :href="links.github" target="_blank" class="w-10 h-10 bg-neutral-800 rounded-xl flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 transform hover:-translate-y-1">
+                        <i class='bx bxl-github text-xl'></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-span-1">
+                <h4 class="font-bold text-sm sm:text-base mb-4 text-white flex items-center gap-2">
+                    <i class='bx bx-link text-neutral-500'></i> Navigasi
+                </h4>
+                <ul class="space-y-3 text-xs sm:text-sm">
+                    <li><a :href="links.home" class="text-neutral-400 hover:text-white transition-colors">Beranda</a></li>
+                    <li><a :href="links.portfolio" class="text-neutral-400 hover:text-white transition-colors">Portfolio</a></li>
+                </ul>
+            </div>
+            
+            <div class="col-span-1">
+                <h4 class="font-bold text-sm sm:text-base mb-4 text-white flex items-center gap-2">
+                    <i class='bx bx-info-circle text-neutral-500'></i> Legal
+                </h4>
+                <ul class="space-y-3 text-xs sm:text-sm">
+                    <li><a :href="links.terms" class="text-neutral-400 hover:text-white transition-colors">Terms & Conditions</a></li>
+                    <li><a :href="links.privacy" class="text-neutral-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                    <li><a :href="links.help" class="text-neutral-400 hover:text-white transition-colors">Bantuan</a></li>
+                </ul>
+            </div>
+            
+            <div class="col-span-2 md:col-span-1">
+                <h4 class="font-bold text-sm sm:text-base mb-4 text-white flex items-center gap-2">
+                    <i class='bx bx-phone text-neutral-500'></i> Kontak
+                </h4>
+                <ul class="space-y-3 text-xs sm:text-sm">
+                    <li class="flex items-start gap-2">
+                        <i class='bx bx-map text-neutral-500 mt-0.5'></i>
+                        <span class="text-neutral-400" x-text="links.address">Bandung</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i class='bx bx-phone text-neutral-500'></i>
+                        <a :href="'tel:' + links.phoneDisplay" class="text-neutral-400 hover:text-white" x-text="links.phoneDisplay"></a>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i class='bx bx-envelope text-neutral-500'></i>
+                        <a :href="'mailto:' + links.email" class="text-neutral-400 hover:text-white" x-text="links.email"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="border-t border-neutral-800 mt-10 pt-10">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <h4 class="font-bold text-white flex items-center gap-2">
+                        <i class='bx bx-bell text-yellow-500'></i> Berlangganan Newsletter
+                    </h4>
+                    <p class="text-neutral-500 text-xs mt-1">Update produk terbaru langsung di email kamu.</p>
+                </div>
+                <div class="flex w-full md:w-auto">
+                    <input type="email" placeholder="Email kamu..." class="flex-1 md:w-64 bg-neutral-800 border border-neutral-700 border-r-0 rounded-l-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-neutral-500">
+                    <button class="bg-white text-black px-6 py-3 rounded-r-xl font-bold hover:bg-neutral-200 transition-all flex items-center gap-2">
+                        <i class='bx bx-send'></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<div class="border-t border-neutral-800 py-6 sm:py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+            
+            <div class="text-center lg:text-left order-2 lg:order-1">
+                <p class="text-neutral-500 text-[10px] sm:text-xs leading-relaxed">
+                    © 2026 <span class="text-white font-bold tracking-wider">REYHANDSHOOT</span>. All rights reserved. 
+                </p>
+                <p class="text-neutral-600 text-[9px] sm:text-[10px] mt-1 flex items-center justify-center lg:justify-start gap-1">
+                    Crafted with <i class='bx bxs-zap text-yellow-500'></i> & <i class='bx bxs-heart text-red-500'></i> by 
+                    <a :href="links.github" target="_blank" class="text-neutral-400 hover:text-white transition-colors underline decoration-neutral-800">ReyhanDShoot</a> 
+                    in Bandung, ID
+                </p>
+            </div>
+
+            <div class="flex flex-col items-center lg:items-end gap-3 order-1 lg:order-2">
+                <div class="flex items-center gap-2 mb-1">
+                    <div class="flex items-center gap-1 text-[9px] font-bold text-green-500 uppercase tracking-[0.2em] bg-green-500/10 px-2 py-1 rounded">
+                        <i class='bx bxs-lock-alt'></i>
+                        <span>Secure Checkout</span>
+                    </div>
+                    <div class="h-3 w-[1px] bg-neutral-800"></div>
+                    <div class="flex items-center gap-1 text-[9px] font-bold text-neutral-400 uppercase tracking-[0.2em]">
+                        <i class='bx bxs-check-shield'></i>
+                        <span>Verified Merchant</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-center lg:justify-end gap-3 sm:gap-4 grayscale opacity-50 hover:opacity-100 hover:grayscale-0 transition-all duration-500">
+                    <div class="flex items-center gap-3 pr-3 border-r border-neutral-800">
+                        <i class='bx bxl-visa text-2xl text-white'></i>
+                        <i class='bx bxl-mastercard text-2xl text-white'></i>
+                        <i class='bx bxl-paypal text-2xl text-white'></i>
+                    </div>
+                    
+                    <div class="flex items-center gap-3">
+                        <span class="text-[11px] font-black italic text-white tracking-tighter">QRIS</span>
+                        <span class="text-[10px] font-bold text-white tracking-tight">GoPay</span>
+                        <span class="text-[10px] font-bold text-white tracking-tight">DANA</span>
+                        <span class="text-[10px] font-bold text-white tracking-tight">OVO</span>
+                        <span class="text-[10px] font-bold text-white tracking-tight hidden sm:block">ShopeePay</span>
+                    </div>
+                </div>
+                
+                <p class="text-neutral-600 text-[9px] uppercase tracking-widest font-medium">
+                    Powered by <span class="text-neutral-400">Lynk.id Checkout System</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</footer>

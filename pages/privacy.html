@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id" x-data="{ mobileMenu: false }">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kebijakan Privasi - DEVACODE</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="/lib/link.js"></script>
+    <script src="/lib/load.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        ::-webkit-scrollbar { width: 6px; height: 4px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .animate-fadeInUp { animation: fadeInUp 0.6s ease-out forwards; }
+        .animate-fadeInDown { animation: fadeInDown 0.6s ease-out forwards; }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        
+        .glass {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 0%, #888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .privacy-card {
+            transition: all 0.3s ease;
+        }
+        .privacy-card:hover {
+            transform: translateY(-4px);
+            border-color: #404040;
+        }
+    </style>
+</head>
+<body class="bg-neutral-950 text-white min-h-screen">
+    
+    <!-- Navbar -->
+    <div id="navbar-placeholder"></div>
+    
+    <!-- Hero Section -->
+    <section class="pt-24 sm:pt-28 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 bg-neutral-900 border border-neutral-800 rounded-3xl flex items-center justify-center mx-auto mb-6 animate-float">
+                <i class='bx bx-shield-quarter text-4xl sm:text-5xl text-white'></i>
+            </div>
+            <h1 class="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 gradient-text animate-fadeInUp">
+                Kebijakan Privasi
+            </h1>
+            <p class="text-neutral-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto animate-fadeInUp delay-100">
+                Kami menghargai privasi Anda. Halaman ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi pribadi Anda.
+            </p>
+            <div class="flex items-center justify-center gap-4 mt-6 text-xs sm:text-sm text-neutral-500 animate-fadeInUp delay-200">
+                <span class="flex items-center gap-1">
+                    <i class='bx bx-calendar'></i> Efektif: 1 Januari 2024
+                </span>
+                <span class="hidden sm:inline">|</span>
+                <span class="flex items-center gap-1">
+                    <i class='bx bx-revision'></i> Versi 2.0
+                </span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Privacy Highlights -->
+    <section class="px-4 sm:px-6 lg:px-8 pb-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="grid sm:grid-cols-3 gap-4 animate-fadeInUp delay-200">
+                <div class="bg-green-500/10 border border-green-500/20 rounded-2xl p-5 text-center">
+                    <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
+                        <i class='bx bx-lock-alt text-2xl text-green-400'></i>
+                    </div>
+                    <h3 class="font-semibold text-sm sm:text-base mb-1">Data Terenkripsi</h3>
+                    <p class="text-neutral-500 text-xs sm:text-sm">Semua data dilindungi enkripsi SSL</p>
+                </div>
+                <div class="bg-blue-500/10 border border-blue-500/20 rounded-2xl p-5 text-center">
+                    <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
+                        <i class='bx bx-user-check text-2xl text-blue-400'></i>
+                    </div>
+                    <h3 class="font-semibold text-sm sm:text-base mb-1">Tidak Dijual</h3>
+                    <p class="text-neutral-500 text-xs sm:text-sm">Data Anda tidak dijual ke pihak ketiga</p>
+                </div>
+                <div class="bg-purple-500/10 border border-purple-500/20 rounded-2xl p-5 text-center">
+                    <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
+                        <i class='bx bx-edit text-2xl text-purple-400'></i>
+                    </div>
+                    <h3 class="font-semibold text-sm sm:text-base mb-1">Kontrol Penuh</h3>
+                    <p class="text-neutral-500 text-xs sm:text-sm">Anda bisa mengubah/hapus data</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Content Section -->
+    <section class="px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20">
+        <div class="max-w-4xl mx-auto space-y-6">
+            
+            <!-- Section 1 -->
+            <div class="privacy-card bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 animate-fadeInUp">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-neutral-800 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class='bx bx-data text-xl sm:text-2xl'></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-playfair text-lg sm:text-xl font-semibold mb-3">Informasi yang Kami Kumpulkan</h3>
+                        <p class="text-neutral-400 text-sm sm:text-base mb-4 leading-relaxed">
+                            Kami mengumpulkan informasi yang Anda berikan secara sukarela saat berinteraksi dengan layanan kami:
+                        </p>
+                        <div class="grid sm:grid-cols-2 gap-3">
+                            <div class="bg-neutral-800/50 rounded-xl p-3 flex items-start gap-3">
+                                <i class='bx bx-user text-neutral-500 mt-0.5'></i>
+                                <div>
+                                    <p class="font-medium text-sm">Data Identitas</p>
+                                    <p class="text-neutral-500 text-xs">Nama, email, no. WhatsApp</p>
+                                </div>
+                            </div>
+                            <div class="bg-neutral-800/50 rounded-xl p-3 flex items-start gap-3">
+                                <i class='bx bx-credit-card text-neutral-500 mt-0.5'></i>
+                                <div>
+                                    <p class="font-medium text-sm">Data Transaksi</p>
+                                    <p class="text-neutral-500 text-xs">Riwayat pembelian, pembayaran</p>
+                                </div>
+                            </div>
+                            <div class="bg-neutral-800/50 rounded-xl p-3 flex items-start gap-3">
+                                <i class='bx bx-devices text-neutral-500 mt-0.5'></i>
+                                <div>
+                                    <p class="font-medium text-sm">Data Teknis</p>
+                                    <p class="text-neutral-500 text-xs">IP address, browser, device</p>
+                                </div>
+                            </div>
+                            <div class="bg-neutral-800/50 rounded-xl p-3 flex items-start gap-3">
+                                <i class='bx bx-message-dots text-neutral-500 mt-0.5'></i>
+                                <div>
+                                    <p class="font-medium text-sm">Data Komunikasi</p>
+                                    <p class="text-neutral-500 text-xs">Pesan chat, email support</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 2 -->
+            <div class="privacy-card bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 animate-fadeInUp">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-neutral-800 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class='bx bx-target-lock text-xl sm:text-2xl'></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-playfair text-lg sm:text-xl font-semibold mb-3">Penggunaan Informasi</h3>
+                        <p class="text-neutral-400 text-sm sm:text-base mb-4 leading-relaxed">
+                            Kami menggunakan informasi yang dikumpulkan untuk tujuan berikut:
+                        </p>
+                        <ul class="space-y-2">
+                            <li class="flex items-start gap-3 text-sm sm:text-base text-neutral-400">
+                                <i class='bx bx-check-circle text-green-400 mt-0.5'></i>
+                                <span><strong class="text-white">Memproses transaksi</strong> - Mengirim produk digital, konfirmasi pembayaran</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-sm sm:text-base text-neutral-400">
+                                <i class='bx bx-check-circle text-green-400 mt-0.5'></i>
+                                <span><strong class="text-white">Komunikasi</strong> - Merespon pertanyaan, memberikan support teknis</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-sm sm:text-base text-neutral-400">
+                                <i class='bx bx-check-circle text-green-400 mt-0.5'></i>
+                                <span><strong class="text-white">Peningkatan layanan</strong> - Analisis untuk pengembangan produk</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-sm sm:text-base text-neutral-400">
+                                <i class='bx bx-check-circle text-green-400 mt-0.5'></i>
+                                <span><strong class="text-white">Marketing</strong> - Informasi promo (dengan persetujuan)</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-sm sm:text-base text-neutral-400">
+                                <i class='bx bx-check-circle text-green-400 mt-0.5'></i>
+                                <span><strong class="text-white">Keamanan</strong> - Mencegah fraud dan aktivitas mencurigakan</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 3 -->
+            <div class="privacy-card bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 animate-fadeInUp">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-neutral-800 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class='bx bx-share-alt text-xl sm:text-2xl'></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-playfair text-lg sm:text-xl font-semibold mb-3">Berbagi Informasi</h3>
+                        <p class="text-neutral-400 text-sm sm:text-base mb-4 leading-relaxed">
+                            Kami <strong class="text-white">TIDAK menjual</strong> data pribadi Anda. Informasi hanya dibagikan dalam kondisi berikut:
+                        </p>
+                        <div class="space-y-3">
+                            <div class="bg-neutral-800/50 rounded-xl p-4">
+                                <h4 class="font-medium text-sm sm:text-base mb-1 flex items-center gap-2">
+                                    <i class='bx bx-building text-neutral-500'></i> Payment Gateway
+                                </h4>
+                                <p class="text-neutral-500 text-xs sm:text-sm">Data transaksi diproses oleh partner pembayaran resmi (Bank, e-wallet) dengan standar keamanan tinggi.</p>
+                            </div>
+                            <div class="bg-neutral-800/50 rounded-xl p-4">
+                                <h4 class="font-medium text-sm sm:text-base mb-1 flex items-center gap-2">
+                                    <i class='bx bx-gavel text-neutral-500'></i> Kewajiban Hukum
+                                </h4>
+                                <p class="text-neutral-500 text-xs sm:text-sm">Jika diwajibkan oleh hukum yang berlaku atau perintah pengadilan.</p>
+                            </div>
+                            <div class="bg-neutral-800/50 rounded-xl p-4">
+                                <h4 class="font-medium text-sm sm:text-base mb-1 flex items-center gap-2">
+                                    <i class='bx bx-check-shield text-neutral-500'></i> Persetujuan Anda
+                                </h4>
+                                <p class="text-neutral-500 text-xs sm:text-sm">Dengan izin eksplisit dari Anda untuk tujuan tertentu.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 4 -->
+            <div class="privacy-card bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 animate-fadeInUp">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-neutral-800 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class='bx bx-cookie text-xl sm:text-2xl'></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-playfair text-lg sm:text-xl font-semibold mb-3">Cookies & Tracking</h3>
+                        <p class="text-neutral-400 text-sm sm:text-base mb-4 leading-relaxed">
+                            Website kami menggunakan cookies untuk meningkatkan pengalaman pengguna:
+                        </p>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm">
+                                <thead>
+                                    <tr class="border-b border-neutral-800">
+                                        <th class="text-left py-2 pr-4 text-neutral-400 font-medium">Jenis Cookie</th>
+                                        <th class="text-left py-2 pr-4 text-neutral-400 font-medium">Fungsi</th>
+                                        <th class="text-left py-2 text-neutral-400 font-medium">Durasi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-neutral-800/50">
+                                        <td class="py-3 pr-4">Essential</td>
+                                        <td class="py-3 pr-4 text-neutral-500">Fungsi dasar website</td>
+                                        <td class="py-3 text-neutral-500">Session</td>
+                                    </tr>
+                                    <tr class="border-b border-neutral-800/50">
+                                        <td class="py-3 pr-4">Analytics</td>
+                                        <td class="py-3 pr-4 text-neutral-500">Statistik pengunjung</td>
+                                        <td class="py-3 text-neutral-500">1 tahun</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-3 pr-4">Preferences</td>
+                                        <td class="py-3 pr-4 text-neutral-500">Menyimpan preferensi</td>
+                                        <td class="py-3 text-neutral-500">6 bulan</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-neutral-500 text-xs sm:text-sm mt-3 flex items-start gap-2">
+                            <i class='bx bx-info-circle mt-0.5'></i>
+                            Anda dapat menonaktifkan cookies melalui pengaturan browser.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 5 -->
+            <div class="privacy-card bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 animate-fadeInUp">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-neutral-800 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class='bx bx-shield text-xl sm:text-2xl'></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-playfair text-lg sm:text-xl font-semibold mb-3">Keamanan Data</h3>
+                        <p class="text-neutral-400 text-sm sm:text-base mb-4 leading-relaxed">
+                            Kami menerapkan langkah-langkah keamanan untuk melindungi data Anda:
+                        </p>
+                        <div class="grid sm:grid-cols-2 gap-3">
+                            <div class="flex items-center gap-3 bg-neutral-800/50 rounded-xl p-3">
+                                <i class='bx bx-lock text-green-400'></i>
+                                <span class="text-sm">SSL/TLS Encryption</span>
+                            </div>
+                            <div class="flex items-center gap-3 bg-neutral-800/50 rounded-xl p-3">
+                                <i class='bx bx-server text-green-400'></i>
+                                <span class="text-sm">Secure Server Hosting</span>
+                            </div>
+                            <div class="flex items-center gap-3 bg-neutral-800/50 rounded-xl p-3">
+                                <i class='bx bx-key text-green-400'></i>
+                                <span class="text-sm">Password Hashing</span>
+                            </div>
+                            <div class="flex items-center gap-3 bg-neutral-800/50 rounded-xl p-3">
+                                <i class='bx bx-shield-x text-green-400'></i>
+                                <span class="text-sm">Firewall Protection</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 6 -->
+            <div class="privacy-card bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 animate-fadeInUp">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-neutral-800 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class='bx bx-slider-alt text-xl sm:text-2xl'></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-playfair text-lg sm:text-xl font-semibold mb-3">Hak Anda</h3>
+                        <p class="text-neutral-400 text-sm sm:text-base mb-4 leading-relaxed">
+                            Anda memiliki hak penuh atas data pribadi Anda:
+                        </p>
+                        <div class="grid sm:grid-cols-2 gap-3">
+                            <div class="bg-neutral-800/50 rounded-xl p-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <i class='bx bx-show text-blue-400'></i>
+                                    <h4 class="font-medium text-sm">Hak Akses</h4>
+                                </div>
+                                <p class="text-neutral-500 text-xs">Melihat data yang kami simpan tentang Anda</p>
+                            </div>
+                            <div class="bg-neutral-800/50 rounded-xl p-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <i class='bx bx-edit text-yellow-400'></i>
+                                    <h4 class="font-medium text-sm">Hak Koreksi</h4>
+                                </div>
+                                <p class="text-neutral-500 text-xs">Mengubah data yang tidak akurat</p>
+                            </div>
+                            <div class="bg-neutral-800/50 rounded-xl p-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <i class='bx bx-trash text-red-400'></i>
+                                    <h4 class="font-medium text-sm">Hak Hapus</h4>
+                                </div>
+                                <p class="text-neutral-500 text-xs">Meminta penghapusan data Anda</p>
+                            </div>
+                            <div class="bg-neutral-800/50 rounded-xl p-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <i class='bx bx-download text-green-400'></i>
+                                    <h4 class="font-medium text-sm">Hak Portabilitas</h4>
+                                </div>
+                                <p class="text-neutral-500 text-xs">Mengunduh data dalam format umum</p>
+                            </div>
+                        </div>
+                        <p class="text-neutral-400 text-sm mt-4">
+                            Untuk menggunakan hak Anda, hubungi kami di <a href="mailto:privacy@devacode.id" class="text-white underline">privacy@devacode.id</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact for Privacy -->
+            <div class="bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 text-center animate-fadeInUp">
+                <div class="w-16 h-16 bg-neutral-800 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <i class='bx bx-envelope text-3xl'></i>
+                </div>
+                <h3 class="font-playfair text-lg sm:text-xl font-semibold mb-2">Pertanyaan tentang Privasi?</h3>
+                <p class="text-neutral-400 text-sm sm:text-base max-w-lg mx-auto mb-4">
+                    Jika Anda memiliki pertanyaan atau kekhawatiran tentang kebijakan privasi kami, jangan ragu untuk menghubungi kami.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                    <a href="mailto:privacy@devacode.id" class="inline-flex items-center justify-center gap-2 bg-white text-black px-6 py-3 rounded-xl font-semibold text-sm hover:bg-neutral-200 transition-colors">
+                        <i class='bx bx-envelope'></i> privacy@devacode.id
+                    </a>
+                    <a href="contact.html" class="inline-flex items-center justify-center gap-2 bg-neutral-800 text-white px-6 py-3 rounded-xl font-semibold text-sm hover:bg-neutral-700 transition-colors border border-neutral-700">
+                        <i class='bx bx-message-dots'></i> Hubungi Kami
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    
+    <!-- Footer -->    
+    <div id="footer-placeholder"></div>
+
+    <!-- Floating Action Button - WhatsApp -->
+    <div id="floating-button-whatsapp-placeholder"></div>
+</body>
+</html>

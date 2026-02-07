@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="id" x-data="{ mobileMenu: false }">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syarat & Ketentuan - DEVACODE</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="/lib/link.js"></script>
+    <script src="/lib/load.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        ::-webkit-scrollbar { width: 6px; height: 4px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .animate-fadeInUp { animation: fadeInUp 0.6s ease-out forwards; }
+        .animate-fadeInDown { animation: fadeInDown 0.6s ease-out forwards; }
+        .animate-slideInLeft { animation: slideInLeft 0.6s ease-out forwards; }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        
+        .glass {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 0%, #888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .content-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .content-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .content-section ul li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #a3a3a3;
+        }
+        
+        .content-section ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="bg-neutral-950 text-white min-h-screen">
+    
+    <!-- Navbar -->
+    <div id="navbar-placeholder"></div>
+    
+    <!-- Hero Section -->
+    <section class="pt-24 sm:pt-28 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 bg-neutral-900 border border-neutral-800 px-4 py-2 rounded-full text-xs sm:text-sm text-neutral-400 mb-6 animate-fadeInDown">
+                <i class='bx bx-file text-white'></i>
+                <span>Dokumen Legal</span>
+            </div>
+            <h1 class="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 gradient-text animate-fadeInUp">
+                Syarat & Ketentuan
+            </h1>
+            <p class="text-neutral-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto animate-fadeInUp delay-100">
+                Dengan menggunakan layanan DEVACODE, Anda menyetujui syarat dan ketentuan yang berlaku. Harap baca dengan seksama.
+            </p>
+            <div class="flex items-center justify-center gap-4 mt-6 text-xs sm:text-sm text-neutral-500 animate-fadeInUp delay-200">
+                <span class="flex items-center gap-1">
+                    <i class='bx bx-calendar'></i> Terakhir diperbarui: 15 Januari 2024
+                </span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Content Section -->
+    <section class="px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20">
+        <div class="max-w-4xl mx-auto">
+            
+            <!-- Content Sections -->
+            <div class="space-y-8">
+                
+                <!-- Section 1 -->
+                <div id="definisi" class="content-section bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 animate-fadeInUp delay-300">
+                    <h3>
+                        <span class="w-8 h-8 bg-white text-black rounded-lg flex items-center justify-center text-sm font-bold">1</span>
+                        Definisi Umum
+                    </h3>
+                    <p class="text-neutral-400 mb-4 text-sm sm:text-base leading-relaxed">
+                        Dalam Syarat dan Ketentuan ini, istilah-istilah berikut memiliki arti sebagai berikut:
+                    </p>
+                    <ul class="text-sm sm:text-base">
+                        <li><strong class="text-white">"DEVACODE"</strong> merujuk pada layanan penjualan produk digital yang dikelola oleh DevaCode.</li>
+                        <li><strong class="text-white">"Produk Digital"</strong> mencakup template web HTML, preset Alight Motion, template Pixellab/PLP, komponen HTML, dan produk digital lainnya.</li>
+                        <li><strong class="text-white">"Pembeli"</strong> adalah individu atau entitas yang membeli produk melalui platform kami.</li>
+                        <li><strong class="text-white">"Lisensi"</strong> adalah hak penggunaan yang diberikan kepada pembeli sesuai dengan jenis lisensi yang dibeli.</li>
+                    </ul>
+                </div>
+                
+                <!-- Section 2 -->
+                <div id="layanan" class="content-section bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 animate-fadeInUp">
+                    <h3>
+                        <span class="w-8 h-8 bg-white text-black rounded-lg flex items-center justify-center text-sm font-bold">2</span>
+                        Layanan Kami
+                    </h3>
+                    <p class="text-neutral-400 mb-4 text-sm sm:text-base leading-relaxed">
+                        DEVACODE menyediakan berbagai produk dan layanan digital:
+                    </p>
+                    <ul class="text-sm sm:text-base">
+                        <li><strong class="text-white">Web HTML Statis</strong> - Template website siap pakai dengan kode bersih dan terstruktur</li>
+                        <li><strong class="text-white">Template Alight Motion</strong> - Preset animasi dan transisi untuk video editing</li>
+                        <li><strong class="text-white">Template Pixellab/PLP</strong> - Desain typography dan poster siap edit</li>
+                        <li><strong class="text-white">Web Siap Online</strong> - Website lengkap dengan hosting dan domain</li>
+                        <li><strong class="text-white">Komponen HTML</strong> - Elemen UI siap pakai (navbar, footer, cards, dll)</li>
+                        <li><strong class="text-white">Jasa Custom</strong> - Pembuatan website dan desain sesuai kebutuhan klien</li>
+                    </ul>
+                </div>
+                
+                <!-- Section 3 -->
+                <div id="pembelian" class="content-section bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 animate-fadeInUp">
+                    <h3>
+                        <span class="w-8 h-8 bg-white text-black rounded-lg flex items-center justify-center text-sm font-bold">3</span>
+                        Pembelian & Pembayaran
+                    </h3>
+                    <p class="text-neutral-400 mb-4 text-sm sm:text-base leading-relaxed">
+                        Ketentuan yang berlaku untuk setiap transaksi pembelian:
+                    </p>
+                    <ul class="text-sm sm:text-base">
+                        <li>Semua harga yang tercantum dalam mata uang <strong class="text-white">Rupiah (IDR)</strong></li>
+                        <li>Pembayaran dapat dilakukan melalui <strong class="text-white">Transfer Bank, E-Wallet (DANA, OVO, GoPay), atau QRIS</strong></li>
+                        <li>Produk digital akan dikirim melalui <strong class="text-white">Email atau WhatsApp</strong> setelah pembayaran dikonfirmasi</li>
+                        <li>Konfirmasi pembayaran maksimal <strong class="text-white">1x24 jam</strong> untuk transfer manual</li>
+                        <li>Harga dapat berubah sewaktu-waktu tanpa pemberitahuan sebelumnya</li>
+                        <li>Diskon dan promo memiliki periode tertentu dan tidak dapat digabungkan</li>
+                    </ul>
+                </div>
+                
+                <!-- Section 4 -->
+                <div id="lisensi" class="content-section bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 animate-fadeInUp">
+                    <h3>
+                        <span class="w-8 h-8 bg-white text-black rounded-lg flex items-center justify-center text-sm font-bold">4</span>
+                        Lisensi Penggunaan
+                    </h3>
+                    <p class="text-neutral-400 mb-4 text-sm sm:text-base leading-relaxed">
+                        Setiap produk yang dibeli dilengkapi dengan lisensi penggunaan:
+                    </p>
+                    <div class="grid sm:grid-cols-2 gap-4 mb-4">
+                        <div class="bg-neutral-800/50 rounded-xl p-4">
+                            <h4 class="font-semibold text-sm sm:text-base mb-2 flex items-center gap-2">
+                                <i class='bx bx-user text-green-400'></i> Lisensi Personal
+                            </h4>
+                            <p class="text-neutral-500 text-xs sm:text-sm">Penggunaan untuk 1 proyek pribadi, tidak untuk dijual kembali atau klien.</p>
+                        </div>
+                        <div class="bg-neutral-800/50 rounded-xl p-4">
+                            <h4 class="font-semibold text-sm sm:text-base mb-2 flex items-center gap-2">
+                                <i class='bx bx-briefcase text-blue-400'></i> Lisensi Komersial
+                            </h4>
+                            <p class="text-neutral-500 text-xs sm:text-sm">Penggunaan untuk proyek klien tanpa batasan, tidak termasuk resell.</p>
+                        </div>
+                    </div>
+                    <ul class="text-sm sm:text-base">
+                        <li><strong class="text-red-400">DILARANG</strong> menjual kembali produk dalam bentuk asli atau modifikasi</li>
+                        <li><strong class="text-red-400">DILARANG</strong> mendistribusikan produk secara gratis ke pihak lain</li>
+                        <li><strong class="text-red-400">DILARANG</strong> mengklaim produk sebagai hasil karya sendiri</li>
+                        <li><strong class="text-green-400">DIIZINKAN</strong> memodifikasi produk sesuai kebutuhan proyek</li>
+                        <li><strong class="text-green-400">DIIZINKAN</strong> menggunakan untuk unlimited proyek (lisensi komersial)</li>
+                    </ul>
+                </div>
+                
+                <!-- Section 5 -->
+                <div id="refund" class="content-section bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 animate-fadeInUp">
+                    <h3>
+                        <span class="w-8 h-8 bg-white text-black rounded-lg flex items-center justify-center text-sm font-bold">5</span>
+                        Kebijakan Refund
+                    </h3>
+                    <p class="text-neutral-400 mb-4 text-sm sm:text-base leading-relaxed">
+                        Karena sifat produk digital, kebijakan refund kami sebagai berikut:
+                    </p>
+                    <div class="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4 mb-4">
+                        <p class="text-yellow-400 text-sm flex items-start gap-2">
+                            <i class='bx bx-info-circle text-lg mt-0.5'></i>
+                            <span>Produk digital <strong>tidak dapat dikembalikan</strong> setelah link download dikirimkan kepada pembeli.</span>
+                        </p>
+                    </div>
+                    <ul class="text-sm sm:text-base">
+                        <li><strong class="text-white">Refund DISETUJUI</strong> jika produk tidak sesuai deskripsi atau rusak/corrupt</li>
+                        <li><strong class="text-white">Refund DISETUJUI</strong> jika terjadi kesalahan teknis dari pihak kami</li>
+                        <li><strong class="text-white">Refund DITOLAK</strong> jika pembeli berubah pikiran setelah menerima produk</li>
+                        <li><strong class="text-white">Refund DITOLAK</strong> jika pembeli tidak memiliki skill untuk menggunakan produk</li>
+                        <li>Pengajuan refund maksimal <strong class="text-white">7 hari</strong> setelah pembelian</li>
+                    </ul>
+                </div>
+                
+                <!-- Section 6 -->
+                <div id="larangan" class="content-section bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 animate-fadeInUp">
+                    <h3>
+                        <span class="w-8 h-8 bg-white text-black rounded-lg flex items-center justify-center text-sm font-bold">6</span>
+                        Larangan & Batasan
+                    </h3>
+                    <p class="text-neutral-400 mb-4 text-sm sm:text-base leading-relaxed">
+                        Pengguna layanan DEVACODE dilarang untuk:
+                    </p>
+                    <ul class="text-sm sm:text-base">
+                        <li>Melakukan tindakan fraud atau penipuan dalam transaksi</li>
+                        <li>Menggunakan produk untuk kegiatan ilegal atau melanggar hukum</li>
+                        <li>Menyebarkan produk ke platform sharing/download gratis</li>
+                        <li>Membuat akun palsu atau menggunakan identitas orang lain</li>
+                        <li>Melakukan chargeback tanpa komunikasi terlebih dahulu</li>
+                        <li>Mencoba mengakses sistem atau data secara tidak sah</li>
+                    </ul>
+                    <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-4 mt-4">
+                        <p class="text-red-400 text-sm flex items-start gap-2">
+                            <i class='bx bx-error-circle text-lg mt-0.5'></i>
+                            <span>Pelanggaran terhadap ketentuan ini dapat mengakibatkan <strong>pembatalan lisensi</strong> dan <strong>tindakan hukum</strong>.</span>
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- Agreement Box -->
+            <div class="mt-8 bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 text-center animate-fadeInUp">
+                <div class="w-16 h-16 bg-neutral-800 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <i class='bx bx-check-shield text-3xl text-green-400'></i>
+                </div>
+                <h3 class="font-playfair text-lg sm:text-xl font-semibold mb-2">Persetujuan</h3>
+                <p class="text-neutral-400 text-sm sm:text-base max-w-lg mx-auto mb-4">
+                    Dengan melakukan pembelian di DEVACODE, Anda dianggap telah membaca, memahami, dan menyetujui seluruh Syarat & Ketentuan yang berlaku.
+                </p>
+                <a href="index.html" class="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-xl font-semibold text-sm hover:bg-neutral-200 transition-colors">
+                    <i class='bx bx-store'></i> Kembali Berbelanja
+                </a>
+            </div>
+            
+        </div>
+    </section>
+    
+    <!-- Footer -->    
+    <div id="footer-placeholder"></div>
+
+    <!-- Floating Action Button - WhatsApp -->
+    <div id="floating-button-whatsapp-placeholder"></div>
+</body>
+</html>

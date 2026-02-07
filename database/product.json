@@ -1,1 +1,51 @@
-[]
+[
+  {
+    "id": "link-in-bio-01",
+    "type": "html",
+    "name": "MONOCHROME Link-in-Bio Template — HTML & Tailwind Edition",
+    "price": 10000,
+    "original_price": 20000,
+    "discount_label": "50% OFF",
+    "image": "/assets/img/LINK-IN-BIO-STYLE-MONOCHROME-EDITION.png",
+    "category_label": "Web HTML",
+    "category_icon": "bx-code-block",
+    "voucher_code": null,
+    "flash_sale": false,
+    "flash_sale_end": "2026-02-15T23:59:59",
+    "lynk_url": "https://lynk.id/reyhandshoot/1ox2doz3lnzk/checkout?token=cGFyYW1zPSU1QiU1RCZiaWRfcHJpY2U9MCZxdHlfcHJvZD0x",
+    "wa_number": "6282117256472",
+    "wa_text_template": "Halo Reyhan! Saya tertarik produk: [PRODUCT_NAME].",
+    "description_text": "<b>Bosan dengan tampilan Linktree yang itu-itu saja?</b>\n\nTingkatkan personal branding kamu dengan Monochrome Edition, template website Link-in-Bio yang didesain khusus untuk kamu yang menyukai estetika minimalis, bersih, dan profesional.\n\nTemplate ini adalah solusi sekali bayar tanpa biaya berlangganan bulanan. Kamu punya kontrol penuh atas kodenya!\n\n<b>Apa yang akan kamu dapatkan?</b>\n✅ <b>2 Variasi File</b> : Versi Standard (HTML & CSS murni) dan Versi Advanced (Tailwind CSS).\n✅ <b>Fully Responsive</b> : Tampilan tetap cantik saat dibuka di HP, Tablet, maupun Laptop.\n✅ <b>Clean Code</b> : Struktur kodingan rapi dan mudah dimengerti, bahkan untuk pemula.\n✅ <b>Desain Modular</b> : Struktur folder yang teratur memudahkan kamu dalam kustomisasi.\n✅ <b>Bebas Watermark</b> : Tidak ada merek kamu sendiri tanpa embel-embel platform lain.\n\n<b>Cocok untuk:</b>\nKreator, Pengembang, Freelancer, atau siapa pun yang ingin tampil beda.\n\n⚠️ <i><b>Catatan Penting:</b></i>\nIni adalah produk Statis (Source Code HTML). Tidak ada admin dasbor. Perubahan konten dilakukan secara manual. Sangat direkomendasikan untuk digunakan bersama layanan hosting gratis seperti Netlify atau Vercel.\n\n<b>Isi Paket:</b>\n- Kode Sumber (Standar & Lanjutan)\n- Panduan Penggunaan (README.md)\n- Lisensi Penggunaan\n\nIngin Melihat Halaman Website Sebagai Contoh?? Kunjungi link: pages-link-in-bio-stye-monochrome.vercel.app",
+    "keywords": ["HTML", "Landing Page", "Portfolio"],
+    "features": [
+      "Minimalist & Professional Design",
+      "Standard (HTML/CSS) & Advanced (Tailwind) Versions",
+      "Fully Responsive for All Devices",
+      "SEO Friendly & Fast Loading",
+      "No Watermark (Full White Label)",
+      "Clean & Modular Code Structure"
+    ],
+    "benefits": [
+      {
+        "title": "Dual Format", 
+        "subtitle": "HTML & Tailwind", 
+        "icon": "bx-code-alt"
+      },
+      {
+        "title": "Lifetime Access", 
+        "subtitle": "Sekali Bayar", 
+        "icon": "bx-infinite"
+      },
+      {
+        "title": "Easy Edit", 
+        "subtitle": "Pemula Friendly", 
+        "icon": "bx-edit-alt"
+      },
+      {
+        "title": "Priority Support", 
+        "subtitle": "Direct via WA", 
+        "icon": "bx-support"
+      }
+    ]
+  }
+]

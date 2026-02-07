@@ -1,0 +1,116 @@
+<nav x-data="{ 
+        mobileMenu: false, 
+        searchOpen: false, 
+        links: window.PAGE_LINKS,
+        // Logika untuk mendeteksi apakah kita sedang di halaman index
+        isIndex: window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/') 
+     }" 
+     x-cloak
+     class="fixed top-0 left-0 right-0 z-50 glass border-b border-neutral-800/50 animate-fadeInDown">
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+        <div class="flex items-center justify-between">
+            <a :href="links.home" class="flex items-center space-x-2 group">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <i class='bx bx-code-alt text-black text-lg sm:text-xl'></i>
+                </div>
+                <span class="font-playfair text-xl sm:text-2xl lg:text-3xl font-bold tracking-wide text-white">ReyhanDShoot</span>
+            </a>
+            
+            <div class="hidden lg:flex items-center space-x-6 xl:space-x-8">
+                <a :href="links.home" class="relative group py-2 text-sm xl:text-base text-white">
+                    <span class="hover:text-neutral-400 transition-colors">Beranda</span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a :href="links.portfolio" class="relative group py-2 text-sm xl:text-base text-white">
+                    <span class="hover:text-neutral-400 transition-colors">Portfolio</span>
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <div class="h-4 w-[1px] bg-neutral-800"></div>
+            
+                <a :href="links.privacy" class="relative group py-2 text-xs xl:text-sm text-neutral-500">
+                    <span class="hover:text-white transition-colors">Privacy</span>
+                </a>
+                <a :href="links.contact" class="relative group py-2 text-xs xl:text-sm text-neutral-500">
+                    <span class="hover:text-green-500 transition-colors">Contact</span>
+                </a>
+            
+                <template x-if="isIndex">
+                    <button @click="searchOpen = !searchOpen" class="p-2 hover:bg-neutral-800 rounded-full transition-colors group">
+                        <i class='bx bx-search text-xl' :class="searchOpen ? 'text-white' : 'text-neutral-400'"></i>
+                    </button>
+                </template>
+            </div>
+
+            <div class="flex lg:hidden items-center space-x-2 text-white">
+                <template x-if="isIndex">
+                    <button @click="searchOpen = !searchOpen" class="p-2 hover:bg-neutral-800 rounded-full transition-colors">
+                        <i class='bx text-xl' :class="searchOpen ? 'bx-x text-white' : 'bx-search text-neutral-400'"></i>
+                    </button>
+                </template>
+                <button @click="mobileMenu = !mobileMenu" class="p-2 hover:bg-neutral-800 rounded-full transition-colors">
+                    <i class='bx text-2xl' :class="mobileMenu ? 'bx-x' : 'bx-menu'"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div x-show="searchOpen && isIndex" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-2"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             class="mt-4 pb-2" 
+             style="display: none;">
+            <div class="relative max-w-7xl mx-auto">
+                <input type="text" 
+                       x-model="$store.search.query"
+                       @keydown.escape="searchOpen = false"
+                       placeholder="Cari template, jasa, atau aset digital..." 
+                       class="w-full bg-neutral-900/80 border border-neutral-700 rounded-2xl px-5 py-3.5 text-sm text-white focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all">
+                
+                <div class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2">
+                    <button x-show="$store.search.query" @click="$store.search.query = ''" class="p-1 text-neutral-500 hover:text-white">
+                        <i class='bx bx-x text-xl'></i>
+                    </button>
+                    <i class='bx bx-search text-xl text-neutral-400'></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div x-show="mobileMenu" 
+         x-transition:enter="transition ease-out duration-300" 
+         x-transition:enter-start="opacity-0 -translate-y-4" 
+         x-transition:enter-end="opacity-100 translate-y-0" 
+         x-transition:leave="transition ease-in duration-200" 
+         x-transition:leave-start="opacity-100 translate-y-0" 
+         x-transition:leave-end="opacity-0 -translate-y-4" 
+         class="lg:hidden bg-neutral-900/95 border-t border-neutral-800 backdrop-blur-md shadow-2xl" 
+         style="display: none;"> 
+        
+        <div class="px-4 py-6 space-y-2"> 
+            <a :href="links.home" class="flex items-center gap-4 py-3.5 px-4 hover:bg-neutral-800 rounded-2xl transition-colors text-white group"> 
+                <i class='bx bx-store-alt text-2xl text-neutral-400 group-hover:text-white'></i> 
+                <span class="flex-1 font-semibold">Beranda</span> 
+            </a> 
+            <a :href="links.portfolio" class="flex items-center gap-4 py-3.5 px-4 hover:bg-neutral-800 rounded-2xl transition-colors text-white group"> 
+                <i class='bx bx-briefcase text-2xl text-neutral-400 group-hover:text-white'></i> 
+                <span class="flex-1 font-semibold">Portfolio</span> 
+            </a> 
+            <div class="pt-6 pb-2 px-4">
+                <div class="h-[1px] bg-neutral-800 w-full mb-4"></div>
+                <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500">Support & Center</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 px-2">
+                <a :href="links.help" class="flex flex-col items-center gap-2 py-4 hover:bg-neutral-800 rounded-2xl border border-neutral-800/50 transition-colors"> 
+                    <i class='bx bx-help-circle text-2xl text-yellow-500'></i> 
+                    <span class="text-xs text-neutral-400">Bantuan</span> 
+                </a> 
+                <a :href="links.contact" class="flex flex-col items-center gap-2 py-4 hover:bg-neutral-800 rounded-2xl border border-neutral-800/50 transition-colors"> 
+                    <i class='bx bx-envelope text-2xl text-green-500'></i> 
+                    <span class="text-xs text-neutral-400">Kontak</span> 
+                </a> 
+            </div>
+        </div> 
+    </div>
+</nav>

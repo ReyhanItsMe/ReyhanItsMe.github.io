@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="id" x-data="helpPage()">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pusat Bantuan - DEVACODE</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="/lib/link.js"></script>
+    <script src="/lib/load.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        ::-webkit-scrollbar { width: 6px; height: 4px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+        
+        .animate-fadeInUp { animation: fadeInUp 0.6s ease-out forwards; }
+        .animate-fadeInDown { animation: fadeInDown 0.6s ease-out forwards; }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        
+        .glass {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 0%, #888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .guide-card {
+            transition: all 0.3s ease;
+        }
+        .guide-card:hover {
+            transform: translateY(-4px);
+            border-color: #404040;
+        }
+        
+        .toc-link {
+            transition: all 0.2s ease;
+        }
+        .toc-link:hover {
+            padding-left: 1rem;
+            color: #fff;
+        }
+        
+        .step-number {
+            counter-increment: step;
+        }
+        .step-number::before {
+            content: counter(step);
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-neutral-950 text-white min-h-screen">
+    
+    <!-- Navbar (kosong untuk diganti) -->
+    <div id="navbar-placeholder"></div>
+    
+    <!-- Hero Section -->
+    <section class="pt-24 sm:pt-28 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <!-- Welcome Icon -->
+            <div class="w-20 h-20 sm:w-24 sm:h-24 bg-neutral-900 border border-neutral-800 rounded-3xl flex items-center justify-center mx-auto mb-6 animate-float">
+                <i class='bx bx-book-open text-4xl sm:text-5xl text-white'></i>
+            </div>
+            
+            <!-- Welcome Text -->
+            <div class="inline-flex items-center gap-2 bg-neutral-900 border border-neutral-800 px-4 py-2 rounded-full text-xs sm:text-sm text-neutral-400 mb-4 animate-fadeInDown">
+                <i class='bx bx-help-circle text-white'></i>
+                <span>Pusat Bantuan</span>
+            </div>
+            
+            <h1 class="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 gradient-text animate-fadeInUp">
+                Selamat Datang di<br>Panduan DEVACODE
+            </h1>
+            <p class="text-neutral-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto animate-fadeInUp delay-100">
+                Temukan semua informasi yang Anda butuhkan tentang cara menggunakan layanan kami, mulai dari pembelian hingga penggunaan produk digital.
+            </p>
+            
+            <!-- Quick Search -->
+            <div class="mt-8 max-w-xl mx-auto animate-fadeInUp delay-200">
+                <div class="relative">
+                    <input type="text" 
+                           x-model="searchQuery"
+                           @input="filterFAQ()"
+                           placeholder="Cari bantuan... (cth: cara membeli, refund, lisensi)" 
+                           class="w-full bg-neutral-900 border border-neutral-800 rounded-2xl px-5 py-4 pr-12 text-sm focus:outline-none focus:border-neutral-600 transition-colors">
+                    <button class="absolute right-4 top-1/2 -translate-y-1/2">
+                        <i class='bx bx-search text-xl text-neutral-500'></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Quick Stats -->
+            <div class="flex items-center justify-center flex-wrap gap-6 mt-8 text-sm animate-fadeInUp delay-300">
+                <div class="flex items-center gap-2 text-neutral-400">
+                    <i class='bx bx-file text-neutral-500'></i>
+                    <span><strong class="text-white">8</strong> Panduan</span>
+                </div>
+                <div class="flex items-center gap-2 text-neutral-400">
+                    <i class='bx bx-help-circle text-neutral-500'></i>
+                    <span><strong class="text-white">20+</strong> FAQ</span>
+                </div>
+                <div class="flex items-center gap-2 text-neutral-400">
+                    <i class='bx bx-time text-neutral-500'></i>
+                    <span>Update <strong class="text-white">Jan 2024</strong></span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Table of Contents -->
+    <section id="daftar-isi" class="px-4 sm:px-6 lg:px-8 pb-12">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 lg:p-8 animate-fadeInUp">
+                <h2 class="font-playfair text-xl sm:text-2xl font-semibold mb-6 flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white text-black rounded-xl flex items-center justify-center">
+                        <i class='bx bx-list-ul text-xl'></i>
+                    </div>
+                    Daftar Isi
+                </h2>
+                
+                <div class="grid sm:grid-cols-2 gap-3 sm:gap-4">
+                    <!-- Panduan Section -->
+                    <div class="space-y-2">
+                        <h3 class="text-neutral-500 text-xs uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i class='bx bx-book'></i> Panduan
+                        </h3>
+                        <a href="#cara-membeli" class="toc-link flex items-center gap-3 text-neutral-400 hover:text-white py-2 px-3 rounded-lg hover:bg-neutral-800">
+                            <span class="w-6 h-6 bg-neutral-800 rounded-lg flex items-center justify-center text-xs font-bold">1</span>
+                            Cara Membeli Produk
+                        </a>
+                        <a href="#metode-pembayaran" class="toc-link flex items-center gap-3 text-neutral-400 hover:text-white py-2 px-3 rounded-lg hover:bg-neutral-800">
+                            <span class="w-6 h-6 bg-neutral-800 rounded-lg flex items-center justify-center text-xs font-bold">2</span>
+                            Metode Pembayaran
+                        </a>
+                        <a href="#download-produk" class="toc-link flex items-center gap-3 text-neutral-400 hover:text-white py-2 px-3 rounded-lg hover:bg-neutral-800">
+                            <span class="w-6 h-6 bg-neutral-800 rounded-lg flex items-center justify-center text-xs font-bold">3</span>
+                            Cara Download Produk
+                        </a>
+                        <a href="#penggunaan-produk" class="toc-link flex items-center gap-3 text-neutral-400 hover:text-white py-2 px-3 rounded-lg hover:bg-neutral-800">
+                            <span class="w-6 h-6 bg-neutral-800 rounded-lg flex items-center justify-center text-xs font-bold">4</span>
+                            Penggunaan Produk
+                        </a>
+                    </div>
+                    
+                    <!-- Info Section -->
+                    <div class="space-y-2">
+                        <h3 class="text-neutral-500 text-xs uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i class='bx bx-info-circle'></i> Informasi
+                        </h3>
+                        <a href="#lisensi" class="toc-link flex items-center gap-3 text-neutral-400 hover:text-white py-2 px-3 rounded-lg hover:bg-neutral-800">
+                            <span class="w-6 h-6 bg-neutral-800 rounded-lg flex items-center justify-center text-xs font-bold">5</span>
+                            Informasi Lisensi
+                        </a>
+                        <a href="#peringatan" class="toc-link flex items-center gap-3 text-neutral-400 hover:text-white py-2 px-3 rounded-lg hover:bg-neutral-800">
+                            <span class="w-6 h-6 bg-neutral-800 rounded-lg flex items-center justify-center text-xs font-bold">6</span>
+                            Peringatan & Larangan
+                        </a>
+                        <a href="#refund" class="toc-link flex items-center gap-3 text-neutral-400 hover:text-white py-2 px-3 rounded-lg hover:bg-neutral-800">
+                            <span class="w-6 h-6 bg-neutral-800 rounded-lg flex items-center justify-center text-xs font-bold">7</span>
+                            Kebijakan Refund
+                        </a>
+                        <a href="#faq" class="toc-link flex items-center gap-3 text-neutral-400 hover:text-white py-2 px-3 rounded-lg hover:bg-neutral-800">
+                            <span class="w-6 h-6 bg-neutral-800 rounded-lg flex items-center justify-center text-xs font-bold">8</span>
+                            FAQ (20+ Pertanyaan)
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Guide Sections -->
+    <section class="px-4 sm:px-6 lg:px-8 pb-12">
+        <div class="max-w-4xl mx-auto space-y-8">
+            
+            <!-- Guide 1: Cara Membeli -->
+            <div id="cara-membeli" class="guide-card bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 lg:p-8 scroll-mt-8 animate-fadeInUp">
+                <div class="flex items-start gap-4 mb-6">
+                    <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class='bx bx-cart text-2xl text-green-400'></i>
+                    </div>
+                    <div>
+                        <h2 class="font-playfair text-xl sm:text-2xl font-semibold">Cara Membeli Produk</h2>
+                        <p class="text-neutral-500 text-sm mt-1">Panduan lengkap untuk membeli produk digital di DEVACODE</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-4" style="counter-reset: step;">
+                    <div class="flex gap-4">
+                        <div class="step-number w-8 h-8 bg-white text-black rounded-lg flex items-center justify-center flex-shrink-0 font-bold text-sm"></div>
+                        <div class="flex-1">
+                            <h4 class="font-medium mb-1">Pilih Produk</h4>
+                            <p class="text-neutral-400 text-sm">Jelajahi katalog produk kami dan pilih produk yang Anda inginkan. Anda bisa menggunakan filter untuk mempermudah pencarian.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="step-number w-8 h-8 bg-white text-black rounded-lg flex items-center justify-center flex-shrink-0 font-bold text-sm"></div>
+                        <div class="flex-1">
+                            <h4 class="font-medium mb-1">Lihat Detail Produk</h4>
+                            <p class="text-neutral-400 text-sm">Klik produk untuk melihat detail lengkap termasuk deskripsi, fitur, preview, dan harga.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="step-number w-8 h-8 bg-white text-black rounded-lg flex items-center justify-center flex-shrink-0 font-bold text-sm"></div>
+                        <div class="flex-1">
+                            <h4 class="font-medium mb-1">Klik "Beli Sekarang"</h4>
+                            <p class="text-neutral-400 text-sm">Setelah yakin, klik tombol "Beli Sekarang" untuk melanjutkan ke proses checkout.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="step-number w-8 h-8 bg-white text-black rounded-lg flex items-center justify-center flex-shrink-0 font-bold text-sm"></div>
+                        <div class="flex-1">
+                            <h4 class="font-medium mb-1">Review Pesanan</h4>
+                            <p class="text-neutral-400 text-sm">Periksa kembali detail pesanan Anda di popup struk pembayaran sebelum melanjutkan.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="step-number w-8 h-8 bg-white text-black rounded-lg flex items-center justify-center flex-shrink-0 font-bold text-sm"></div>
+                        <div class="flex-1">
+                            <h4 class="font-medium mb-1">Lanjutkan ke WhatsApp</h4>
+                            <p class="text-neutral-400 text-sm">Klik tombol untuk melanjutkan ke WhatsApp. Admin akan membantu proses pembayaran Anda.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="step-number w-8 h-8 bg-white text-black rounded-lg flex items-center justify-center flex-shrink-0 font-bold text-sm"></div>
+                        <div class="flex-1">
+                            <h4 class="font-medium mb-1">Lakukan Pembayaran</h4>
+                            <p class="text-neutral-400 text-sm">Transfer sesuai nominal yang diberikan ke rekening/e-wallet yang tersedia.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="step-number w-8 h-8 bg-white text-black rounded-lg flex items-center justify-center flex-shrink-0 font-bold text-sm"></div>
+                        <div class="flex-1">
+                            <h4 class="font-medium mb-1">Terima Produk</h4>
+                            <p class="text-neutral-400 text-sm">Setelah pembayaran dikonfirmasi, produk akan dikirim ke email/WhatsApp Anda dalam hitungan menit.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 bg-green-500/10 border border-green-500/20 rounded-xl p-4">
+                    <p class="text-green-400 text-sm flex items-start gap-2">
+                        <i class='bx bx-bulb text-lg mt-0.5'></i>
+                        <span><strong>Tips:</strong> Simpan bukti pembayaran dan chat dengan admin untuk referensi jika diperlukan di kemudian hari.</span>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Guide 2: Metode Pembayaran -->
+            <div id="metode-pembayaran" class="guide-card bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 lg:p-8 scroll-mt-8 animate-fadeInUp">
+                <div class="flex items-start gap-4 mb-6">
+                    <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class='bx bx-credit-card text-2xl text-blue-400'></i>
+                    </div>
+                    <div>
+                        <h2 class="font-playfair text-xl sm:text-2xl font-semibold">Metode Pembayaran</h2>
+                        <p class="text-neutral-500 text-sm mt-1">Berbagai pilihan pembayaran yang tersedia</p>
+                    </div>
+                </div>
+                
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <!-- Transfer Bank -->
+                    <div class="bg-neutral-800/50 rounded-xl p-4">
+                        <h4 class="font-medium mb-3 flex items-center gap-2">
+                            <i class='bx bx-building text-neutral-500'></i> Transfer Bank
+                        </h4>
+                        <div class="space-y-2 text-sm text-neutral-400">
+                            <div class="flex items-center gap-2">
+                                <span class="w-12 h-6 bg-blue-600 rounded text-white text-xs flex items-center justify-center font-bold">BCA</span>
+                                <span>Bank Central Asia</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-12 h-6 bg-orange-600 rounded text-white text-xs flex items-center justify-center font-bold">BNI</span>
+                                <span>Bank Negara Indonesia</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-12 h-6 bg-blue-800 rounded text-white text-xs flex items-center justify-center font-bold">BRI</span>
+                                <span>Bank Rakyat Indonesia</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-12 h-6 bg-yellow-600 rounded text-white text-xs flex items-center justify-center font-bold">MDR</span>
+                                <span>Bank Mandiri</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- E-Wallet -->
+                    <div class="bg-neutral-800/50 rounded-xl p-4">
+                        <h4 class="font-medium mb-3 flex items-center gap-2">
+                            <i class='bx bx-wallet text-neutral-500'></i> E-Wallet
+                        </h4>
+                        <div class="space-y-2 text-sm text-neutral-400">
+                            <div class="flex items-center gap-2">
+                                <span class="w-12 h-6 bg-blue-500 rounded text-white text-xs flex items-center justify-center font-bold">DANA</span>
+                                <span>DANA</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-12 h-6 bg-purple-600 rounded text-white text-xs flex items-center justify-center font-bold">OVO</span>
+                                <span>OVO</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-12 h-6 bg-green-600 rounded text-white text-xs flex items-center justify-center font-bold">GOPAY</span>
+                                <span>GoPay</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-12 h-6 bg-orange-500 rounded text-white text-xs flex items-center justify-center font-bold">SPAY</span>
+                                <span>ShopeePay</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- QRIS -->
+                    <div class="bg-neutral-800/50 rounded-xl p-4">
+                        <h4 class="font-medium mb-3 flex items-center gap-2">
+                            <i class='bx bx-qr text-neutral-500'></i> QRIS
+                        </h4>
+                        <p class="text-sm text-neutral-400">Scan & bayar menggunakan aplikasi mobile banking atau e-wallet apapun yang mendukung QRIS.</p>
+                    </div>
+                    
+                    <!-- PayPal -->
+                    <div class="bg-neutral-800/50 rounded-xl p-4">
+                        <h4 class="font-medium mb-3 flex items-center gap-2">
+                            <i class='bx bxl-paypal text-neutral-500'></i> Internasional
+                        </h4>
+                        <p class="text-sm text-neutral-400">PayPal tersedia untuk pembeli dari luar Indonesia dengan kurs yang berlaku.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
+                    <p class="text-blue-400 text-sm flex items-start gap-2">
+                        <i class='bx bx-info-circle text-lg mt-0.5'></i>
+                        <span><strong>Info:</strong> Biaya admin pembayaran ditanggung pembeli dan bervariasi tergantung metode yang dipilih.</span>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Guide 3: Download Produk -->
+            <div id="download-produk" class="guide-card bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 lg:p-8 scroll-mt-8 animate-fadeInUp">
+                <div class="flex items-start gap-4 mb-6">
+                    <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class='bx bx-download text-2xl text-purple-400'></i>
+                    </div>
+                    <div>
+                        <h2 class="font-playfair text-xl sm:text-2xl font-semibold">Cara Download Produk</h2>
+                        <p class="text-neutral-500 text-sm mt-1">Panduan mengakses produk yang sudah dibeli</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="bg-neutral-800/50 rounded-xl p-4">
+                        <h4 class="font-medium mb-2 flex items-center gap-2">
+                            <i class='bx bx-envelope text-green-400'></i> Via Email
+                        </h4>
+                        <ol class="text-sm text-neutral-400 space-y-2 list-decimal list-inside">
+                            <li>Cek inbox email yang Anda berikan saat order</li>
+                            <li>Cari email dari DEVACODE dengan subjek "Produk Anda Siap"</li>
+                            <li>Klik link download yang tersedia di email</li>
+                            <li>Jika tidak ada di inbox, cek folder Spam/Junk</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="bg-neutral-800/50 rounded-xl p-4">
+                        <h4 class="font-medium mb-2 flex items-center gap-2">
+                            <i class='bx bxl-whatsapp text-green-400'></i> Via WhatsApp
+                        </h4>
+                        <ol class="text-sm text-neutral-400 space-y-2 list-decimal list-inside">
+                            <li>Admin akan mengirim file langsung ke chat WhatsApp Anda</li>
+                            <li>Download file dengan tap & hold lalu pilih "Save"</li>
+                            <li>Untuk file besar, link Google Drive/MediaFire akan diberikan</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="bg-neutral-800/50 rounded-xl p-4">
+                        <h4 class="font-medium mb-2 flex items-center gap-2">
+                            <i class='bx bx-cloud-download text-green-400'></i> Via Cloud Storage
+                        </h4>
+                        <ol class="text-sm text-neutral-400 space-y-2 list-decimal list-inside">
+                            <li>Link Google Drive/Dropbox akan diberikan</li>
+                            <li>Klik link untuk membuka halaman download</li>
+                            <li>Klik tombol Download atau ikon panah ke bawah</li>
+                            <li>Extract file ZIP menggunakan aplikasi seperti WinRAR atau 7-Zip</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="mt-6 bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4">
+                    <p class="text-yellow-400 text-sm flex items-start gap-2">
+                        <i class='bx bx-error text-lg mt-0.5'></i>
+                        <span><strong>Penting:</strong> Link download memiliki masa berlaku. Segera download produk Anda setelah menerima link.</span>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Guide 4: Penggunaan Produk -->
+            <div id="penggunaan-produk" class="guide-card bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 lg:p-8 scroll-mt-8 animate-fadeInUp">
+                <div class="flex items-start gap-4 mb-6">
+                    <div class="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class='bx bx-cog text-2xl text-cyan-400'></i>
+                    </div>
+                    <div>
+                        <h2 class="font-playfair text-xl sm:text-2xl font-semibold">Penggunaan Produk</h2>
+                        <p class="text-neutral-500 text-sm mt-1">Cara menggunakan berbagai jenis produk digital</p>
+                    </div>
+                </div>
+                
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <!-- Web HTML -->
+                    <div class="bg-neutral-800/50 rounded-xl p-4">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class='bx bx-code-alt text-orange-400 text-xl'></i>
+                            <h4 class="font-medium">Web HTML/Template</h4>
+                        </div>
+                        <ol class="text-sm text-neutral-400 space-y-1 list-decimal list-inside">
+                            <li>Extract file ZIP</li>
+                            <li>Buka dengan code editor (VS Code, dll)</li>
+                            <li>Edit konten sesuai kebutuhan</li>
+                            <li>Preview dengan browser</li>
+                            <li>Upload ke hosting</li>
+                        </ol>
+                    </div>
+                    
+                    <!-- Alight Motion -->
+                    <div class="bg-neutral-800/50 rounded-xl p-4">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class='bx bx-movie-play text-purple-400 text-xl'></i>
+                            <h4 class="font-medium">Preset Alight Motion</h4>
+                        </div>
+                        <ol class="text-sm text-neutral-400 space-y-1 list-decimal list-inside">
+                            <li>Download file .alight</li>
+                            <li>Buka aplikasi Alight Motion</li>
+                            <li>Tap titik 3 → Import</li>
+                            <li>Pilih file preset</li>
+                            <li>Edit dan export video</li>
+                        </ol>
+                    </div>
+                    
+                    <!-- Pixellab/PLP -->
+                    <div class="bg-neutral-800/50 rounded-xl p-4">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class='bx bx-text text-blue-400 text-xl'></i>
+                            <h4 class="font-medium">Template PLP/Pixellab</h4>
+                        </div>
+                        <ol class="text-sm text-neutral-400 space-y-1 list-decimal list-inside">
+                            <li>Download file .plp</li>
+                            <li>Buka aplikasi Pixellab</li>
+                            <li>Menu → Load Project</li>
+                            <li>Pilih file template</li>
+                            <li>Edit teks dan warna</li>
+                        </ol>
+                    </div>
+                    
+                    <!-- Komponen -->
+                    <div class="bg-neutral-800/50 rounded-xl p-4">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class='bx bx-layer text-green-400 text-xl'></i>
+                            <h4 class="font-medium">Komponen HTML</h4>
+                        </div>
+                        <ol class="text-sm text-neutral-400 space-y-1 list-decimal list-inside">
+                            <li>Buka file komponen</li>
+                            <li>Copy kode yang dibutuhkan</li>
+                            <li>Paste ke project Anda</li>
+                            <li>Sesuaikan styling</li>
+                            <li>Integrasikan dengan website</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="mt-6 bg-neutral-800 rounded-xl p-4">
+                    <p class="text-neutral-400 text-sm flex items-start gap-2">
+                        <i class='bx bx-book-open text-lg mt-0.5'></i>
+                        <span>Setiap produk dilengkapi dengan <strong class="text-white">dokumentasi/README</strong> yang menjelaskan cara penggunaan secara detail.</span>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Guide 5: Informasi Lisensi -->
+            <div id="lisensi" class="guide-card bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 lg:p-8 scroll-mt-8 animate-fadeInUp">
+                <div class="flex items-start gap-4 mb-6">
+                    <div class="w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class='bx bx-shield-quarter text-2xl text-amber-400'></i>
+                    </div>
+                    <div>
+                        <h2 class="font-playfair text-xl sm:text-2xl font-semibold">Informasi Lisensi</h2>
+                        <p class="text-neutral-500 text-sm mt-1">Ketentuan penggunaan produk digital DEVACODE</p>
+                    </div>
+                </div>
+                
+                <div class="grid sm:grid-cols-2 gap-4 mb-6">
+                    <!-- Personal License -->
+                    <div class="bg-gradient-to-br from-neutral-800 to-neutral-900 border border-neutral-700 rounded-xl p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                                <i class='bx bx-user text-blue-400'></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Lisensi Personal</h4>
+                                <p class="text-xs text-neutral-500">Untuk penggunaan pribadi</p>
+                            </div>
+                        </div>
+                        <ul class="text-sm space-y-2">
+                            <li class="flex items-start gap-2 text-green-400">
+                                <i class='bx bx-check mt-0.5'></i>
+                                <span>1 proyek pribadi</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-green-400">
+                                <i class='bx bx-check mt-0.5'></i>
+                                <span>Modifikasi bebas</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-green-400">
+                                <i class='bx bx-check mt-0.5'></i>
+                                <span>Update gratis</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-red-400">
+                                <i class='bx bx-x mt-0.5'></i>
+                                <span>Tidak untuk klien</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-red-400">
+                                <i class='bx bx-x mt-0.5'></i>
+                                <span>Tidak untuk dijual</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Commercial License -->
+                    <div class="bg-gradient-to-br from-amber-900/30 to-neutral-900 border border-amber-700/50 rounded-xl p-5">
+                        <div class="flex items-center gap-2 mb-3">
+                            <div class="w-10 h-10 bg-amber-500/20 rounded-lg flex items-center justify-center">
+                                <i class='bx bx-briefcase text-amber-400'></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Lisensi Komersial</h4>
+                                <p class="text-xs text-neutral-500">Untuk proyek klien</p>
+                            </div>
+                        </div>
+                        <ul class="text-sm space-y-2">
+                            <li class="flex items-start gap-2 text-green-400">
+                                <i class='bx bx-check mt-0.5'></i>
+                                <span>Unlimited proyek</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-green-400">
+                                <i class='bx bx-check mt-0.5'></i>
+                                <span>Untuk klien</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-green-400">
+                                <i class='bx bx-check mt-0.5'></i>
+                                <span>Modifikasi bebas</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-green-400">
+                                <i class='bx bx-check mt-0.5'></i>
+                                <span>Support prioritas</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-red-400">
+                                <i class='bx bx-x mt-0.5'></i>
+                                <span>Tidak untuk resell</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-neutral-800/50 rounded-xl p-4">
+                    <h4 class="font-medium mb-3 flex items-center gap-2">
+                        <i class='bx bx-check-shield text-green-400'></i> Apa yang Boleh Dilakukan
+                    </h4>
+                    <div class="grid sm:grid-cols-2 gap-2 text-sm text-neutral-400">
+                        <div class="flex items-center gap-2">
+                            <i class='bx bx-check text-green-400'></i> Memodifikasi sesuai kebutuhan
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class='bx bx-check text-green-400'></i> Menggunakan di website live
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class='bx bx-check text-green-400'></i> Menghapus credit (jika diizinkan)
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class='bx bx-check text-green-400'></i> Membuat karya turunan
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Guide 6: Peringatan & Larangan -->
+            <div id="peringatan" class="guide-card bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 lg:p-8 scroll-mt-8 animate-fadeInUp">
+                <div class="flex items-start gap-4 mb-6">
+                    <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class='bx bx-error text-2xl text-red-400'></i>
+                    </div>
+                    <div>
+                        <h2 class="font-playfair text-xl sm:text-2xl font-semibold">Peringatan & Larangan</h2>
+                        <p class="text-neutral-500 text-sm mt-1">Hal-hal yang tidak diperbolehkan</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <!-- Larangan Utama -->
+                    <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-4">
+                        <h4 class="font-medium text-red-400 mb-3 flex items-center gap-2">
+                            <i class='bx bx-block'></i> Dilarang Keras
+                        </h4>
+                        <ul class="space-y-2 text-sm">
+                            <li class="flex items-start gap-2 text-neutral-300">
+                                <i class='bx bx-x text-red-400 mt-0.5'></i>
+                                <span><strong>Menjual ulang (Resell)</strong> - Menjual produk dalam bentuk asli atau sedikit modifikasi</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-neutral-300">
+                                <i class='bx bx-x text-red-400 mt-0.5'></i>
+                                <span><strong>Redistribusi gratis</strong> - Membagikan file ke orang lain secara gratis</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-neutral-300">
+                                <i class='bx bx-x text-red-400 mt-0.5'></i>
+                                <span><strong>Upload ke platform sharing</strong> - Upload ke situs download gratis</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-neutral-300">
+                                <i class='bx bx-x text-red-400 mt-0.5'></i>
+                                <span><strong>Klaim sebagai karya sendiri</strong> - Mengakui sebagai kreator asli</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-neutral-300">
+                                <i class='bx bx-x text-red-400 mt-0.5'></i>
+                                <span><strong>Penggunaan ilegal</strong> - Untuk konten melanggar hukum</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Konsekuensi -->
+                    <div class="bg-neutral-800/50 rounded-xl p-4">
+                        <h4 class="font-medium mb-3 flex items-center gap-2">
+                            <i class='bx bx-gavel text-amber-400'></i> Konsekuensi Pelanggaran
+                        </h4>
+                        <ul class="space-y-2 text-sm text-neutral-400">
+                            <li class="flex items-start gap-2">
+                                <span class="text-amber-400">1.</span>
+                                <span>Pembatalan lisensi tanpa refund</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-amber-400">2.</span>
+                                <span>Blacklist dari pembelian di masa depan</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-amber-400">3.</span>
+                                <span>DMCA takedown untuk konten yang melanggar</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-amber-400">4.</span>
+                                <span>Tuntutan hukum untuk pelanggaran berat</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="mt-6 bg-amber-500/10 border border-amber-500/20 rounded-xl p-4">
+                    <p class="text-amber-400 text-sm flex items-start gap-2">
+                        <i class='bx bx-error-circle text-lg mt-0.5'></i>
+                        <span>Dengan membeli produk, Anda dianggap telah membaca dan menyetujui semua ketentuan lisensi.</span>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Guide 7: Kebijakan Refund -->
+            <div id="refund" class="guide-card bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 lg:p-8 scroll-mt-8 animate-fadeInUp">
+                <div class="flex items-start gap-4 mb-6">
+                    <div class="w-12 h-12 bg-indigo-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class='bx bx-refresh text-2xl text-indigo-400'></i>
+                    </div>
+                    <div>
+                        <h2 class="font-playfair text-xl sm:text-2xl font-semibold">Kebijakan Refund</h2>
+                        <p class="text-neutral-500 text-sm mt-1">Ketentuan pengembalian dana</p>
+                    </div>
+                </div>
+                
+                <div class="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4 mb-6">
+                    <p class="text-yellow-400 text-sm flex items-start gap-2">
+                        <i class='bx bx-info-circle text-lg mt-0.5'></i>
+                        <span><strong>Catatan Penting:</strong> Karena sifat produk digital yang dapat langsung diduplikasi setelah diterima, kebijakan refund kami bersifat ketat.</span>
+                    </p>
+                </div>
+                
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <!-- Refund Diterima -->
+                    <div class="bg-green-500/10 border border-green-500/20 rounded-xl p-4">
+                        <h4 class="font-medium text-green-400 mb-3 flex items-center gap-2">
+                            <i class='bx bx-check-circle'></i> Refund Diterima
+                        </h4>
+                        <ul class="space-y-2 text-sm text-neutral-300">
+                            <li class="flex items-start gap-2">
+                                <i class='bx bx-check text-green-400 mt-0.5'></i>
+                                Produk tidak sesuai deskripsi
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class='bx bx-check text-green-400 mt-0.5'></i>
+                                File corrupt/rusak dan tidak bisa diperbaiki
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class='bx bx-check text-green-400 mt-0.5'></i>
+                                Kesalahan teknis dari pihak kami
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class='bx bx-check text-green-400 mt-0.5'></i>
+                                Double payment (bayar 2x)
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Refund Ditolak -->
+                    <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-4">
+                        <h4 class="font-medium text-red-400 mb-3 flex items-center gap-2">
+                            <i class='bx bx-x-circle'></i> Refund Ditolak
+                        </h4>
+                        <ul class="space-y-2 text-sm text-neutral-300">
+                            <li class="flex items-start gap-2">
+                                <i class='bx bx-x text-red-400 mt-0.5'></i>
+                                Berubah pikiran setelah download
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class='bx bx-x text-red-400 mt-0.5'></i>
+                                Tidak punya skill untuk menggunakan
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class='bx bx-x text-red-400 mt-0.5'></i>
+                                Sudah memodifikasi produk
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class='bx bx-x text-red-400 mt-0.5'></i>
+                                Pengajuan lebih dari 7 hari
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="mt-6 bg-neutral-800/50 rounded-xl p-4">
+                    <h4 class="font-medium mb-3 flex items-center gap-2">
+                        <i class='bx bx-list-ol text-neutral-400'></i> Prosedur Pengajuan Refund
+                    </h4>
+                    <ol class="space-y-2 text-sm text-neutral-400 list-decimal list-inside">
+                        <li>Hubungi admin via WhatsApp dalam waktu <strong class="text-white">7 hari</strong> setelah pembelian</li>
+                        <li>Jelaskan alasan refund dengan detail</li>
+                        <li>Sertakan bukti (screenshot error, dll)</li>
+                        <li>Tunggu proses review (1-3 hari kerja)</li>
+                        <li>Jika disetujui, dana dikembalikan ke metode pembayaran asal</li>
+                    </ol>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section id="faq" class="px-4 sm:px-6 lg:px-8 pb-16 scroll-mt-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center gap-2 bg-neutral-900 border border-neutral-800 px-4 py-2 rounded-full text-xs sm:text-sm text-neutral-400 mb-4">
+                    <i class='bx bx-help-circle text-white'></i>
+                    <span>20+ Pertanyaan</span>
+                </div>
+                <h2 class="font-playfair text-2xl sm:text-3xl md:text-4xl font-bold gradient-text">Frequently Asked Questions</h2>
+                <p class="text-neutral-400 text-sm sm:text-base mt-2">Pertanyaan yang sering diajukan oleh pelanggan</p>
+            </div>
+            
+            <!-- FAQ Categories -->
+            <div class="flex flex-wrap justify-center gap-2 mb-8">
+                <button @click="faqFilter = 'semua'" 
+                        :class="faqFilter === 'semua' ? 'bg-white text-black' : 'bg-neutral-800 text-white'"
+                        class="px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                    Semua
+                </button>
+                <button @click="faqFilter = 'pembelian'" 
+                        :class="faqFilter === 'pembelian' ? 'bg-white text-black' : 'bg-neutral-800 text-white'"
+                        class="px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                    Pembelian
+                </button>
+                <button @click="faqFilter = 'produk'" 
+                        :class="faqFilter === 'produk' ? 'bg-white text-black' : 'bg-neutral-800 text-white'"
+                        class="px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                    Produk
+                </button>
+                <button @click="faqFilter = 'teknis'" 
+                        :class="faqFilter === 'teknis' ? 'bg-white text-black' : 'bg-neutral-800 text-white'"
+                        class="px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                    Teknis
+                </button>
+                <button @click="faqFilter = 'lainnya'" 
+                        :class="faqFilter === 'lainnya' ? 'bg-white text-black' : 'bg-neutral-800 text-white'"
+                        class="px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                    Lainnya
+                </button>
+            </div>
+            
+            <!-- FAQ List -->
+            <div class="space-y-3">
+                <template x-for="(faq, index) in filteredFaqs" :key="index">
+                    <div class="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden">
+                        <button @click="faq.open = !faq.open" 
+                                class="w-full flex items-center justify-between p-4 sm:p-5 text-left hover:bg-neutral-800/50 transition-colors">
+                            <div class="flex items-start gap-3 flex-1">
+                                <span class="w-6 h-6 bg-neutral-800 rounded-lg flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5" x-text="index + 1"></span>
+                                <span class="font-medium text-sm sm:text-base pr-4" x-text="faq.q"></span>
+                            </div>
+                            <i class='bx text-xl transition-transform flex-shrink-0' :class="faq.open ? 'bx-minus rotate-0' : 'bx-plus'"></i>
+                        </button>
+                        <div x-show="faq.open" x-collapse>
+                            <div class="px-4 sm:px-5 pb-4 sm:pb-5 pt-0">
+                                <div class="pl-9 text-neutral-400 text-sm leading-relaxed" x-html="faq.a"></div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            
+            <!-- No Results -->
+            <div x-show="filteredFaqs.length === 0" class="text-center py-12">
+                <div class="w-16 h-16 bg-neutral-800 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <i class='bx bx-search-alt text-3xl text-neutral-500'></i>
+                </div>
+                <p class="text-neutral-400">Tidak ada FAQ yang cocok dengan pencarian Anda.</p>
+            </div>
+            
+            <!-- Still Need Help -->
+            <div class="mt-12 bg-gradient-to-br from-neutral-800 to-neutral-900 border border-neutral-700 rounded-2xl p-6 sm:p-8 text-center">
+                <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <i class='bx bx-support text-3xl text-black'></i>
+                </div>
+                <h3 class="font-playfair text-xl sm:text-2xl font-semibold mb-2">Masih Butuh Bantuan?</h3>
+                <p class="text-neutral-400 text-sm sm:text-base mb-6">Tim support kami siap membantu Anda 24/7</p>
+                <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                    <a href="https://wa.me/6282123456789" target="_blank" class="inline-flex items-center justify-center gap-2 bg-green-500 text-white px-6 py-3 rounded-xl font-semibold text-sm hover:bg-green-600 transition-colors">
+                        <i class='bx bxl-whatsapp text-xl'></i> Chat WhatsApp
+                    </a>
+                    <a href="contact.html" class="inline-flex items-center justify-center gap-2 bg-neutral-700 text-white px-6 py-3 rounded-xl font-semibold text-sm hover:bg-neutral-600 transition-colors border border-neutral-600">
+                        <i class='bx bx-envelope text-xl'></i> Kirim Email
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->    
+    <div id="footer-placeholder"></div>
+
+    <!-- Floating Action Button - WhatsApp -->
+    <div id="floating-button-whatsapp-placeholder"></div>
+    
+    <script>
+        function helpPage() {
+            return {
+                mobileMenu: false,
+                searchOpen: false,
+                searchQuery: '',
+                faqFilter: 'semua',
+                faqs: [
+                    // Pembelian
+                    { q: 'Bagaimana cara membeli produk di DEVACODE?', a: 'Pilih produk → Klik "Beli Sekarang" → Review pesanan → Lanjutkan ke WhatsApp → Bayar → Terima produk via email/WA. Proses sangat mudah dan cepat!', category: 'pembelian', open: false },
+                    { q: 'Metode pembayaran apa saja yang tersedia?', a: 'Kami menerima <strong>Transfer Bank</strong> (BCA, BNI, BRI, Mandiri), <strong>E-Wallet</strong> (DANA, OVO, GoPay, ShopeePay), <strong>QRIS</strong>, dan <strong>PayPal</strong> untuk pembeli internasional.', category: 'pembelian', open: false },
+                    { q: 'Apakah ada biaya tambahan selain harga produk?', a: 'Ya, ada <strong>biaya admin pembayaran</strong> yang bervariasi tergantung metode pembayaran yang dipilih. Biaya akan diinformasikan sebelum Anda melakukan pembayaran.', category: 'pembelian', open: false },
+                    { q: 'Berapa lama proses konfirmasi pembayaran?', a: 'Untuk <strong>e-wallet/QRIS</strong>: Instan (1-5 menit). Untuk <strong>transfer bank</strong>: Maksimal 1x24 jam (biasanya lebih cepat pada jam kerja).', category: 'pembelian', open: false },
+                    { q: 'Apakah bisa bayar dengan cicilan?', a: 'Saat ini kami belum menyediakan opsi cicilan. Semua pembayaran dilakukan secara penuh di muka.', category: 'pembelian', open: false },
+                    
+                    // Produk
+                    { q: 'Produk apa saja yang dijual di DEVACODE?', a: 'Kami menjual berbagai produk digital: <strong>Template Web HTML</strong>, <strong>Preset Alight Motion</strong>, <strong>Template Pixellab/PLP</strong>, <strong>Komponen HTML</strong>, <strong>Website Siap Online</strong>, dan layanan <strong>Custom Project</strong>.', category: 'produk', open: false },
+                    { q: 'Apakah produk bisa di-preview sebelum beli?', a: 'Ya! Setiap produk memiliki <strong>gambar preview</strong> dan beberapa produk juga memiliki <strong>live demo</strong> yang bisa Anda lihat sebelum membeli.', category: 'produk', open: false },
+                    { q: 'Apakah produk mendapat update gratis?', a: 'Ya, semua produk mendapat <strong>update gratis selamanya</strong>. Anda akan mendapat notifikasi jika ada update dan bisa download versi terbaru.', category: 'produk', open: false },
+                    { q: 'Apa perbedaan lisensi Personal dan Komersial?', a: '<strong>Personal</strong>: Untuk 1 proyek pribadi, tidak untuk klien. <strong>Komersial</strong>: Unlimited proyek termasuk untuk klien, namun tidak untuk dijual ulang.', category: 'produk', open: false },
+                    { q: 'Apakah bisa request custom produk?', a: 'Tentu! Hubungi kami via WhatsApp atau halaman Contact untuk mendiskusikan kebutuhan custom Anda. Kami akan memberikan penawaran harga sesuai scope project.', category: 'produk', open: false },
+                    
+                    // Teknis
+                    { q: 'Format file apa yang akan saya terima?', a: 'Tergantung jenis produk: <strong>Web HTML</strong> (.zip berisi HTML/CSS/JS), <strong>Alight Motion</strong> (.alight), <strong>Pixellab</strong> (.plp), <strong>Assets</strong> (.png/.svg/.jpg).', category: 'teknis', open: false },
+                    { q: 'Bagaimana cara menggunakan template web HTML?', a: 'Extract file ZIP → Buka dengan code editor (VS Code, dll) → Edit konten sesuai kebutuhan → Preview di browser → Upload ke hosting. Dokumentasi lengkap disertakan dalam setiap produk.', category: 'teknis', open: false },
+                    { q: 'Apakah template web sudah responsive?', a: 'Ya, semua template web kami sudah <strong>100% responsive</strong> dan dioptimasi untuk semua device (mobile, tablet, desktop).', category: 'teknis', open: false },
+                    { q: 'Bagaimana cara import preset Alight Motion?', a: 'Download file .alight → Buka app Alight Motion → Tap menu titik 3 → Pilih Import → Cari dan pilih file preset → Selesai! Preset siap digunakan.', category: 'teknis', open: false },
+                    { q: 'Software apa yang dibutuhkan untuk edit template?', a: 'Untuk <strong>Web HTML</strong>: VS Code, Sublime Text, atau code editor apapun. Untuk <strong>Alight Motion</strong>: App Alight Motion. Untuk <strong>Pixellab</strong>: App Pixellab.', category: 'teknis', open: false },
+                    { q: 'Apakah perlu skill coding untuk menggunakan template?', a: 'Untuk modifikasi dasar (teks, gambar, warna), skill HTML/CSS dasar sudah cukup. Untuk modifikasi lanjutan, diperlukan pemahaman JavaScript. Kami sertakan dokumentasi di setiap produk.', category: 'teknis', open: false },
+                    
+                    // Lainnya
+                    { q: 'Apakah bisa refund jika tidak puas?', a: 'Refund hanya diberikan jika produk <strong>tidak sesuai deskripsi</strong> atau <strong>file rusak</strong>. Refund tidak berlaku jika Anda berubah pikiran setelah download. Pengajuan maksimal 7 hari setelah pembelian.', category: 'lainnya', open: false },
+                    { q: 'Bagaimana jika file yang diterima rusak/corrupt?', a: 'Segera hubungi kami via WhatsApp dengan menyertakan bukti (screenshot error). Kami akan mengirim ulang file atau melakukan refund jika tidak bisa diperbaiki.', category: 'lainnya', open: false },
+                    { q: 'Apakah ada garansi untuk produk yang dibeli?', a: 'Ya, kami memberikan garansi <strong>support seumur hidup</strong> untuk semua produk. Jika ada pertanyaan atau kendala, tim kami siap membantu.', category: 'lainnya', open: false },
+                    { q: 'Bagaimana cara menghubungi customer support?', a: 'Anda bisa menghubungi kami via <strong>WhatsApp</strong> (respon tercepat), <strong>Email</strong>, <strong>Instagram DM</strong>, atau <strong>Discord</strong>. Tim kami aktif 09:00-21:00 WIB.', category: 'lainnya', open: false },
+                    { q: 'Apakah ada diskon untuk pembelian bulk?', a: 'Ya! Hubungi kami via WhatsApp untuk negosiasi harga jika Anda ingin membeli beberapa produk sekaligus atau berlangganan.', category: 'lainnya', open: false },
+                    { q: 'Bagaimana cara menjadi affiliate DEVACODE?', a: 'Saat ini kami belum membuka program affiliate. Ikuti social media kami untuk update terbaru seputar program-program menarik.', category: 'lainnya', open: false },
+                    { q: 'Apakah DEVACODE menerima jasa pembuatan website?', a: 'Ya! Selain menjual template, kami juga menerima <strong>jasa pembuatan website custom</strong>. Hubungi kami untuk konsultasi dan penawaran harga.', category: 'lainnya', open: false },
+                ],
+                
+                get filteredFaqs() {
+                    let result = this.faqs;
+                    
+                    // Filter by category
+                    if (this.faqFilter !== 'semua') {
+                        result = result.filter(faq => faq.category === this.faqFilter);
+                    }
+                    
+                    // Filter by search
+                    if (this.searchQuery.trim() !== '') {
+                        const query = this.searchQuery.toLowerCase();
+                        result = result.filter(faq => 
+                            faq.q.toLowerCase().includes(query) || 
+                            faq.a.toLowerCase().includes(query)
+                        );
+                    }
+                    
+                    return result;
+                },
+                
+                filterFAQ() {
+                    // Reset all FAQ open states when searching
+                    if (this.searchQuery.trim() !== '') {
+                        this.faqs.forEach(faq => faq.open = false);
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
