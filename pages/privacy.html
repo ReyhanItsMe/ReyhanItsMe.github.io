@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kebijakan Privasi - DEVACODE</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="/environment.js"></script>
     <script src="/lib/link.js"></script>
     <script src="/lib/load.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -12,58 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { font-family: 'Inter', sans-serif; }
-        .font-playfair { font-family: 'Playfair Display', serif; }
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
-        
-        ::-webkit-scrollbar { width: 6px; height: 4px; }
-        ::-webkit-scrollbar-track { background: #0a0a0a; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #555; }
-        
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .animate-fadeInUp { animation: fadeInUp 0.6s ease-out forwards; }
-        .animate-fadeInDown { animation: fadeInDown 0.6s ease-out forwards; }
-        .animate-float { animation: float 3s ease-in-out infinite; }
-        
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
-        
-        .glass {
-            background: rgba(20, 20, 20, 0.8);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-        
-        .gradient-text {
-            background: linear-gradient(135deg, #fff 0%, #888 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .privacy-card {
-            transition: all 0.3s ease;
-        }
-        .privacy-card:hover {
-            transform: translateY(-4px);
-            border-color: #404040;
-        }
-    </style>
+    <link rel="stylesheet" href="/assets/css/style.js">
 </head>
 <body class="bg-neutral-950 text-white min-h-screen">
     

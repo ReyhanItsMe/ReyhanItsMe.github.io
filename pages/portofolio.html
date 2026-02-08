@@ -5,168 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tentang Saya - ReyhanDShoot</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="/environment.js"></script>
     <script src="/lib/link.js"></script>
+    <script src="/lib/portofolio.js"></script>
     <script src="/lib/load.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { font-family: 'Inter', sans-serif; }
-        .font-playfair { font-family: 'Playfair Display', serif; }
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
-        
-        ::-webkit-scrollbar { width: 6px; height: 4px; }
-        ::-webkit-scrollbar-track { background: #0a0a0a; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #555; }
-        
-        /* Hide scrollbar for horizontal scroll */
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInLeft {
-            from { opacity: 0; transform: translateX(-30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes fadeInRight {
-            from { opacity: 0; transform: translateX(30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes scaleIn {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
-        }
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        @keyframes blink {
-            0%, 100% { border-color: #fff; }
-            50% { border-color: transparent; }
-        }
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        .animate-fadeInUp { animation: fadeInUp 0.6s ease-out forwards; }
-        .animate-fadeInDown { animation: fadeInDown 0.6s ease-out forwards; }
-        .animate-fadeInLeft { animation: fadeInLeft 0.6s ease-out forwards; }
-        .animate-fadeInRight { animation: fadeInRight 0.6s ease-out forwards; }
-        .animate-scaleIn { animation: scaleIn 0.5s ease-out forwards; }
-        .animate-float { animation: float 3s ease-in-out infinite; }
-        .animate-pulse-slow { animation: pulse 2s ease-in-out infinite; }
-        
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
-        .delay-400 { animation-delay: 0.4s; }
-        .delay-500 { animation-delay: 0.5s; }
-        .delay-600 { animation-delay: 0.6s; }
-        
-        .glass {
-            background: rgba(20, 20, 20, 0.8);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-        
-        .gradient-text {
-            background: linear-gradient(135deg, #fff 0%, #888 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .gradient-border {
-            position: relative;
-            background: linear-gradient(135deg, #333, #111);
-        }
-        .gradient-border::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            padding: 1px;
-            background: linear-gradient(135deg, #555, #222);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            border-radius: inherit;
-        }
-        
-        .btn-shine {
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-shine::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-        .btn-shine:hover::before { left: 100%; }
-        
-        .skill-card {
-            transition: all 0.3s ease;
-        }
-        .skill-card:hover {
-            transform: translateY(-4px);
-            border-color: #555;
-        }
-        
-        .portfolio-card {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .portfolio-card:hover {
-            transform: translateY(-8px) scale(1.02);
-        }
-        
-        .timeline-line {
-            background: linear-gradient(to bottom, transparent, #333, #333, transparent);
-        }
-        
-        .typing-text {
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 2px solid #fff;
-            animation: typing 3s steps(30) forwards, blink 0.8s infinite;
-        }
-        
-        /* Orbit animation for decorative elements */
-        .orbit {
-            animation: rotate 20s linear infinite;
-        }
-        .orbit-reverse {
-            animation: rotate 15s linear infinite reverse;
-        }
-    </style>
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body class="bg-neutral-950 text-white min-h-screen">
     
@@ -206,30 +55,25 @@
                         Freelancer berusia <strong class="text-white">16 tahun</strong> dari Indonesia. Fokus pada pengembangan web dan desain UI/UX. Belajar otodidak melalui smartphone menggunakan Termux & Acode.
                     </p>
                     
-                    <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start animate-fadeInUp delay-400">
-                        <a href="#contact" class="btn-shine bg-white text-black px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-sm sm:text-base hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2">
-                            <i class='bx bx-envelope'></i> Hubungi Saya
-                        </a>
-                        <a href="#portfolio" class="border border-neutral-700 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-sm sm:text-base hover:bg-neutral-800 transition-colors flex items-center justify-center gap-2">
-                            <i class='bx bx-briefcase'></i> Lihat Portfolio
+                    <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start animate-fadeInUp delay-400" x-data="aboutPage()">
+                        <a :href="whatsappLink" 
+                           target="_blank"
+                           class="btn-shine bg-[#25D366] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-sm sm:text-base hover:opacity-90 transition-colors flex items-center justify-center gap-2">
+                            <i class='bx bxl-whatsapp text-xl'></i> Hubungi Saya
                         </a>
                     </div>
-                    
+
                     <!-- Quick Stats -->
-                    <div class="grid grid-cols-3 gap-4 mt-10 animate-fadeInUp delay-500">
-                        <div class="text-center lg:text-left">
-                            <p class="font-playfair text-2xl sm:text-3xl lg:text-4xl font-bold">2+</p>
-                            <p class="text-neutral-500 text-xs sm:text-sm">Tahun Belajar</p>
-                        </div>
-                        <div class="text-center lg:text-left">
-                            <p class="font-playfair text-2xl sm:text-3xl lg:text-4xl font-bold">50+</p>
-                            <p class="text-neutral-500 text-xs sm:text-sm">Proyek</p>
-                        </div>
-                        <div class="text-center lg:text-left">
-                            <p class="font-playfair text-2xl sm:text-3xl lg:text-4xl font-bold">100%</p>
-                            <p class="text-neutral-500 text-xs sm:text-sm">Otodidak</p>
-                        </div>
+                    <div id="stats-container" class="grid grid-cols-3 gap-4 mt-10" x-data="aboutPage()">
+                        <template x-for="stat in stats">
+                            <div class="text-center lg:text-left">
+                                <p class="font-playfair text-2xl sm:text-3xl lg:text-4xl font-bold" x-text="stat.value"></p>
+                                <p class="text-neutral-500 text-xs sm:text-sm" x-text="stat.label"></p>
+                            </div>
+                        </template>
                     </div>
+
+
                 </div>
                 
                 <!-- Profile Image -->
@@ -254,13 +98,14 @@
                         </div>
                         
                         <!-- Main Image -->
-                        <div class="w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-neutral-800 relative">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face" 
-                                 alt="Raihan Azhar" 
-                                 class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
+                        <div class="w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-neutral-800 relative flex items-center justify-center">
+                            
+                            <img src="/assets/img/logo.png" alt="Logo" class="w-full h-full object-cover">
+                            
                             <div class="absolute inset-0 bg-gradient-to-t from-neutral-950/50 to-transparent"></div>
-                        </div>
                         
+                        </div>
+
                         <!-- Status Badge -->
                         <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-neutral-900 border border-neutral-700 px-4 py-2 rounded-full flex items-center gap-2 whitespace-nowrap">
                             <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
@@ -416,217 +261,55 @@
         </div>
     </section>
     
-    <!-- Skills Section -->
-    <section id="skills" class="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 bg-neutral-900/50 scroll-mt-20">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-10 sm:mb-12">
-                <div class="inline-flex items-center gap-2 bg-neutral-800 border border-neutral-700 px-4 py-2 rounded-full text-xs sm:text-sm text-neutral-400 mb-4">
-                    <i class='bx bx-code-curly'></i>
-                    <span>Skills & Tools</span>
-                </div>
-                <h2 class="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">Teknologi yang Saya Kuasai</h2>
-                <p class="text-neutral-400 text-sm sm:text-base mt-3 max-w-lg mx-auto">Semua dipelajari secara otodidak hanya dengan smartphone</p>
+<section id="skills" class="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 bg-neutral-900/50 scroll-mt-20" x-data="aboutPage()">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-10 sm:mb-12">
+            <div class="inline-flex items-center gap-2 bg-neutral-800 border border-neutral-700 px-4 py-2 rounded-full text-xs sm:text-sm text-neutral-400 mb-4">
+                <i class='bx bx-code-curly'></i>
+                <span>Skills & Tools</span>
             </div>
-            
-            <!-- Skills Tabs -->
-            <div class="flex justify-center gap-2 sm:gap-3 mb-8 flex-wrap">
-                <button @click="skillTab = 'languages'" 
-                        :class="skillTab === 'languages' ? 'bg-white text-black' : 'bg-neutral-800 text-white'"
-                        class="px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all flex items-center gap-1.5">
-                    <i class='bx bx-code-alt'></i> Languages
-                </button>
-                <button @click="skillTab = 'frameworks'" 
-                        :class="skillTab === 'frameworks' ? 'bg-white text-black' : 'bg-neutral-800 text-white'"
-                        class="px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all flex items-center gap-1.5">
-                    <i class='bx bx-layer'></i> Frameworks
-                </button>
-                <button @click="skillTab = 'database'" 
-                        :class="skillTab === 'database' ? 'bg-white text-black' : 'bg-neutral-800 text-white'"
-                        class="px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all flex items-center gap-1.5">
-                    <i class='bx bx-data'></i> Database
-                </button>
-                <button @click="skillTab = 'tools'" 
-                        :class="skillTab === 'tools' ? 'bg-white text-black' : 'bg-neutral-800 text-white'"
-                        class="px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all flex items-center gap-1.5">
-                    <i class='bx bx-wrench'></i> Tools
-                </button>
-                <button @click="skillTab = 'design'" 
-                        :class="skillTab === 'design' ? 'bg-white text-black' : 'bg-neutral-800 text-white'"
-                        class="px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all flex items-center gap-1.5">
-                    <i class='bx bx-palette'></i> Design
-                </button>
-            </div>
-            
-            <!-- Languages -->
-            <div x-show="skillTab === 'languages'" 
-                 x-transition:enter="transition ease-out duration-300"
-                 x-transition:enter-start="opacity-0 translate-y-4"
-                 x-transition:enter-end="opacity-100 translate-y-0"
-                 class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
-                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 sm:p-5 text-center">
-                    <i class='bx bxl-html5 text-4xl sm:text-5xl text-orange-500 mb-2'></i>
-                    <p class="font-medium text-sm sm:text-base">HTML5</p>
-                    <div class="mt-2 h-1.5 bg-neutral-800 rounded-full overflow-hidden">
-                        <div class="h-full bg-orange-500 rounded-full" style="width: 95%"></div>
-                    </div>
-                </div>
-                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 sm:p-5 text-center">
-                    <i class='bx bxl-css3 text-4xl sm:text-5xl text-blue-500 mb-2'></i>
-                    <p class="font-medium text-sm sm:text-base">CSS3</p>
-                    <div class="mt-2 h-1.5 bg-neutral-800 rounded-full overflow-hidden">
-                        <div class="h-full bg-blue-500 rounded-full" style="width: 90%"></div>
-                    </div>
-                </div>
-                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 sm:p-5 text-center">
-                    <i class='bx bxl-javascript text-4xl sm:text-5xl text-yellow-400 mb-2'></i>
-                    <p class="font-medium text-sm sm:text-base">JavaScript</p>
-                    <div class="mt-2 h-1.5 bg-neutral-800 rounded-full overflow-hidden">
-                        <div class="h-full bg-yellow-400 rounded-full" style="width: 75%"></div>
-                    </div>
-                </div>
-                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 sm:p-5 text-center">
-                    <i class='bx bxl-php text-4xl sm:text-5xl text-indigo-400 mb-2'></i>
-                    <p class="font-medium text-sm sm:text-base">PHP</p>
-                    <div class="mt-2 h-1.5 bg-neutral-800 rounded-full overflow-hidden">
-                        <div class="h-full bg-indigo-400 rounded-full" style="width: 65%"></div>
-                    </div>
-                </div>
-                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 sm:p-5 text-center">
-                    <i class='bx bxl-nodejs text-4xl sm:text-5xl text-green-500 mb-2'></i>
-                    <p class="font-medium text-sm sm:text-base">Node.js</p>
-                    <div class="mt-2 h-1.5 bg-neutral-800 rounded-full overflow-hidden">
-                        <div class="h-full bg-green-500 rounded-full" style="width: 60%"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Frameworks -->
-            <div x-show="skillTab === 'frameworks'" 
-                 x-transition:enter="transition ease-out duration-300"
-                 x-transition:enter-start="opacity-0 translate-y-4"
-                 x-transition:enter-end="opacity-100 translate-y-0"
-                 class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
-                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 sm:p-5 text-center">
-                    <i class='bx bxl-tailwind-css text-4xl sm:text-5xl text-cyan-400 mb-2'></i>
-                    <p class="font-medium text-sm sm:text-base">Tailwind CSS</p>
-                    <div class="mt-2 h-1.5 bg-neutral-800 rounded-full overflow-hidden">
-                        <div class="h-full bg-cyan-400 rounded-full" style="width: 90%"></div>
-                    </div>
-                </div>
-                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 sm:p-5 text-center">
-                    <div class="text-4xl sm:text-5xl mb-2">🏔️</div>
-                    <p class="font-medium text-sm sm:text-base">Alpine.js</p>
-                    <div class="mt-2 h-1.5 bg-neutral-800 rounded-full overflow-hidden">
-                        <div class="h-full bg-cyan-600 rounded-full" style="width: 85%"></div>
-                    </div>
-                </div>
-                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 sm:p-5 text-center">
-                    <i class='bx bxl-laravel text-4xl sm:text-5xl text-red-500 mb-2'></i>
-                    <p class="font-medium text-sm sm:text-base">Laravel</p>
-                    <div class="mt-2 h-1.5 bg-neutral-800 rounded-full overflow-hidden">
-                        <div class="h-full bg-red-500 rounded-full" style="width: 55%"></div>
-                    </div>
-                </div>
-                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 sm:p-5 text-center">
-                    <div class="text-4xl sm:text-5xl mb-2">⚡</div>
-                    <p class="font-medium text-sm sm:text-base">Livewire</p>
-                    <div class="mt-2 h-1.5 bg-neutral-800 rounded-full overflow-hidden">
-                        <div class="h-full bg-pink-500 rounded-full" style="width: 50%"></div>
-                    </div>
-                </div>
-                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 sm:p-5 text-center">
-                    <div class="text-4xl sm:text-5xl mb-2">🚂</div>
-                    <p class="font-medium text-sm sm:text-base">Express.js</p>
-                    <div class="mt-2 h-1.5 bg-neutral-800 rounded-full overflow-hidden">
-                        <div class="h-full bg-gray-400 rounded-full" style="width: 50%"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Database -->
-            <div x-show="skillTab === 'database'" 
-                 x-transition:enter="transition ease-out duration-300"
-                 x-transition:enter-start="opacity-0 translate-y-4"
-                 x-transition:enter-end="opacity-100 translate-y-0"
-                 class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto">
-                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 sm:p-5 text-center">
-                    <i class='bx bxs-data text-4xl sm:text-5xl text-blue-400 mb-2'></i>
-                    <p class="font-medium text-sm sm:text-base">MySQL</p>
-                    <div class="mt-2 h-1.5 bg-neutral-800 rounded-full overflow-hidden">
-                        <div class="h-full bg-blue-400 rounded-full" style="width: 60%"></div>
-                    </div>
-                </div>
-                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 sm:p-5 text-center">
-                    <i class='bx bxl-mongodb text-4xl sm:text-5xl text-green-500 mb-2'></i>
-                    <p class="font-medium text-sm sm:text-base">MongoDB</p>
-                    <div class="mt-2 h-1.5 bg-neutral-800 rounded-full overflow-hidden">
-                        <div class="h-full bg-green-500 rounded-full" style="width: 45%"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Tools -->
-            <div x-show="skillTab === 'tools'" 
-                 x-transition:enter="transition ease-out duration-300"
-                 x-transition:enter-start="opacity-0 translate-y-4"
-                 x-transition:enter-end="opacity-100 translate-y-0"
-                 class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
-                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 text-center">
-                    <i class='bx bxl-git text-3xl sm:text-4xl text-orange-500 mb-2'></i>
-                    <p class="font-medium text-xs sm:text-sm">Git</p>
-                </div>
-                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 text-center">
-                    <i class='bx bxl-github text-3xl sm:text-4xl mb-2'></i>
-                    <p class="font-medium text-xs sm:text-sm">GitHub</p>
-                </div>
-                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 text-center">
-                    <i class='bx bx-terminal text-3xl sm:text-4xl text-green-400 mb-2'></i>
-                    <p class="font-medium text-xs sm:text-sm">Termux</p>
-                </div>
-                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 text-center">
-                    <i class='bx bx-code text-3xl sm:text-4xl text-blue-400 mb-2'></i>
-                    <p class="font-medium text-xs sm:text-sm">Acode</p>
-                </div>
-                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 text-center">
-                    <i class='bx bxl-figma text-3xl sm:text-4xl text-purple-400 mb-2'></i>
-                    <p class="font-medium text-xs sm:text-sm">Figma</p>
-                </div>
-                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 text-center">
-                    <i class='bx bx-folder-open text-3xl sm:text-4xl text-yellow-400 mb-2'></i>
-                    <p class="font-medium text-xs sm:text-sm">ZArchiver</p>
-                </div>
-            </div>
-            
-            <!-- Design Tools -->
-            <div x-show="skillTab === 'design'" 
-                 x-transition:enter="transition ease-out duration-300"
-                 x-transition:enter-start="opacity-0 translate-y-4"
-                 x-transition:enter-end="opacity-100 translate-y-0"
-                 class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
-                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 sm:p-5 text-center">
-                    <i class='bx bxl-figma text-4xl sm:text-5xl text-purple-400 mb-2'></i>
-                    <p class="font-medium text-sm sm:text-base">Figma</p>
-                </div>
-                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 sm:p-5 text-center">
-                    <i class='bx bx-text text-4xl sm:text-5xl text-blue-400 mb-2'></i>
-                    <p class="font-medium text-sm sm:text-base">Pixellab</p>
-                </div>
-                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 sm:p-5 text-center">
-                    <i class='bx bx-movie-play text-4xl sm:text-5xl text-pink-400 mb-2'></i>
-                    <p class="font-medium text-sm sm:text-base">Alight Motion</p>
-                </div>
-                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 sm:p-5 text-center">
-                    <i class='bx bx-shape-polygon text-4xl sm:text-5xl text-cyan-400 mb-2'></i>
-                    <p class="font-medium text-sm sm:text-base">Infinite Design</p>
-                </div>
-                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 sm:p-5 text-center">
-                    <i class='bx bx-palette text-4xl sm:text-5xl text-purple-500 mb-2'></i>
-                    <p class="font-medium text-sm sm:text-base">Canva</p>
-                </div>
-            </div>
+            <h2 class="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">Teknologi yang Saya Kuasai</h2>
+            <p class="text-neutral-400 text-sm sm:text-base mt-3 max-w-lg mx-auto">Semua dipelajari secara otodidak hanya dengan smartphone</p>
         </div>
-    </section>
-    
+        
+        <div class="flex justify-center gap-2 sm:gap-3 mb-8 flex-wrap">
+            <template x-for="tab in ['languages', 'frameworks', 'database', 'tools', 'design']">
+                <button @click="skillTab = tab" 
+                        :class="skillTab === tab ? 'bg-white text-black' : 'bg-neutral-800 text-white'"
+                        class="px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all flex items-center gap-1.5 capitalize">
+                    <span x-text="tab === 'languages' ? 'Languages & SML' : tab"></span>
+                </button>
+            </template>
+        </div>
+        
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
+            <template x-for="skill in window.portofolioData.skills[skillTab]" :key="skill.name">
+                <div class="skill-card bg-neutral-900 border border-neutral-800 rounded-xl p-4 sm:p-5 text-center group hover:border-neutral-600 transition-all"
+                     x-show="true" 
+                     x-transition:enter="transition ease-out duration-300"
+                     x-transition:enter-start="opacity-0 translate-y-4"
+                     x-transition:enter-end="opacity-100 translate-y-0">
+                    
+                    <div class="text-4xl sm:text-5xl mb-3 flex justify-center">
+                        <i :class="skill.icon"></i>
+                    </div>
+                    
+                    <p class="font-medium text-sm sm:text-base" x-text="skill.name"></p>
+                    
+                    <template x-if="skill.progress">
+                        <div class="mt-3 h-1.5 bg-neutral-800 rounded-full overflow-hidden">
+                            <div class="h-full rounded-full transition-all duration-1000" 
+                                 :class="skill.color" 
+                                 :style="`width: ${skill.progress}`">
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </div>
+</section>
+
     <!-- Journey Section -->
     <section id="journey" class="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 scroll-mt-20">
         <div class="max-w-4xl mx-auto">
@@ -739,84 +422,6 @@
         </div>
     </section>
     
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 bg-neutral-900/50 scroll-mt-20">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-10 sm:mb-12">
-                <div class="inline-flex items-center gap-2 bg-neutral-800 border border-neutral-700 px-4 py-2 rounded-full text-xs sm:text-sm text-neutral-400 mb-4">
-                    <i class='bx bx-briefcase'></i>
-                    <span>Portfolio</span>
-                </div>
-                <h2 class="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">Karya Terbaru</h2>
-                <p class="text-neutral-400 text-sm sm:text-base mt-3 max-w-lg mx-auto">Beberapa project yang sudah saya kerjakan</p>
-            </div>
-            
-            <!-- Portfolio Filter -->
-            <div class="flex justify-center gap-2 sm:gap-3 mb-8 flex-wrap">
-                <button @click="portfolioFilter = 'all'" 
-                        :class="portfolioFilter === 'all' ? 'bg-white text-black' : 'bg-neutral-800 text-white'"
-                        class="px-4 sm:px-6 py-2 rounded-xl font-medium text-xs sm:text-sm transition-all">
-                    Semua
-                </button>
-                <button @click="portfolioFilter = 'web'" 
-                        :class="portfolioFilter === 'web' ? 'bg-white text-black' : 'bg-neutral-800 text-white'"
-                        class="px-4 sm:px-6 py-2 rounded-xl font-medium text-xs sm:text-sm transition-all">
-                    Website
-                </button>
-                <button @click="portfolioFilter = 'design'" 
-                        :class="portfolioFilter === 'design' ? 'bg-white text-black' : 'bg-neutral-800 text-white'"
-                        class="px-4 sm:px-6 py-2 rounded-xl font-medium text-xs sm:text-sm transition-all">
-                    Design
-                </button>
-                <button @click="portfolioFilter = 'template'" 
-                        :class="portfolioFilter === 'template' ? 'bg-white text-black' : 'bg-neutral-800 text-white'"
-                        class="px-4 sm:px-6 py-2 rounded-xl font-medium text-xs sm:text-sm transition-all">
-                    Template
-                </button>
-            </div>
-            
-            <!-- Portfolio Grid -->
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                <template x-for="(item, index) in filteredPortfolio" :key="index">
-                    <div class="portfolio-card bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden group">
-                        <div class="aspect-video relative overflow-hidden">
-                            <img :src="item.image" :alt="item.title" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 grayscale group-hover:grayscale-0">
-                            <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                            <div class="absolute bottom-3 left-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
-                                <a :href="item.demo" target="_blank" class="flex-1 bg-white text-black py-2 rounded-lg text-xs sm:text-sm font-medium flex items-center justify-center gap-1 hover:bg-neutral-200 transition-colors">
-                                    <i class='bx bx-link-external'></i> Demo
-                                </a>
-                                <a :href="item.github" target="_blank" class="w-10 bg-neutral-800 text-white py-2 rounded-lg flex items-center justify-center hover:bg-neutral-700 transition-colors">
-                                    <i class='bx bxl-github'></i>
-                                </a>
-                            </div>
-                            <!-- Category Badge -->
-                            <div class="absolute top-3 left-3">
-                                <span class="bg-black/70 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-lg" x-text="item.category"></span>
-                            </div>
-                        </div>
-                        <div class="p-4 sm:p-5">
-                            <h4 class="font-semibold text-base sm:text-lg mb-1" x-text="item.title"></h4>
-                            <p class="text-neutral-400 text-xs sm:text-sm mb-3" x-text="item.description"></p>
-                            <div class="flex flex-wrap gap-1.5">
-                                <template x-for="tech in item.tech" :key="tech">
-                                    <span class="bg-neutral-800 text-neutral-400 text-xs px-2 py-1 rounded-md" x-text="tech"></span>
-                                </template>
-                            </div>
-                        </div>
-                    </div>
-                </template>
-            </div>
-            
-            <!-- View More -->
-            <div class="text-center mt-10">
-                <a href="https://github.com/ReyhanItsMe" target="_blank" class="inline-flex items-center gap-2 border border-neutral-700 px-6 py-3 rounded-xl font-medium text-sm hover:bg-white hover:text-black hover:border-white transition-all">
-                    <i class='bx bxl-github text-lg'></i> Lihat Semua di GitHub
-                </a>
-            </div>
-        </div>
-    </section>
-    
     <!-- Services Section -->
     <section class="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         <div class="max-w-6xl mx-auto">
@@ -828,67 +433,19 @@
                 <h2 class="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">Apa yang Saya Tawarkan</h2>
             </div>
             
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                <!-- Service 1 -->
-                <div class="bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 hover:border-neutral-600 transition-colors group">
-                    <div class="w-14 h-14 bg-neutral-800 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-white group-hover:text-black transition-colors">
-                        <i class='bx bx-code-alt text-2xl'></i>
-                    </div>
-                    <h4 class="font-playfair text-lg sm:text-xl font-semibold mb-2">Website Statis</h4>
-                    <p class="text-neutral-400 text-sm mb-4">Landing page, portfolio, company profile dengan HTML, CSS, JavaScript, dan Tailwind.</p>
-                    <p class="text-white font-semibold">Mulai Rp 10K</p>
-                </div>
-                
-                <!-- Service 2 -->
-                <div class="bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 hover:border-neutral-600 transition-colors group">
-                    <div class="w-14 h-14 bg-neutral-800 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-white group-hover:text-black transition-colors">
-                        <i class='bx bx-palette text-2xl'></i>
-                    </div>
-                    <h4 class="font-playfair text-lg sm:text-xl font-semibold mb-2">UI/UX Design</h4>
-                    <p class="text-neutral-400 text-sm mb-4">Desain antarmuka modern dan user-friendly untuk web dan mobile menggunakan Figma.</p>
-                    <p class="text-white font-semibold">Mulai Rp 5K</p>
-                </div>
-                
-                <!-- Service 3 -->
-                <div class="bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 hover:border-neutral-600 transition-colors group">
-                    <div class="w-14 h-14 bg-neutral-800 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-white group-hover:text-black transition-colors">
-                        <i class='bx bx-layer text-2xl'></i>
-                    </div>
-                    <h4 class="font-playfair text-lg sm:text-xl font-semibold mb-2">Template Premium</h4>
-                    <p class="text-neutral-400 text-sm mb-4">Template siap pakai untuk berbagai kebutuhan: web, Alight Motion, Pixellab.</p>
-                    <p class="text-white font-semibold">Mulai Rp 5K</p>
-                </div>
-                
-                <!-- Service 4 -->
-                <div class="bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 hover:border-neutral-600 transition-colors group">
-                    <div class="w-14 h-14 bg-neutral-800 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-white group-hover:text-black transition-colors">
-                        <i class='bx bx-movie-play text-2xl'></i>
-                    </div>
-                    <h4 class="font-playfair text-lg sm:text-xl font-semibold mb-2">Preset Alight Motion</h4>
-                    <p class="text-neutral-400 text-sm mb-4">Preset transisi, efek, dan animasi untuk editing video di Alight Motion.</p>
-                    <p class="text-white font-semibold">Mulai Rp 2K</p>
-                </div>
-                
-                <!-- Service 5 -->
-                <div class="bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 hover:border-neutral-600 transition-colors group">
-                    <div class="w-14 h-14 bg-neutral-800 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-white group-hover:text-black transition-colors">
-                        <i class='bx bx-text text-2xl'></i>
-                    </div>
-                    <h4 class="font-playfair text-lg sm:text-xl font-semibold mb-2">Template Pixellab</h4>
-                    <p class="text-neutral-400 text-sm mb-4">Template typography, poster, dan desain grafis untuk Pixellab (PLP).</p>
-                    <p class="text-white font-semibold">Mulai Rp 10K</p>
-                </div>
-                
-                <!-- Service 6 -->
-                <div class="bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 hover:border-neutral-600 transition-colors group">
-                    <div class="w-14 h-14 bg-neutral-800 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-white group-hover:text-black transition-colors">
-                        <i class='bx bx-customize text-2xl'></i>
-                    </div>
-                    <h4 class="font-playfair text-lg sm:text-xl font-semibold mb-2">Custom Project</h4>
-                    <p class="text-neutral-400 text-sm mb-4">Proyek khusus sesuai kebutuhan Anda. Konsultasi gratis untuk diskusi ide.</p>
-                    <p class="text-white font-semibold">Hubungi untuk harga</p>
-                </div>
+<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6" x-data="aboutPage()">
+    <template x-for="service in services">
+        <div class="bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 hover:border-neutral-600 transition-colors group">
+            <div class="w-14 h-14 bg-neutral-800 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-white group-hover:text-black transition-colors">
+                <i :class="'bx ' + service.icon" class="text-2xl"></i>
             </div>
+            <h4 class="font-playfair text-lg sm:text-xl font-semibold mb-2" x-text="service.title"></h4>
+            <p class="text-neutral-400 text-sm mb-4" x-text="service.desc"></p>
+            <p class="text-white font-semibold" x-text="service.price"></p>
+        </div>
+    </template>
+</div>
+
         </div>
     </section>
     
@@ -966,81 +523,10 @@
     <!-- Floating Action Button - WhatsApp -->
     <div id="floating-button-whatsapp-placeholder"></div>
     
-    <script>
-        function aboutPage() {
-            return {
-                mobileMenu: false,
-                skillTab: 'languages',
-                portfolioFilter: 'all',
-                portfolio: [
-                    {
-                        title: 'DEVACODE Store',
-                        description: 'Toko online untuk produk digital dengan tema monokrom',
-                        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop',
-                        category: 'Website',
-                        type: 'web',
-                        tech: ['HTML', 'Tailwind', 'Alpine.js'],
-                        demo: '#',
-                        github: 'https://github.com/ReyhanItsMe'
-                    },
-                    {
-                        title: 'SevenCultures',
-                        description: 'Website toko fashion dan merchandise',
-                        image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=400&fit=crop',
-                        category: 'Website',
-                        type: 'web',
-                        tech: ['HTML', 'CSS', 'JavaScript'],
-                        demo: '#',
-                        github: 'https://github.com/ReyhanItsMe'
-                    },
-                    {
-                        title: 'Portfolio Template',
-                        description: 'Template portfolio modern dan minimalis',
-                        image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop',
-                        category: 'Template',
-                        type: 'template',
-                        tech: ['HTML', 'Tailwind', 'AOS'],
-                        demo: '#',
-                        github: 'https://github.com/ReyhanItsMe'
-                    },
-                    {
-                        title: 'UI Kit Dashboard',
-                        description: 'Komponen UI untuk admin dashboard',
-                        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop',
-                        category: 'Design',
-                        type: 'design',
-                        tech: ['Figma', 'Tailwind'],
-                        demo: '#',
-                        github: 'https://github.com/ReyhanItsMe'
-                    },
-                    {
-                        title: 'Landing Page Pack',
-                        description: 'Koleksi 5 template landing page',
-                        image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&h=400&fit=crop',
-                        category: 'Template',
-                        type: 'template',
-                        tech: ['HTML', 'CSS', 'JS'],
-                        demo: '#',
-                        github: 'https://github.com/ReyhanItsMe'
-                    },
-                    {
-                        title: 'Mobile App UI',
-                        description: 'Desain UI aplikasi mobile modern',
-                        image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop',
-                        category: 'Design',
-                        type: 'design',
-                        tech: ['Figma', 'Prototyping'],
-                        demo: '#',
-                        github: 'https://github.com/ReyhanItsMe'
-                    }
-                ],
-                
-                get filteredPortfolio() {
-                    if (this.portfolioFilter === 'all') return this.portfolio;
-                    return this.portfolio.filter(item => item.type === this.portfolioFilter);
-                }
-            }
-        }
-    </script>
+
+<script src="/assets/js/script.js"></script>
+
+
+
 </body>
 </html>

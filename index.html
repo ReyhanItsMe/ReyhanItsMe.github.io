@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REYHANDSHOOT - Digital Creative Store</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="/environment.js"></script>
     <script src="./lib/link.js"></script>
     <script src="./lib/load.js"></script>
     <script src="./lib/product.js"></script>
+    <script src="./lib/environment.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/duration.min.js"></script>
@@ -16,176 +18,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { font-family: 'Inter', sans-serif; }
-        .font-playfair { font-family: 'Playfair Display', serif; }
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; height: 4px; }
-        ::-webkit-scrollbar-track { background: #0a0a0a; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #555; }
-        
-        /* Hide scrollbar for filter menu */
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
-        /* Animations */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes scaleIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        @keyframes blink {
-            50% { border-color: transparent; }
-        }
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 5px rgba(255,255,255,0.1); }
-            50% { box-shadow: 0 0 20px rgba(255,255,255,0.2); }
-        }
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .animate-fadeInUp { animation: fadeInUp 0.6s ease-out forwards; }
-        .animate-fadeInDown { animation: fadeInDown 0.6s ease-out forwards; }
-        .animate-slideInLeft { animation: slideInLeft 0.6s ease-out forwards; }
-        .animate-slideInRight { animation: slideInRight 0.6s ease-out forwards; }
-        .animate-scaleIn { animation: scaleIn 0.5s ease-out forwards; }
-        .animate-float { animation: float 3s ease-in-out infinite; }
-        .animate-glow { animation: glow 2s ease-in-out infinite; }
-        
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
-        .delay-400 { animation-delay: 0.4s; }
-        .delay-500 { animation-delay: 0.5s; }
-        .delay-600 { animation-delay: 0.6s; }
-        
-        /* Card hover effects */
-        .card-hover {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .card-hover:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.6);
-        }
-        
-        /* Gradient text */
-        .gradient-text {
-            background: linear-gradient(135deg, #fff 0%, #888 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        /* Gradient border */
-        .gradient-border {
-            position: relative;
-        }
-        .gradient-border::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            padding: 2px;
-            background: linear-gradient(135deg, #444, #222, #444);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            border-radius: inherit;
-        }
-        
-        /* Timer badge pulse */
-        .timer-pulse { animation: pulse 1s infinite; }
-        
-        /* Button shine effect */
-        .btn-shine {
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-shine::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-        .btn-shine:hover::before { left: 100%; }
-        
-        /* Code block style */
-        .code-block {
-            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-            border: 1px solid #2a2a2a;
-        }
-        
-        /* Glass effect */
-        .glass {
-            background: rgba(20, 20, 20, 0.8);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-        
-        @keyframes shimmer {
-            0% { transform: translateX(-150%) translateY(-150%) rotate(45deg); }
-            100% { transform: translateX(150%) translateY(150%) rotate(45deg); }
-        }
-        
-        .skeleton-glow {
-            position: relative;
-            overflow: hidden;
-            background: #171717; /* neutral-900 */
-        }
-        
-        .skeleton-glow::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 200%; height: 200%;
-            background: linear-gradient(
-                to bottom right,
-                rgba(255, 255, 255, 0) 0%,
-                rgba(255, 255, 255, 0.05) 50%,
-                rgba(255, 255, 255, 0) 100%
-            );
-            animation: shimmer 1.5s infinite;
-        }
-
-        
-        [x-cloak] { display: none !important; }
-    </style>
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body class="bg-neutral-950 text-white min-h-screen">
     
@@ -545,78 +378,6 @@
 
 
     
-<script>
-    function productApp() {
-        return {
-            links: window.PAGE_LINKS || {}, // Ambil link dari pages-link.js
-            mobileMenu: false,
-            searchOpen: false,
-            // Simpan target waktu di sini (Nanti bisa ditarik dari JSON)
-            // Format: YYYY-MM-DDTHH:mm:ss
-            deadlines: {
-                timer1: "2026-02-10T23:59:59",
-                timer2: "2026-02-12T12:00:00",
-                timer3: "2026-02-15T00:00:00"
-            },
-            // Objek untuk nampilin teks di HTML
-            displayTimers: {
-                timer1: '00:00:00',
-                timer2: '00:00:00',
-                timer3: '00:00:00'
-            },
-            
-            init() {
-                // Jalankan timer setiap detik
-                this.updateTimers();
-                setInterval(() => this.updateTimers(), 1000);
-
-                // Jalankan Scroll Animation
-                this.initScrollAnimations();
-            },
-
-            updateTimers() {
-                const now = dayjs();
-                for (let key in this.deadlines) {
-                    const target = dayjs(this.deadlines[key]);
-                    const diff = target.diff(now);
-
-                    if (diff > 0) {
-                        // Pakai plugin duration Day.js
-                        const dur = dayjs.duration(diff);
-                        const h = Math.floor(dur.asHours()); // Pakai asHours supaya bisa lebih dari 24 jam
-                        const m = dur.minutes();
-                        const s = dur.seconds();
-                        
-                        this.displayTimers[key] = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
-                    } else {
-                        this.displayTimers[key] = "PROMO HABIS";
-                    }
-                }
-            },
-
-            initScrollAnimations() {
-                const observerOptions = {
-                    threshold: 0.1,
-                    rootMargin: '0px 0px -50px 0px'
-                };
-                
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('animate-fadeInUp');
-                            entry.target.style.opacity = '1';
-                        }
-                    });
-                }, observerOptions);
-                
-                document.querySelectorAll('.card-hover').forEach((el, index) => {
-                    el.style.opacity = '0';
-                    el.style.animationDelay = `${index * 0.1}s`;
-                    observer.observe(el);
-                });
-            }
-        }
-    }
-</script>
+<script src="/assets/js/script.js"></script>
 </body>
 </html>
