@@ -3,19 +3,19 @@
     "id": "link-in-bio-01",
     "type": "html",
     "name": "MONOCHROME Link-in-Bio Template — HTML & Tailwind Edition",
-    "price": 10000,
-    "original_price": 20000,
-    "discount_label": "50% OFF",
-    "image": "/assets/img/LINK-IN-BIO-STYLE-MONOCHROME-EDITION.png",
+    "price": 30000,
+    "original_price": 50000,
+    "discount_label": "40% OFF",
+    "image": "/assets/img/link-in-bio-monochrome-style.png",
     "category_label": "Web HTML",
     "category_icon": "bx-code-block",
     "voucher_code": null,
     "flash_sale": false,
     "flash_sale_end": "2026-02-15T23:59:59",
-    "lynk_url": "https://lynk.id/reyhandshoot/1ox2doz3lnzk/checkout?token=cGFyYW1zPSU1QiU1RCZiaWRfcHJpY2U9MCZxdHlfcHJvZD0x",
+    "lynk_url": "https://lynk.id/reyhandshoot/1ox2doz3lnzk/checkout",
     "wa_number": "6282117256472",
-    "wa_text_template": "Halo Reyhan! Saya tertarik produk: [PRODUCT_NAME].",
-    "description_text": "<b>Bosan dengan tampilan Linktree yang itu-itu saja?</b>\n\nTingkatkan personal branding kamu dengan Monochrome Edition, template website Link-in-Bio yang didesain khusus untuk kamu yang menyukai estetika minimalis, bersih, dan profesional.\n\nTemplate ini adalah solusi sekali bayar tanpa biaya berlangganan bulanan. Kamu punya kontrol penuh atas kodenya!\n\n<b>Apa yang akan kamu dapatkan?</b>\n✅ <b>2 Variasi File</b> : Versi Standard (HTML & CSS murni) dan Versi Advanced (Tailwind CSS).\n✅ <b>Fully Responsive</b> : Tampilan tetap cantik saat dibuka di HP, Tablet, maupun Laptop.\n✅ <b>Clean Code</b> : Struktur kodingan rapi dan mudah dimengerti, bahkan untuk pemula.\n✅ <b>Desain Modular</b> : Struktur folder yang teratur memudahkan kamu dalam kustomisasi.\n✅ <b>Bebas Watermark</b> : Tidak ada merek kamu sendiri tanpa embel-embel platform lain.\n\n<b>Cocok untuk:</b>\nKreator, Pengembang, Freelancer, atau siapa pun yang ingin tampil beda.\n\n⚠️ <i><b>Catatan Penting:</b></i>\nIni adalah produk Statis (Source Code HTML). Tidak ada admin dasbor. Perubahan konten dilakukan secara manual. Sangat direkomendasikan untuk digunakan bersama layanan hosting gratis seperti Netlify atau Vercel.\n\n<b>Isi Paket:</b>\n- Kode Sumber (Standar & Lanjutan)\n- Panduan Penggunaan (README.md)\n- Lisensi Penggunaan\n\nIngin Melihat Halaman Website Sebagai Contoh?? Kunjungi link: pages-link-in-bio-stye-monochrome.vercel.app",
+    "wa_text_template": "Halo Reyhan! Saya tertarik produk: MONOCHROME Link-in-Bio Template — HTML & Tailwind Edition.",
+    "description_text": "<b>Bosan dengan tampilan Linktree yang itu-itu saja?</b>\n\nTingkatkan personal branding kamu dengan Monochrome Edition, template website Link-in-Bio yang didesain khusus untuk kamu yang menyukai estetika minimalis, bersih, dan profesional.\n\nTemplate ini adalah solusi sekali bayar tanpa biaya berlangganan bulanan. Kamu punya kontrol penuh atas kodenya!\n\n<b>Apa yang akan kamu dapatkan?</b>\n✅ <b>2 Variasi File</b> : Versi Standard (HTML & CSS murni) dan Versi Advanced (Tailwind CSS).\n✅ <b>Fully Responsive</b> : Tampilan tetap cantik saat dibuka di HP, Tablet, maupun Laptop.\n✅ <b>Clean Code</b> : Struktur kodingan rapi dan mudah dimengerti, bahkan untuk pemula.\n✅ <b>Desain Modular</b> : Struktur folder yang teratur memudahkan kamu dalam kustomisasi.\n✅ <b>Bebas Watermark</b> : Tidak ada merek kamu sendiri tanpa embel-embel platform lain.\n\n<b>Cocok untuk:</b>\nKreator, Pengembang, Freelancer, atau siapa pun yang ingin tampil beda.\n\n⚠️ <i><b>Catatan Penting:</b></i>\nIni adalah produk Statis (Source Code HTML). Tidak ada admin dasbor. Perubahan konten dilakukan secara manual. Sangat direkomendasikan untuk digunakan bersama layanan hosting gratis seperti Netlify atau Vercel.",
     "keywords": ["HTML", "Landing Page", "Portfolio"],
     "features": [
       "Minimalist & Professional Design",
@@ -26,26 +26,43 @@
       "Clean & Modular Code Structure"
     ],
     "benefits": [
-      {
-        "title": "Dual Format", 
-        "subtitle": "HTML & Tailwind", 
-        "icon": "bx-code-alt"
-      },
-      {
-        "title": "Lifetime Access", 
-        "subtitle": "Sekali Bayar", 
-        "icon": "bx-infinite"
-      },
-      {
-        "title": "Easy Edit", 
-        "subtitle": "Pemula Friendly", 
-        "icon": "bx-edit-alt"
-      },
-      {
-        "title": "Priority Support", 
-        "subtitle": "Direct via WA", 
-        "icon": "bx-support"
-      }
+      { "title": "Dual Format", "subtitle": "HTML & Tailwind", "icon": "bx-code-alt" },
+      { "title": "Lifetime Access", "subtitle": "Sekali Bayar", "icon": "bx-infinite" },
+      { "title": "Easy Edit", "subtitle": "Pemula Friendly", "icon": "bx-edit-alt" },
+      { "title": "Priority Support", "subtitle": "Direct via WA", "icon": "bx-support" }
+    ]
+  },
+  {
+    "id": "clean-ui-01",
+    "type": "html",
+    "name": "THE CLEAN UI COLLECTION - 100+ Premium Components (Tailwind & Alpine.js Edition)",
+    "price": 70000,
+    "original_price": 125000,
+    "discount_label": "44% OFF",
+    "image": "/assets/img/components-the-clean-ui-collection.png",
+    "category_label": "Web Components",
+    "category_icon": "bx-layer",
+    "voucher_code": null,
+    "flash_sale": false,
+    "flash_sale_end": null,
+    "lynk_url": "https://lynk.id/reyhandshoot/92vmr51xyodg/checkout",
+    "wa_number": "6282117256472",
+    "wa_text_template": "Halo Reyhan! Saya ingin membeli: THE CLEAN UI COLLECTION - 100+ Premium Components (Tailwind & Alpine.js Edition).",
+    "description_text": "<b>THE CLEAN UI COLLECTION</b> adalah standar baru untuk library komponen UI minimalis. Dirancang khusus bagi Anda yang menginginkan tampilan website profesional, elegan, dan clean tanpa harus menghabiskan ratusan jam di depan kode.\n\nKoleksi ini bukan sekadar template statis; setiap baris dari <b>4.500+ total baris kode</b> yang tersedia telah dioptimasi menggunakan Tailwind CSS dan diperkaya dengan logika interaktif dari Alpine.js.\n\n📦 <b>Apa yang Anda Dapatkan dalam Paket Ini?</b>\nAnda akan menerima <b>100+ Komponen Siap Pakai</b> yang telah diorganisir secara modular:\n✅ 01-Buttons (14 Variasi)\n✅ 02-Alerts & Notifications (13 Variasi)\n✅ 03-Cards (12 Variasi)\n✅ 04-Skeletons (10 Variasi)\n✅ 05-Charts (10 Variasi)\n✅ 06-Tables (9 Variasi)\n✅ 07-Popups (9 Variasi)\n✅ 08-Forms (8 Variasi)\n✅ 09-Badges & Labels (30 Variasi)\n\n💎 <b>Mengapa Harus Memilih Koleksi Ini?</b>\n• <b>Estetika High-End</b>: Konsistensi desain monochrome eksklusif.\n• <b>Workflow Super Cepat</b>: File dipisah rapi (1 file 1 komponen).\n• <b>Teknologi Modern</b>: Tailwind CSS & Alpine.js untuk performa smooth.\n• <b>Investasi Lifetime Update</b>: Gratis pembaruan selamanya untuk pembeli resmi.",
+    "keywords": ["Tailwind CSS", "Alpine.js", "UI Kit", "Components"],
+    "features": [
+      "110+ Premium UI Components",
+      "Interactive Logic with Alpine.js",
+      "Clean & Modular Code (1 File 1 Component)",
+      "Optimized for Tailwind CSS v3",
+      "Lifetime Free Updates",
+      "Professional Monochrome Aesthetic"
+    ],
+    "benefits": [
+      { "title": "100+ Items", "subtitle": "Komponen Lengkap", "icon": "bx-grid-alt" },
+      { "title": "Clean Code", "subtitle": "4.500+ Baris", "icon": "bx-code-curly" },
+      { "title": "Lifetime", "subtitle": "Gratis Update", "icon": "bx-refresh" },
+      { "title": "Interactive", "subtitle": "Alpine.js Ready", "icon": "bx-mouse-alt" }
     ]
   }
 ]

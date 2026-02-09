@@ -5,13 +5,14 @@
 window.ENV = {
     // === [ GLOBAL CONFIG ] ===
     APP_NAME: "RDS Web ID",
+    APP_USERNAME: "ReyhanDShoot",
+    APP_SLOGAN: "Digital Creative Store",
     DB_PRODUCTS: './database/product.json',
     PRODUCT_LIMIT_PER_PAGE: 8,
 
     // === [ PAGE PATHS ] ===
     PATH_HOME: "/index.html", 
     PATH_PORTFOLIO: "/pages/portofolio.html",
-    PATH_PROMO: "/pages/promo.html",
     PATH_PRIVACY: "/pages/privacy.html",
     PATH_TERMS: "/pages/terms-and-conditions.html",
     PATH_HELP: "/pages/help.html",
@@ -26,7 +27,7 @@ window.ENV = {
     URL_LYNK: "https://lynk.id/reyhanshoot",
 
     // === [ CONTACT INFO ] ===
-    CONTACT_EMAIL: "hello@rds.web.id",
+    CONTACT_EMAIL: "admin@rds.web.id",
     CONTACT_PHONE_DISPLAY: "+62 821-1725-6472",
     CONTACT_ADDRESS: "Bandung, Jawa Barat, Indonesia",
     WA_DEFAULT_MSG: "Halo Reyhan, saya ingin tanya tentang layanannya.",
@@ -54,7 +55,7 @@ window.ENV = {
     // === [ PORTOFOLIO STATS ] ===
     STATS: [
         { value: "2+", label: "Tahun Belajar" },
-        { value: "5+", label: "Proyek" },
+        { value: "2+", label: "Proyek" },
         { value: "100%", label: "Otodidak" }
     ],
 
@@ -120,5 +121,6 @@ window.ENV = {
             { name: "Alight Motion", icon: "bx bx-movie-play", progress: "80%", color: "bg-pink-400" },
             { name: "Canva", icon: "devicon-canva-original colored", progress: "90%", color: "bg-purple-500" }
         ]
-    }
+    },
+    FOLLOWERS: "12K"
 };

@@ -201,3 +201,46 @@ function productDetail() {
         }
     };
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Ambil Konfigurasi
+    const siteName = window.ENV?.APP_NAME || "REYHANDSHOOT";
+    const slogan = window.ENV?.APP_SLOGAN || "Official Store";
+
+    // 2. Daftar Nama Halaman (Mapping)
+    // Format: "nama_file" : "Judul Keren"
+    const pageTitles = {
+        "index": "Home",
+        "portofolio": "Portofolio",
+        "privacy": "Privacy Policy",
+        "terms-and-conditions": "Terms & Conditions",
+        "help": "Help",
+        "contact": "Contact"
+    };
+
+    // 3. Deteksi Halaman Saat Ini
+    const path = window.location.pathname;
+    // Ambil nama file terakhir (misal: /pages/contact.html -> contact)
+    let currentPage = path.split("/").pop().replace(".html", "");
+    
+    // Jika kosong (root domain), anggap sebagai index
+    if (currentPage === "") currentPage = "index";
+
+    // 4. Eksekusi Perubahan Judul
+    if (currentPage === "index") {
+        // Khusus Home: "REYHANDSHOOT - Digital Creative Store"
+        document.title = `${siteName} - ${slogan}`;
+    } else if (pageTitles[currentPage]) {
+        // Halaman Lain: "Hubungi Kami || REYHANDSHOOT"
+        document.title = `${pageTitles[currentPage]} || ${siteName}`;
+    }
+
+    // 5. Helper Function (Untuk Halaman Produk / Dinamis)
+    // Bisa dipanggil dari Alpine.js: window.setPageTitle("Nama Produk")
+    window.setPageTitle = (customTitle) => {
+        if (customTitle) {
+            document.title = `${customTitle} || ${siteName}`;
+        }
+    };
+});
+
