@@ -1,0 +1,103 @@
+    <header class="bg-sky-blue dark:bg-gray-800 fixed w-full top-0 z-50 transition-all duration-300" x-data="{ scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 10)" :class="{'shadow-lg py-1': scrolled, 'py-3': !scrolled}">
+        <nav class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16 md:h-20">
+            
+            <a href="#home" class="flex items-center gap-2 z-50">
+                <span class="text-xl md:text-2xl font-black text-white uppercase tracking-tight">
+                    Zisam <span class="text-gold-light">Community</span>
+                </span>
+            </a>
+
+            <div class="hidden lg:flex space-x-8 items-center font-bold text-sm">
+                <template x-for="item in ['Home', 'Event', 'Artikel', 'Portofolio', 'galeri']">
+                    <a :href="'#' + item.toLowerCase()" class="text-white hover:text-gold-light transition relative group" x-text="item">
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold-light transition-all group-hover:w-full"></span>
+                    </a>
+                </template>
+                <a href="#kontak" class="gold-gradient text-white px-6 py-2 rounded-full shadow-md hover:-translate-y-0.5 transition">Kontak Kami</a>
+                
+                <div class="relative ml-2" x-data="{ themePopupOpen: false }">
+                    <button @click="themePopupOpen = !themePopupOpen" class="text-white hover:text-gold-light p-2 focus:outline-none">
+                        <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                    
+                    <div x-show="themePopupOpen" 
+                         @click.away="themePopupOpen = false" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 scale-95"
+                         x-transition:enter-end="opacity-100 scale-100"
+                         x-transition:leave="transition ease-in duration-75"
+                         x-transition:leave-start="opacity-100 scale-100"
+                         x-transition:leave-end="opacity-0 scale-95"
+                         x-cloak 
+                         class="absolute right-0 mt-4 w-32 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl py-2 border border-gray-100 dark:border-gray-700 z-50">
+                        
+                        <div class="flex justify-around items-center px-2 py-2">
+                            <button @click="toggleTheme(false); themePopupOpen = false" 
+                                    :class="!darkMode ? 'bg-sky-blue/10 text-sky-blue scale-110' : 'text-gray-400 hover:text-sky-blue'" 
+                                    class="p-2 rounded-xl transition-all duration-300 shadow-sm"
+                                    title="Mode Terang">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                                </svg>
+                            </button>
+                    
+                            <div class="w-px h-6 bg-gray-100 dark:bg-gray-700"></div>
+                    
+                            <button @click="toggleTheme(true); themePopupOpen = false" 
+                                    :class="darkMode ? 'bg-gold-light/10 text-gold-light scale-110' : 'text-gray-400 hover:text-gold-light'" 
+                                    class="p-2 rounded-xl transition-all duration-300 shadow-sm"
+                                    title="Mode Malam">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:hidden flex items-center z-50">
+                <button @click="mobileMenuOpen = true" class="text-white p-2">
+                    <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                </button>
+            </div>
+        </nav>
+
+        <div x-show="mobileMenuOpen" x-transition.opacity class="fixed inset-0 bg-black/60 z-40 lg:hidden" @click="mobileMenuOpen = false" x-cloak></div>
+
+        <div x-show="mobileMenuOpen" 
+             x-transition:enter="transition ease-out duration-300 transform"
+             x-transition:enter-start="translate-x-full"
+             x-transition:enter-end="translate-x-0"
+             x-transition:leave="transition ease-in duration-200 transform"
+             x-transition:leave-start="translate-x-0"
+             x-transition:leave-end="translate-x-full"
+             class="fixed top-0 right-0 bottom-0 w-3/4 max-w-sm bg-sky-blue dark:bg-gray-900 z-50 shadow-2xl pt-24 px-8 lg:hidden flex flex-col" x-cloak>
+            
+            <button @click="mobileMenuOpen = false" class="absolute top-6 right-6 text-white/80 hover:text-white focus:outline-none p-2 bg-white/10 dark:bg-gray-800 rounded-full">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <div class="flex flex-col space-y-4">
+                <template x-for="item in ['Home', 'Event', 'Artikel', 'Portofolio', 'galeri']">
+                    <a @click="mobileMenuOpen = false" :href="'#' + item.toLowerCase()" class="text-xl font-bold text-white hover:text-gold-light border-b border-white/10 pb-3" x-text="item"></a>
+                </template>
+                <a @click="mobileMenuOpen = false" href="#kontak" class="text-xl font-black text-gold-light mt-2 pb-6 border-b border-white/10">Kontak Kami</a>
+            </div>
+
+            <div class="mt-8 pt-2">
+                <div class="text-xs font-bold text-white/50 uppercase tracking-wider mb-3">Tampilan Tema</div>
+                <div class="flex items-center gap-3 text-lg">
+                    <button @click="toggleTheme(false)" :class="!darkMode ? 'text-white font-black' : 'text-white/60 hover:text-white'" class="transition">Light</button>
+                    <span class="text-white/30">|</span>
+                    <button @click="toggleTheme(true)" :class="darkMode ? 'text-gold-light font-black' : 'text-white/60 hover:text-white'" class="transition">Dark</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-0 left-0 w-full h-1 gold-divider"></div>
+    </header>

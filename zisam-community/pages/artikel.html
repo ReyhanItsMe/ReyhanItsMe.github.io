@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth" 
+    x-data="{ 
+        darkMode: localStorage.getItem('theme') === 'dark',
+        toggleTheme(mode) {
+            this.darkMode = mode;
+            localStorage.setItem('theme', mode ? 'dark' : 'light');
+        }
+    }" 
+    :class="{ 'dark': darkMode }">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zisam Community - Dark Mode Ready</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class', 
+            theme: {
+                extend: {
+                    colors: {
+                        'gold-light': '#F1BE63',
+                        'gold-dark': '#BD8A2F',
+                        'sky-blue': '#379AAF',
+                        'teal-deep': '#106172',
+                        'base-white': '#FAFAFA'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gold-gradient { background: linear-gradient(135deg, #F1BE63 0%, #BD8A2F 100%); }
+        .gold-divider { background: linear-gradient(to right, #BD8A2F, #F1BE63, #BD8A2F); }
+        body.menu-open { overflow: hidden; }
+    </style>
+</head>
+<body class="bg-base-white dark:bg-gray-900 font-sans text-gray-700 dark:text-gray-300 flex flex-col min-h-screen transition-colors duration-300" x-data="{ mobileMenuOpen: false }" :class="{'menu-open': mobileMenuOpen}">
+
+<div x-data="{ html: '' }" 
+     x-init="fetch('./../components/navbar.html').then(r => r.text()).then(t => html = t)" 
+     x-html="html">
+     </div>
+
+<main id="artikel" class="relative z-10 flex-grow pt-24 bg-texture transition-colors duration-300">
+  <section class="relative z-20 pt-20 pb-12 px-4 md:px-6 overflow-hidden">
+    <div class="max-w-7xl mx-auto text-center">
+        
+        <div class="inline-flex items-center gap-3 bg-[#106172]/5 dark:bg-white/5 px-4 py-2 rounded-full border border-[#106172]/10 dark:border-white/10 mb-8 animate-fade-in">
+            <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#BD8A2F] opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-[#BD8A2F]"></span>
+            </span>
+            <span class="text-[10px] font-black uppercase tracking-[0.3em] text-[#BD8A2F]">Ruang Literasi Syabab</span>
+        </div>
+
+        <h1 class="text-4xl md:text-7xl font-black text-[#106172] dark:text-white uppercase tracking-tighter leading-none mb-6">
+            Jelajahi <span class="text-[#379AAF]">Inspirasi</span> <br> 
+            & <span class="italic font-serif">Wawasan.</span>
+        </h1>
+
+        <p class="max-w-2xl mx-auto text-sm md:text-base text-gray-500 dark:text-gray-400 font-medium leading-relaxed mb-12">
+            Selamat datang di portal artikel Zisam Community. Temukan berbagai tulisan mulai dari tazkiyah, fiqh, hingga tips produktivitas untuk bekal perjuanganmu di Dunia maupun Akhirat.
+        </p>
+
+        <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+            <div class="h-px w-24 bg-gradient-to-r from-transparent to-[#F1BE63] hidden md:block"></div>
+            
+            <div class="relative w-full max-w-md group">
+                <input type="text" 
+                       placeholder="Cari topik artikel..." 
+                       class="w-full bg-white dark:bg-gray-800 border-2 border-gray-100 dark:border-gray-700 px-6 py-4 rounded-2xl text-sm font-bold focus:outline-none focus:border-[#379AAF] transition-all shadow-lg group-hover:shadow-xl dark:text-white">
+                <button class="absolute right-4 top-1/2 -translate-y-1/2 text-[#379AAF] text-2xl">
+                    <i class='bx bx-search-alt'></i>
+                </button>
+            </div>
+
+            <div class="h-px w-24 bg-gradient-to-l from-transparent to-[#F1BE63] hidden md:block"></div>
+        </div>
+
+    </div>
+
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 opacity-30 pointer-events-none">
+        <div class="absolute top-10 left-10 w-64 h-64 bg-[#379AAF]/10 rounded-full blur-[100px]"></div>
+        <div class="absolute bottom-10 right-10 w-64 h-64 bg-[#BD8A2F]/10 rounded-full blur-[100px]"></div>
+    </div>
+</section>
+
+<section class="relative z-20 px-4 md:px-6 mb-24">
+    <div class="max-w-7xl mx-auto">
+        
+        <div class="group relative bg-white dark:bg-gray-800 rounded-[3rem] shadow-2xl border border-gray-100 dark:border-gray-700 overflow-hidden transition-all duration-500 hover:border-[#F1BE63]/50">
+            
+            <div class="flex flex-col lg:flex-row">
+                
+                <div class="lg:w-1/2 relative h-64 md:h-80 lg:h-auto overflow-hidden">
+                    <img src="/zisam-community/assets/img/z-masjid1.jpg" 
+                         class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
+                         alt="Ramadhan Kareem">
+                    
+                    <div class="absolute top-6 left-6 bg-[#106172] text-white px-4 py-2 rounded-xl font-black text-[10px] uppercase tracking-widest shadow-lg">
+                        Featured Article
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center">
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4 text-[10px] font-black text-[#BD8A2F] uppercase tracking-[0.2em]">
+                            <span class="flex items-center gap-1"><i class='bx bx-calendar'></i> 25 Feb 2026</span>
+                            <span class="w-1 h-1 bg-gray-300 rounded-full"></span>
+                            <span class="flex items-center gap-1"><i class='bx bx-time'></i> 5 Menit Baca</span>
+                        </div>
+
+                        <h2 class="text-2xl md:text-4xl font-black text-[#106172] dark:text-white uppercase tracking-tighter leading-tight group-hover:text-[#379AAF] transition-colors">
+                            Menjemput Keberkahan: <br class="hidden md:block"> Manfaat Spiritual & Kesehatan di Bulan Ramadhan
+                        </h2>
+
+                        <p class="text-sm md:text-base text-gray-500 dark:text-gray-400 font-medium leading-relaxed">
+                            Bulan Ramadhan bukan sekadar menahan lapar dan dahaga dari terbit fajar hingga terbenam matahari. Lebih dari itu, ini adalah momentum transformasi jiwa yang luar biasa bagi setiap Muslim. Secara spiritual, puasa melatih kesabaran dan memperkuat kontrol diri terhadap hawa nafsu yang seringkali menjebak kita dalam rutinitas duniawi. Namun, tahukah kamu bahwa manfaatnya tidak berhenti di sana saja? Secara medis, sistem pencernaan kita mendapatkan waktu istirahat yang sangat dibutuhkan, membantu proses detoksifikasi alami tubuh secara optimal...
+                        </p>
+
+                        <div class="pt-6 border-t border-gray-100 dark:border-gray-700 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                            <a href="artikel-detail.html" class="inline-flex items-center gap-3 bg-[#F1BE63] text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-[#BD8A2F] transition-all shadow-lg hover:shadow-[#F1BE63]/20">
+                                Baca Selengkapnya
+                                <i class='bx bx-right-arrow-alt text-xl'></i>
+                            </a>
+
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-[#106172] flex items-center justify-center text-white font-black text-xs">Z</div>
+                                <div>
+                                    <p class="text-[10px] font-black text-[#106172] dark:text-white uppercase tracking-tight">Admin Zisam</p>
+                                    <p class="text-[9px] font-bold text-gray-400 uppercase">Editorial Team</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <div class="mt-16 flex flex-col items-center justify-center space-y-4 px-4">
+    
+    <button class="group relative inline-flex items-center justify-center px-10 py-4 font-black text-[10px] uppercase tracking-[0.3em] text-[#106172] dark:text-white transition-all duration-500">
+        <span class="absolute inset-0 border-2 border-[#106172]/10 dark:border-white/10 rounded-2xl group-hover:border-[#F1BE63] transition-colors"></span>
+        
+        <div class="relative flex items-center gap-3">
+            <i class='bx bx-plus-circle text-xl group-hover:rotate-90 transition-transform duration-500 text-[#BD8A2F]'></i>
+            <span>Tampilkan Artikel Lainnya</span>
+        </div>
+    </button>
+
+    <p class="text-[9px] font-bold text-gray-400 uppercase tracking-widest animate-pulse">
+        Menjelajahi lebih banyak inspirasi...
+    </p>
+
+</div>
+
+    </div>
+</section>
+
+</main>
+
+<div x-data="{ html: '' }" 
+     x-init="fetch('./../components/footer.html').then(r => r.text()).then(t => html = t)" 
+     x-html="html">
+     </div>
+
+</body>
+</html>
+ 

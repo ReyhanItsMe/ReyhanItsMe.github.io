@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth" 
+    x-data="{ 
+        darkMode: localStorage.getItem('theme') === 'dark',
+        toggleTheme(mode) {
+            this.darkMode = mode;
+            localStorage.setItem('theme', mode ? 'dark' : 'light');
+        }
+    }" 
+    :class="{ 'dark': darkMode }">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zisam Community - Dark Mode Ready</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class', 
+            theme: {
+                extend: {
+                    colors: {
+                        'gold-light': '#F1BE63',
+                        'gold-dark': '#BD8A2F',
+                        'sky-blue': '#379AAF',
+                        'teal-deep': '#106172',
+                        'base-white': '#FAFAFA'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gold-gradient { background: linear-gradient(135deg, #F1BE63 0%, #BD8A2F 100%); }
+        .gold-divider { background: linear-gradient(to right, #BD8A2F, #F1BE63, #BD8A2F); }
+        body.menu-open { overflow: hidden; }
+    </style>
+</head>
+<body class="bg-base-white dark:bg-gray-900 font-sans text-gray-700 dark:text-gray-300 flex flex-col min-h-screen transition-colors duration-300" x-data="{ mobileMenuOpen: false }" :class="{'menu-open': mobileMenuOpen}">
+
+<div x-data="{ html: '' }" 
+     x-init="fetch('./../components/navbar.html').then(r => r.text()).then(t => html = t)" 
+     x-html="html">
+     </div>
+
+    <main id="" class="relative z-10 flex-grow pt-24 bg-texture transition-colors duration-300">
+
+</main>
+
+<div x-data="{ html: '' }" 
+     x-init="fetch('./../components/footer.html').then(r => r.text()).then(t => html = t)" 
+     x-html="html">
+     </div>
+
+</body>
+</html>
