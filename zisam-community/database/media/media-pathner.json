@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "name": "IRMA JABAR",
+    "url_logo": "/zisam-community/assets/img/media/partner/z-irma-270.png",
+    "type": "media-partner",
+    "description": "Ikatan Remaja Masjid"
+  },
+  {
+    "id": "2",
+    "name": "MASJID AL-ARAF",
+    "url_logo": "/zisam-community/assets/img/media/partner/z-masjid-jami-al-araf-270.png",
+    "type": "media-partner",
+    "description": "Pusat Dakwah & Syiar"
+  },
+  {
+    "id": "3",
+    "name": "MDT HIDAYATUL HANIFAH",
+    "url_logo": "/zisam-community/assets/img/media/partner/z-madrasah-hidayatul-hanifah-270.png",
+    "type": "media-partner",
+    "description": "Edukasi & Literasi"
+  }
+]

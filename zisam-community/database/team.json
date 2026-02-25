@@ -1,0 +1,47 @@
+[
+  {
+    "id": "PAN-2026-001",
+    "nama_lengkap": "Reyhan Al-Fatih",
+    "jabatan": "Ketua Komunitas",
+    "asal_tempat": "Cisirung, Bandung",
+    "asal_sekolah": "SMK Negeri 1 Bandung",
+    "tanggal_bergabung": "12 Januari 2024",
+    "foto_panitia": "/zisam-community/assets/img/team/default.jpg",
+    "sosial_media": {
+      "instagram": "reyhan_alf",
+      "tiktok": ""
+    },
+    "kata_kata": "Jadikan setiap langkah sebagai bentuk ibadah, karena sebaik-baiknya pemuda adalah yang bermanfaat bagi sesama.",
+    "is_active": true
+  },
+  {
+    "id": "PAN-2026-002",
+    "nama_lengkap": "Siti Nurhaliza",
+    "jabatan": "Sekretaris & Admin",
+    "asal_tempat": "Dayeuhkolot, Bandung",
+    "asal_sekolah": "Universitas Telkom",
+    "tanggal_bergabung": "05 Maret 2024",
+    "foto_panitia": "/zisam-community/assets/img/team/default.jpg",
+    "sosial_media": {
+      "instagram": "siti_nh",
+      "tiktok": "sitinur_daily"
+    },
+    "kata_kata": "Terorganisir dalam bekerja, ikhlas dalam beramal. Dakwah bukan tentang siapa yang paling pintar, tapi siapa yang paling gigih.",
+    "is_active": true
+  },
+  {
+    "id": "PAN-2026-003",
+    "nama_lengkap": "Ahmad Zaki",
+    "jabatan": "Tim Kreatif & Visual",
+    "asal_tempat": "Baleendah, Bandung",
+    "asal_sekolah": "MAN 1 Bandung",
+    "tanggal_bergabung": "20 Juni 2024",
+    "foto_panitia": "/zisam-community/assets/img/team/default.jpg",
+    "sosial_media": {
+      "instagram": "zaki_visual",
+      "tiktok": "zakicreative"
+    },
+    "kata_kata": "Visual yang indah adalah dakwah tanpa suara. Mari mewarnai dunia dengan nilai-nilai kebaikan.",
+    "is_active": true
+  }
+]

@@ -1,0 +1,38 @@
+{
+  "app": {
+    "name": "Zisam Community",
+    "full_name": "Zikrul Hisyam Community",
+    "slogan": "Mengingat Allah",
+    "description": "Kumpulan pemuda-pemudi muslimin & muslimah yang bergerak bersama untuk saling mengingatkan kepada Allah melalui event-event kreatif berbasis Islami.",
+    "version": "1.0.0"
+  },
+  "contact": {
+    "location": "Bandung, Jawa Barat",
+    "maps": "https://google",
+    "address": "Gedung Dakwah Zisam, Jl. Cisirung, Bandung, Jawa Barat",
+    "email": "zisamcommunity@gmail.com",
+    "whatsapp": "628xxxxxxxxxx",
+    "instagram": "zisam.id",
+    "youtube": "zisam.id",
+    "tiktok": "zisam.id"
+  },
+  "urls": {
+    "base": "/zisam-community",
+    "assets": "/zisam-community/assets",
+    "img": "/zisam-community/assets/img",
+    "pages": "/zisam-community/pages"
+  },
+  "meta": {
+    "favicon": "/zisam-community/assets/img/favicon.png"
+  },
+   "pages": {
+      "home": "/zisam-community/pages/home.html",
+      "event": "/zisam-community/pages/event.html",
+      "artikel": "/zisam-community/pages/artikel.html",
+      "galeri": "/zisam-community/pages/galeri.html",
+      "kontak": "/zisam-community/pages/kontak.html",
+      "portofolio": "/zisam-community/pages/portofolio.html",
+      "privasi": "/zisam-community/pages/privasi.html",
+      "syarat": "/zisam-community/pages/syarat.html"
+    }
+}

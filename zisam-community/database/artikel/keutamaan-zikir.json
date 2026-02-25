@@ -1,0 +1,40 @@
+{
+  "id": "ART-001",
+  "slug": "keutamaan-mengingat-allah",
+  "penulis": "Admin Zisam",
+  "tanggal": "25 Februari 2026",
+  "kategori": "Dakwah",
+  "image": "/zisam-community/assets/img/artikel/hero-zikir.jpg",
+  "profile": "/zisam-community/assets/img/artikel/hero-zikir.jpg",
+  "info_konten": {
+    "total_paragraf": 8,
+    "total_quotes": 2
+  },
+  "konten": {
+    "paragraf_1": "Masa muda seringkali dianggap sebagai waktu untuk bersenang-senang tanpa batas. Namun, bagi pemuda muslim, ini adalah momentum emas untuk menanamkan akar iman yang kuat melalui zikir.",
+    "quotes_boolean_1": true,
+    "quotes_1": "Hati yang tidak mengingat Allah ibarat rumah yang gelap tanpa lentera.",
+    "paragraf_2": "Zikir bukan sekadar aktivitas lisan, melainkan pengikat hati agar tetap tenang di tengah hiruk-pikuk dunia yang semakin cepat ini.",
+    "quotes_boolean_2": false,
+    "quotes_2": "",
+    "paragraf_3": "Dengan bergabung di Zisam Community, kita belajar bahwa mengingat Allah bisa dilakukan dengan cara yang kreatif dan relevan dengan gaya hidup anak muda masa kini.",
+    "quotes_boolean_3": false,
+    "quotes_3": "",
+    "paragraf_4": "Sebagai penutup, marilah kita jadikan setiap langkah kita sebagai bentuk ibadah dan pengabdian kepada Sang Pencipta.",
+    "quotes_boolean_4": false,
+    "quotes_4": "",
+    "paragraf_5": "Membangun kebiasaan positif di waktu luang akan sangat menentukan bagaimana masa depan kita nantinya.",
+    "quotes_boolean_5": true,
+    "quotes_5": "Waktu laksana pedang, jika engkau tidak menggunakannya maka ia yang akan menebasmu.",
+    "paragraf_6": "Komunitas yang positif adalah support system terbaik untuk menjaga istiqomah.",
+    "quotes_boolean_6": false,
+    "quotes_6": "",
+    "paragraf_7": "Jangan pernah merasa sendiri dalam berbuat baik, karena Allah selalu bersama hamba-Nya yang bersabar.",
+    "quotes_boolean_7": false,
+    "quotes_7": "",
+    "paragraf_8": "Mari melangkah bersama Zisam untuk masa muda yang lebih bermakna.",
+    "quotes_boolean_8": false,
+    "quotes_8": ""
+  },
+  "tags": ["Spirit", "Muslim Muda", "ZisamUpdate"]
+}

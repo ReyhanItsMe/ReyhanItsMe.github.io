@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "name": "REYHANDSHOOT",
+    "url_logo": "/zisam-community/assets/img/media/supported/reyhandshoot-270.png",
+    "type": "supported",
+    "description": "Dokumentasi Kreatif"
+  },
+  {
+    "id": "2",
+    "name": "MDT AL-KAUTSAR",
+    "url_logo": "/zisam-community/assets/img/media/supported/mdt-al-kautsar-270.png",
+    "type": "supported",
+    "description": "Mitra Pendidikan"
+  },
+  {
+    "id": "3",
+    "name": "ZISAM COMMUNITY",
+    "url_logo": "/zisam-community/assets/img/media/supported/zisam-270.png",
+    "type": "supported",
+    "description": "Induk Komunitas"
+  }
+]

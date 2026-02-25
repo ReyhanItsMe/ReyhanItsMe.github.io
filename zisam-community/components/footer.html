@@ -4,12 +4,12 @@
             
             <div class="lg:col-span-5 space-y-6 text-center md:text-left">
                 <div class="text-3xl font-black text-sky-blue dark:text-white uppercase tracking-tight">
-                    Zisam <span class="text-gold-dark">Community</span>
+                    <span data-config="app.name">Zisam</span> <span class="text-gold-dark">Community</span>
                 </div>
                 <div class="space-y-4 text-sm text-gray-500 dark:text-gray-400 leading-relaxed max-w-md mx-auto md:mx-0">
-                    <p>Zisam Community adalah kependekan dari <strong class="text-teal-deep dark:text-teal-400">Zikrul Hisyam Community</strong>.</p>
-                    <p class="pt-2 font-medium italic border-l-4 border-gold-light pl-4 leading-relaxed">
-                        "Kumpulan <span class="text-teal-deep dark:text-teal-400 font-bold">pemuda-pemudi muslimin & muslimah</span> yang bergerak bersama untuk saling mengingatkan kepada Allah melalui event-event kreatif berbasis Islami."
+                    <p>Zisam Community adalah kependekan dari <strong class="text-teal-deep dark:text-teal-400" data-config="app.full_name">Zikrul Hisyam Community</strong>.</p>
+                    <p class="pt-2 font-medium italic border-l-4 border-gold-light pl-4 leading-relaxed" data-config="app.description">
+                        "Kumpulan pemuda-pemudi muslimin & muslimah yang bergerak bersama untuk saling mengingatkan kepada Allah melalui event-event kreatif berbasis Islami."
                     </p>
                 </div>
             </div>
@@ -18,150 +18,65 @@
                 <div>
                     <h3 class="text-lg font-black text-teal-deep dark:text-teal-400 mb-6 uppercase tracking-widest">Explore</h3>
                     <ul class="space-y-3 text-sm font-semibold text-gray-600 dark:text-gray-400">
-                        <li><a href="/zisam-community/pages/home.html" class="hover:text-sky-blue transition flex items-center justify-center md:justify-start gap-2"><i class='bx bx-chevron-right text-gold-dark'></i> Beranda</a></li>
-                        <li><a href="/zisam-community/pages/event.html" class="hover:text-sky-blue transition flex items-center justify-center md:justify-start gap-2"><i class='bx bx-chevron-right text-gold-dark'></i> Event</a></li>
-                        <li><a href="/zisam-community/pages/artikel.html" class="hover:text-sky-blue transition flex items-center justify-center md:justify-start gap-2"><i class='bx bx-chevron-right text-gold-dark'></i> Artikel</a></li>
-                        <li><a href="/zisam-community/pages/portofolio.html" class="hover:text-sky-blue transition flex items-center justify-center md:justify-start gap-2"><i class='bx bx-chevron-right text-gold-dark'></i> Portofolio</a></li>
-                        <li><a href="/zisam-community/pages/galeri.html" class="hover:text-sky-blue transition flex items-center justify-center md:justify-start gap-2"><i class='bx bx-chevron-right text-gold-dark'></i> Galeri</a></li>
+                        <li><a href="#" data-page="home" class="hover:text-sky-blue transition flex items-center justify-center md:justify-start gap-2"><i class='bx bx-chevron-right text-gold-dark'></i> Beranda</a></li>
+                        <li><a href="#" data-page="event" class="hover:text-sky-blue transition flex items-center justify-center md:justify-start gap-2"><i class='bx bx-chevron-right text-gold-dark'></i> Event</a></li>
+                        <li><a href="#" data-page="artikel" class="hover:text-sky-blue transition flex items-center justify-center md:justify-start gap-2"><i class='bx bx-chevron-right text-gold-dark'></i> Artikel</a></li>
+                        <li><a href="#" data-page="portofolio" class="hover:text-sky-blue transition flex items-center justify-center md:justify-start gap-2"><i class='bx bx-chevron-right text-gold-dark'></i> Portofolio</a></li>
+                        <li><a href="#" data-page="galeri" class="hover:text-sky-blue transition flex items-center justify-center md:justify-start gap-2"><i class='bx bx-chevron-right text-gold-dark'></i> Galeri</a></li>
                     </ul>
                 </div>
 
                 <div>
                     <h3 class="text-lg font-black text-teal-deep dark:text-teal-400 mb-6 uppercase tracking-widest">Bantuan</h3>
                     <ul class="space-y-3 text-sm font-semibold text-gray-600 dark:text-gray-400">
-                        <li><a href="/zisam-community/pages/kontak.html" class="hover:text-sky-blue transition flex items-center justify-center md:justify-start gap-2"><i class='bx bx-chevron-right text-gold-dark'></i> Kontak</a></li>
-                        <li><a href="/zisam-community/pages/privasi.html" class="hover:text-sky-blue transition flex items-center justify-center md:justify-start gap-2"><i class='bx bx-chevron-right text-gold-dark'></i> Privasi</a></li>
-                        <li><a href="/zisam-community/pages/syarat.html" class="hover:text-sky-blue transition flex items-center justify-center md:justify-start gap-2"><i class='bx bx-chevron-right text-gold-dark'></i> Syarat & Ketentuan</a></li>
+                        <li><a href="#" data-page="kontak" class="hover:text-sky-blue transition flex items-center justify-center md:justify-start gap-2"><i class='bx bx-chevron-right text-gold-dark'></i> Kontak</a></li>
+                        <li><a href="#" data-page="privasi" class="hover:text-sky-blue transition flex items-center justify-center md:justify-start gap-2"><i class='bx bx-chevron-right text-gold-dark'></i> Privasi</a></li>
+                        <li><a href="#" data-page="syarat" class="hover:text-sky-blue transition flex items-center justify-center md:justify-start gap-2"><i class='bx bx-chevron-right text-gold-dark'></i> Syarat & Ketentuan</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="lg:col-span-3 space-y-6 text-center md:text-left">
-                <h3 class="text-lg font-black text-teal-deep dark:text-teal-400 mb-6 uppercase tracking-widest">Sekretariat</h3>
-                <div class="text-sm text-gray-600 dark:text-gray-400 space-y-4 font-medium">
-                    <div class="flex items-start justify-center md:justify-start gap-3">
-                        <i class='bx bxs-map text-2xl text-gold-dark flex-shrink-0'></i>
-                        <span>Gedung Dakwah Zisam,<br>Jl. Cisirung, Bandung, Jawa Barat</span>
-                    </div>
-                    <div class="flex items-center justify-center md:justify-start gap-3">
-                        <i class='bx bxs-envelope text-2xl text-gold-dark flex-shrink-0'></i>
-                        <a href="mailto:zisamcommunity@gmail.com" class="hover:text-sky-blue transition">zisamcommunity@gmail.com</a>
-                    </div>
-                </div>
+                <h3 class="text-lg font-black text-teal-deep dark:text-teal-400 mb-6 uppercase tracking-widest">Sosial Media</h3>
                 
                 <div class="flex justify-center md:justify-start gap-4 pt-4">
-                    <a href="#" class="w-11 h-11 rounded-xl bg-sky-blue/10 dark:bg-gray-700 text-sky-blue dark:text-gray-300 flex items-center justify-center text-2xl hover:bg-gold-light hover:text-white hover:-translate-y-1 transition-all duration-300 shadow-sm">
+                    <a href="#" data-config="contact.instagram" target="_blank" class="w-11 h-11 rounded-xl bg-sky-blue/10 dark:bg-gray-700 text-sky-blue dark:text-gray-300 flex items-center justify-center text-2xl hover:bg-gold-light hover:text-white hover:-translate-y-1 transition-all duration-300 shadow-sm">
                         <i class='bx bxl-instagram'></i>
                     </a>
-                    <a href="#" class="w-11 h-11 rounded-xl bg-sky-blue/10 dark:bg-gray-700 text-sky-blue dark:text-gray-300 flex items-center justify-center text-2xl hover:bg-gold-light hover:text-white hover:-translate-y-1 transition-all duration-300 shadow-sm">
-                        <i class='bx bxl-facebook-circle'></i>
+                    <a href="#" data-config="contact.tiktok" target="_blank" class="w-11 h-11 rounded-xl bg-sky-blue/10 dark:bg-gray-700 text-sky-blue dark:text-gray-300 flex items-center justify-center text-2xl hover:bg-gold-light hover:text-white hover:-translate-y-1 transition-all duration-300 shadow-sm">
+                        <i class='bx bxl-tiktok'></i>
                     </a>
-                    <a href="#" class="w-11 h-11 rounded-xl bg-sky-blue/10 dark:bg-gray-700 text-sky-blue dark:text-gray-300 flex items-center justify-center text-2xl hover:bg-gold-light hover:text-white hover:-translate-y-1 transition-all duration-300 shadow-sm">
+                    <a href="#" data-config="contact.youtube" target="_blank" class="w-11 h-11 rounded-xl bg-sky-blue/10 dark:bg-gray-700 text-sky-blue dark:text-gray-300 flex items-center justify-center text-2xl hover:bg-gold-light hover:text-white hover:-translate-y-1 transition-all duration-300 shadow-sm">
                         <i class='bx bxl-youtube'></i>
                     </a>
-                    <a href="#" class="w-11 h-11 rounded-xl bg-sky-blue/10 dark:bg-gray-700 text-sky-blue dark:text-gray-300 flex items-center justify-center text-2xl hover:bg-gold-light hover:text-white hover:-translate-y-1 transition-all duration-300 shadow-sm">
+                    <a href="#" data-config="contact.whatsapp" target="_blank" class="w-11 h-11 rounded-xl bg-sky-blue/10 dark:bg-gray-700 text-sky-blue dark:text-gray-300 flex items-center justify-center text-2xl hover:bg-gold-light hover:text-white hover:-translate-y-1 transition-all duration-300 shadow-sm">
                         <i class='bx bxl-whatsapp'></i>
                     </a>
                 </div>
             </div>
         </div>
 
-        <div class="py-12 border-t border-gray-100 dark:border-gray-700">
-            <div class="flex flex-wrap justify-center items-center gap-x-8 md:gap-x-12 gap-y-8 px-4">
-                
-                <div class="flex items-center gap-3 group">
-                    <img src="/zisam-community/assets/img/z-logo-reyhandshoot-270.png" 
-                         class="h-7 md:h-10 w-auto object-contain transition-all duration-500
-                                /* Light Mode */
-                                grayscale opacity-60 
-                                /* Dark Mode */
-                                dark:grayscale-0 dark:invert dark:opacity-90 dark:brightness-200
-                                /* Hover State */
-                                group-hover:grayscale-0 group-hover:invert-0 group-hover:opacity-100 group-hover:brightness-100" 
-                         alt="Reyhandshoot">
-                    
-                    <span class="hidden md:inline text-xs font-bold uppercase tracking-tight transition-all duration-300
-                                 text-gray-400 group-hover:text-gray-900 
-                                 dark:text-gray-500 dark:group-hover:text-white">
-                        Reyhandshoot
-                    </span>
-                </div>
-        
-                <div class="flex items-center gap-3 group">
-                    <img src="/zisam-community/assets/img/z-masjid-jami-al-araf-270.png" 
-                         class="h-7 md:h-10 w-auto object-contain transition-all duration-500
-                                grayscale opacity-60 
-                                dark:grayscale-0 dark:invert dark:opacity-90 dark:brightness-200
-                                group-hover:grayscale-0 group-hover:invert-0 group-hover:opacity-100 group-hover:brightness-100" 
-                         alt="Masjid Jami Al Araf">
-                    <span class="hidden md:inline text-xs font-bold uppercase tracking-tight transition-all duration-300
-                                 text-gray-400 group-hover:text-gray-900 
-                                 dark:text-gray-500 dark:group-hover:text-white">
-                        Masjid Jami Al Araf
-                    </span>
-                </div>
-        
-                <div class="flex items-center gap-3 group">
-                    <img src="/zisam-community/assets/img/z-madrasah-diniyah-al-kautsar-270.png" 
-                         class="h-7 md:h-10 w-auto object-contain transition-all duration-500
-                                grayscale opacity-60 
-                                dark:grayscale-0 dark:invert dark:opacity-90 dark:brightness-200
-                                group-hover:grayscale-0 group-hover:invert-0 group-hover:opacity-100 group-hover:brightness-100" 
-                         alt="MDT Al Kautsar">
-                    <span class="hidden md:inline text-xs font-bold uppercase tracking-tight transition-all duration-300
-                                 text-gray-400 group-hover:text-gray-900 
-                                 dark:text-gray-500 dark:group-hover:text-white">
-                        MDT Al Kautsar
-                    </span>
-                </div>
-        
-                <div class="flex items-center gap-3 group">
-                    <img src="/zisam-community/assets/img/z-zisam-270.png" 
-                         class="h-7 md:h-10 w-auto object-contain transition-all duration-500
-                                grayscale opacity-60 
-                                dark:grayscale-0 dark:invert dark:opacity-90 dark:brightness-200
-                                group-hover:grayscale-0 group-hover:invert-0 group-hover:opacity-100 group-hover:brightness-100" 
-                         alt="Zisam Community">
-                    <span class="hidden md:inline text-xs font-black uppercase tracking-tight transition-all duration-300
-                                 text-gray-400 group-hover:text-gray-900 
-                                 dark:text-gray-500 dark:group-hover:text-white">
-                        Zisam Community
-                    </span>
-                </div>
-        
-                <div class="flex items-center gap-3 group">
-                    <img src="/zisam-community/assets/img/z-madrasah-hidayatul-hanifah-270.png" 
-                         class="h-7 md:h-10 w-auto object-contain transition-all duration-500
-                                grayscale opacity-60 
-                                dark:grayscale-0 dark:invert dark:opacity-90 dark:brightness-200
-                                group-hover:grayscale-0 group-hover:invert-0 group-hover:opacity-100 group-hover:brightness-100" 
-                         alt="Madrasah Hidayatul Hanifah">
-                    <span class="hidden md:inline text-xs font-bold uppercase tracking-tight transition-all duration-300
-                                 text-gray-400 group-hover:text-gray-900 
-                                 dark:text-gray-500 dark:group-hover:text-white">
-                        Hidayatul Hanifah
-                    </span>
-                </div>
-        
-            </div>
-        </div>
-
         <div class="border-t border-gray-100 dark:border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-center">
             <div class="space-y-2">
                 <div class="text-gray-400 text-[10px] md:text-xs font-medium uppercase tracking-widest">
-                    &copy; 2026 <span class="text-teal-deep dark:text-teal-400 font-bold">Zikrul Hisyam Community</span>. All Rights Reserved.
+                    &copy; <span id="current-year">2026</span> <span class="text-teal-deep dark:text-teal-400 font-bold" data-config="app.full_name">Zikrul Hisyam Community</span>. All Rights Reserved.
                 </div>
                 <div class="flex justify-center md:justify-start gap-4 text-[9px] font-bold text-gray-400 uppercase tracking-[0.2em]">
-                    <a href="/zisam-community/pages/privasi.html" class="hover:text-gold-dark transition">Kebijakan Privasi</a>
+                    <a href="#" data-page="privasi" class="hover:text-gold-dark transition">Kebijakan Privasi</a>
                     <span>•</span>
-                    <a href="/zisam-community/pages/syarat.html" class="hover:text-gold-dark transition">Syarat & Ketentuan</a>
+                    <a href="#" data-page="syarat" class="hover:text-gold-dark transition">Syarat & Ketentuan</a>
                 </div>
             </div>
             <div class="flex items-center gap-2 text-[10px] font-bold text-teal-deep dark:text-teal-400 bg-gray-50 dark:bg-gray-900 px-5 py-2.5 rounded-full border border-gray-100 dark:border-gray-700">
                 <span>Menebar Kebaikan</span>
                 <i class='bx bxs-heart text-gold-dark animate-pulse'></i>
-                <span>Mengingat Allah</span>
+                <span data-config="app.slogan">Mengingat Allah</span>
             </div>
         </div>
     </div>
 </footer>
+
+<script>
+    // Script kecil untuk update tahun copyright otomatis
+    document.getElementById('current-year').innerText = new Date().getFullYear();
+</script>
