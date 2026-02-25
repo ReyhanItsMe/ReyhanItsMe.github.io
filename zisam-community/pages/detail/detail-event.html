@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth" 
+    x-data="{ 
+        darkMode: localStorage.getItem('theme') === 'dark',
+        toggleTheme(mode) {
+            this.darkMode = mode;
+            localStorage.setItem('theme', mode ? 'dark' : 'light');
+        }
+    }" 
+    :class="{ 'dark': darkMode }">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zisam Community - Dark Mode Ready</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class', 
+            theme: {
+                extend: {
+                    colors: {
+                        'gold-light': '#F1BE63',
+                        'gold-dark': '#BD8A2F',
+                        'sky-blue': '#379AAF',
+                        'teal-deep': '#106172',
+                        'base-white': '#FAFAFA'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gold-gradient { background: linear-gradient(135deg, #F1BE63 0%, #BD8A2F 100%); }
+        .gold-divider { background: linear-gradient(to right, #BD8A2F, #F1BE63, #BD8A2F); }
+        body.menu-open { overflow: hidden; }
+    </style>
+</head>
+<body class="bg-base-white dark:bg-gray-900 font-sans text-gray-700 dark:text-gray-300 flex flex-col min-h-screen transition-colors duration-300" x-data="{ mobileMenuOpen: false }" :class="{'menu-open': mobileMenuOpen}">
+
+<div x-data="{ html: '' }" 
+     x-init="fetch('./../../components/navbar_secondary.html').then(r => r.text()).then(t => html = t)" 
+     x-html="html">
+     </div>
+
+<main class="relative z-10 flex-grow pt-10 bg-texture transition-colors duration-300">
+
+    <section class="relative w-full h-[70vh] md:h-[80vh] overflow-hidden bg-gray-900">
+        <img src="/zisam-community/assets/img/z-masjid1.jpg" 
+             class="absolute inset-0 w-full h-full object-cover opacity-60 dark:opacity-40" 
+             alt="Detail Event Zisam">
+
+        <div class="absolute inset-0 bg-gradient-to-t from-base-white dark:from-gray-900 via-transparent to-black/20"></div>
+
+        <div class="relative z-10 h-full max-w-5xl mx-auto px-6 flex flex-col justify-end pb-12 md:pb-20">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="bg-sky-blue text-white px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest shadow-lg animate-pulse">
+                    Pendaftaran Dibuka
+                </span>
+                <span class="text-white/60 text-xs hidden md:block">•</span>
+                <nav class="hidden md:flex items-center gap-2 text-white/80 text-[10px] font-bold uppercase tracking-widest">
+                    <a href="index.html" class="hover:text-gold-light transition">Home</a>
+                    <i class='bx bx-chevron-right'></i>
+                    <span>Event Syabab</span>
+                </nav>
+            </div>
+
+            <h1 class="text-3xl md:text-6xl font-black text-teal-deep dark:text-white uppercase tracking-tighter leading-[0.95] mb-8">
+                Mabit Akbar & <br>
+                <span class="text-gold-dark italic font-serif normal-case">Tahajjud Bersama</span> <br>
+                Syabab Bandung
+            </h1>
+
+            <div class="flex flex-wrap items-center gap-y-4 gap-x-8 pt-8 border-t border-gray-200/20">
+                <div class="flex items-center gap-3">
+                    <i class='bx bx-calendar-event text-2xl text-gold-light'></i>
+                    <div>
+                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest">Tanggal</p>
+                        <p class="text-xs font-bold text-teal-deep dark:text-white uppercase">15 - 16 Maret 2026</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <i class='bx bx-map-pin text-2xl text-gold-light'></i>
+                    <div>
+                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest">Lokasi</p>
+                        <p class="text-xs font-bold text-teal-deep dark:text-white uppercase">Masjid Jami Al-Araf</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 border-l border-white/10 pl-0 md:pl-8">
+                    <i class='bx bx-wallet text-2xl text-gold-light'></i>
+                    <div>
+                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest">Infaq / Biaya</p>
+                        <p class="text-sm font-black text-[#BD8A2F]">Rp 25.000 <span class="text-[9px] text-gray-500 font-medium">/ Orang</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative z-20 bg-base-white dark:bg-gray-900 px-6 pb-24">
+        <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 pt-12">
+            
+            <div class="lg:col-span-8">
+                <div class="prose prose-lg dark:prose-invert max-w-none">
+                    <p class="text-lg leading-relaxed text-teal-deep dark:text-gray-300 font-medium mb-6">
+                        Zisam Community kembali mengundang seluruh Syabab Muslim di Bandung untuk bergabung dalam agenda spiritual "Mabit Akbar". Kegiatan ini dirancang untuk mempererat ukhuwah sekaligus memperdalam pemahaman agama di tengah hiruk pikuk kehidupan kota yang kian cepat.
+                    </p>
+                    <p class="text-base text-gray-600 dark:text-gray-400 mb-6">
+                        Acara akan dimulai dengan kajian senja menjelang Maghrib, dilanjutkan dengan makan malam bersama menggunakan nampan khas pesantren untuk menghidupkan sunnah. Kehangatan dalam satu nampan ini bukan sekadar tentang kenyang, tapi tentang bagaimana rasa syukur dan kebersamaan menyatu dalam keberkahan.
+                    </p>
+                    <div class="my-8 pl-6 border-l-4 border-gold-light italic bg-gray-50 dark:bg-gray-800/50 py-4 rounded-r-2xl">
+                        <p class="text-lg text-teal-deep dark:text-gray-200 font-serif">
+                            "Mengingat Allah di keheningan malam adalah obat terbaik bagi hati yang lelah oleh urusan dunia."
+                        </p>
+                    </div>
+                    <p class="text-base text-gray-600 dark:text-gray-400 mb-6">
+                        Puncak acara adalah Qiyamul Lail yang akan dipimpin oleh Imam muda kita. Di sepertiga malam terakhir, kita akan bersujud bersama dalam keheningan Masjid Jami Al-Araf, memohon ampunan dan kekuatan untuk terus menjadi pemuda yang menebar manfaat di jalan dakwah.
+                    </p>
+                    <p class="text-base text-gray-600 dark:text-gray-400 mb-6">
+                        Sebagai penutup, subuh berjamaah akan dilanjutkan dengan sarapan ringan dan sesi sharing santai. Inilah saatnya kita saling bertukar pikiran, membangun relasi positif, dan merancang kolaborasi kebaikan untuk agenda-agenda Zisam Community di masa mendatang.
+                    </p>
+                </div>
+            </div>
+
+            <div class="lg:col-span-4 lg:sticky lg:top-24 h-fit">
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-[2.5rem] shadow-2xl shadow-gray-200/50 dark:shadow-none border border-gray-100 dark:border-gray-700 space-y-6">
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Pilih Kategori Infaq</p>
+                            <span class="text-[9px] font-bold text-sky-blue bg-sky-blue/10 px-2 py-0.5 rounded-full uppercase">Benefit Sama</span>
+                        </div>
+            
+                        <div class="grid grid-cols-1 gap-3" x-data="{ selectedInfaq: 50 }">
+                            <button @click="selectedInfaq = 25" 
+                                    :class="selectedInfaq === 25 ? 'border-gold-light bg-gold-light/5' : 'border-gray-100 dark:border-gray-700'"
+                                    class="flex items-center justify-between p-4 border-2 rounded-2xl transition-all duration-300 group">
+                                <div class="flex items-center gap-3">
+                                    <div :class="selectedInfaq === 25 ? 'bg-gold-light' : 'bg-gray-100 dark:bg-gray-700'" class="w-4 h-4 rounded-full border-4 border-white dark:border-gray-800 transition-colors"></div>
+                                    <span class="text-sm font-black text-teal-deep dark:text-white">Rp 25.000</span>
+                                </div>
+                                <span class="text-[9px] font-bold text-gray-400 uppercase">Basic</span>
+                            </button>
+            
+                            <button @click="selectedInfaq = 35" 
+                                    :class="selectedInfaq === 35 ? 'border-gold-light bg-gold-light/5' : 'border-gray-100 dark:border-gray-700'"
+                                    class="flex items-center justify-between p-4 border-2 rounded-2xl transition-all duration-300 group">
+                                <div class="flex items-center gap-3">
+                                    <div :class="selectedInfaq === 35 ? 'bg-gold-light' : 'bg-gray-100 dark:border-gray-700'" class="w-4 h-4 rounded-full border-4 border-white dark:border-gray-800 transition-colors"></div>
+                                    <span class="text-sm font-black text-teal-deep dark:text-white">Rp 35.000</span>
+                                </div>
+                                <span class="text-[9px] font-bold text-gray-400 uppercase">Support</span>
+                            </button>
+            
+                            <button @click="selectedInfaq = 50" 
+                                    :class="selectedInfaq === 50 ? 'border-gold-light bg-gold-light/5' : 'border-gray-100 dark:border-gray-700'"
+                                    class="flex items-center justify-between p-4 border-2 rounded-2xl transition-all duration-300 group">
+                                <div class="flex items-center gap-3">
+                                    <div :class="selectedInfaq === 50 ? 'bg-gold-light' : 'bg-gray-100 dark:border-gray-700'" class="w-4 h-4 rounded-full border-4 border-white dark:border-gray-800 transition-colors"></div>
+                                    <span class="text-sm font-black text-teal-deep dark:text-white">Rp 50.000</span>
+                                </div>
+                                <span class="text-[9px] font-bold text-[#BD8A2F] uppercase">Donasi</span>
+                            </button>
+                        </div>
+                    </div>
+            
+                    <div class="pt-4 border-t border-gray-100 dark:border-gray-700">
+                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-4 text-center">Benefit Yang Didapat</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-3 text-xs font-bold text-gray-600 dark:text-gray-400">
+                                <i class='bx bx-check-circle text-gold-dark text-lg'></i> Makan Malam & Snack
+                            </li>
+                            <li class="flex items-center gap-3 text-xs font-bold text-gray-600 dark:text-gray-400">
+                                <i class='bx bx-check-circle text-gold-dark text-lg'></i> E-Sertifikat Eksklusif
+                            </li>
+                            <li class="flex items-center gap-3 text-xs font-bold text-gray-600 dark:text-gray-400">
+                                <i class='bx bx-check-circle text-gold-dark text-lg'></i> Ilmu & Ukhuwah Baru
+                            </li>
+                        </ul>
+                    </div>
+            
+                    <div class="space-y-3 pt-4">
+                        <a href="#" class="flex items-center justify-center gap-3 w-full bg-teal-deep text-white py-4 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-sky-blue transition-all duration-300 shadow-lg shadow-teal-deep/20">
+                            <i class='bx bx-edit-alt text-lg'></i>
+                            Daftar Sekarang
+                        </a>
+            
+                        <a href="#" class="flex items-center justify-center gap-3 w-full border-2 border-gray-100 dark:border-gray-700 text-teal-deep dark:text-gray-300 py-4 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:border-gold-light hover:text-gold-dark transition-all duration-300">
+                            <i class='bx bx-group text-lg'></i>
+                            Lihat Peserta (120/200)
+                        </a>
+                    </div>
+            
+                    <div class="text-center pt-2">
+                        <p class="text-[9px] font-medium text-gray-400">
+                            *Pilihan harga tidak mempengaruhi benefit, namun sangat membantu keberlangsungan operasional dakwah Zisam.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<div x-data="{ html: '' }" 
+     x-init="fetch('./../../components/footer_secondary.html').then(r => r.text()).then(t => html = t)" 
+     x-html="html">
+     </div>
+
+</body>
+</html>

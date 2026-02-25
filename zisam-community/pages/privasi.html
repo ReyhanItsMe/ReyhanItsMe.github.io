@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth" 
+    x-data="{ 
+        darkMode: localStorage.getItem('theme') === 'dark',
+        toggleTheme(mode) {
+            this.darkMode = mode;
+            localStorage.setItem('theme', mode ? 'dark' : 'light');
+        }
+    }" 
+    :class="{ 'dark': darkMode }">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zisam Community - Dark Mode Ready</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class', 
+            theme: {
+                extend: {
+                    colors: {
+                        'gold-light': '#F1BE63',
+                        'gold-dark': '#BD8A2F',
+                        'sky-blue': '#379AAF',
+                        'teal-deep': '#106172',
+                        'base-white': '#FAFAFA'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gold-gradient { background: linear-gradient(135deg, #F1BE63 0%, #BD8A2F 100%); }
+        .gold-divider { background: linear-gradient(to right, #BD8A2F, #F1BE63, #BD8A2F); }
+        body.menu-open { overflow: hidden; }
+    </style>
+</head>
+<body class="bg-base-white dark:bg-gray-900 font-sans text-gray-700 dark:text-gray-300 flex flex-col min-h-screen transition-colors duration-300" x-data="{ mobileMenuOpen: false }" :class="{'menu-open': mobileMenuOpen}">
+
+<div x-data="{ html: '' }" 
+     x-init="fetch('./../components/navbar.html').then(r => r.text()).then(t => html = t)" 
+     x-html="html">
+     </div>
+
+    <main id="" class="relative z-10 flex-grow pt-24 bg-texture transition-colors duration-300">
+<section class="relative pt-32 pb-20 px-6 overflow-hidden bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto relative z-10 text-center">
+        <div class="inline-flex items-center gap-2 bg-sky-blue/10 px-4 py-2 rounded-2xl mb-6">
+            <i class='bx bxs-lock-alt text-sky-blue'></i>
+            <span class="text-[10px] font-black uppercase tracking-[0.3em] text-sky-blue">Data Protection</span>
+        </div>
+
+        <h1 class="text-4xl md:text-7xl font-black text-teal-deep dark:text-white uppercase tracking-tighter leading-none mb-6">
+            Kebijakan <br>
+            <span class="text-gold-dark italic font-serif normal-case">Privasi.</span>
+        </h1>
+        
+        <p class="max-w-2xl mx-auto text-sm md:text-base text-gray-500 dark:text-gray-400 font-medium leading-relaxed">
+            Zisam Community sangat menghargai privasi Anda. Kami berkomitmen untuk melindungi data pribadi yang Anda percayakan kepada kami.
+        </p>
+    </div>
+</section>
+<section class="py-12 bg-white dark:bg-gray-900 px-6">
+    <div class="max-w-4xl mx-auto">
+        
+        <div class="bg-gray-50 dark:bg-gray-800/50 rounded-[3rem] p-8 md:p-12 border border-gray-100 dark:border-gray-700">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-12 h-12 bg-teal-deep text-white rounded-2xl flex items-center justify-center shadow-lg shadow-teal-deep/20">
+                    <i class='bx bx-shield-quarter text-2xl'></i>
+                </div>
+                <h2 class="text-xl md:text-2xl font-black text-teal-deep dark:text-white uppercase tracking-tight">
+                    Keamanan & Penyimpanan Data
+                </h2>
+            </div>
+
+            <div class="space-y-8">
+                <div class="flex gap-4">
+                    <i class='bx bx-check-double text-gold-dark text-xl mt-1'></i>
+                    <div>
+                        <h4 class="text-sm font-black text-teal-deep dark:text-white uppercase tracking-widest mb-2">Penyimpanan Terenkripsi</h4>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                            Semua data sensitif seperti nomor kontak dan bukti transaksi disimpan dalam database yang terenkripsi dan hanya dapat diakses oleh admin yang bertugas melalui jalur aman.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <i class='bx bx-check-double text-gold-dark text-xl mt-1'></i>
+                    <div>
+                        <h4 class="text-sm font-black text-teal-deep dark:text-white uppercase tracking-widest mb-2">Akses Terbatas</h4>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                            Kami tidak akan pernah menjual, menyewakan, atau memberikan data pribadi Anda kepada pihak ketiga untuk kepentingan komersial tanpa izin tertulis dari Anda.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <i class='bx bx-check-double text-gold-dark text-xl mt-1'></i>
+                    <div>
+                        <h4 class="text-sm font-black text-teal-deep dark:text-white uppercase tracking-widest mb-2">Masa Simpan Data</h4>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                            Kami hanya menyimpan data Anda selama diperlukan untuk kebutuhan administratif event atau selama Anda masih terdaftar sebagai bagian dari komunitas Zisam.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 p-6 bg-white dark:bg-gray-900 rounded-2xl border border-dashed border-sky-blue/30">
+                <p class="text-[10px] font-bold text-sky-blue uppercase tracking-widest text-center">
+                    <i class='bx bx-lock-open-alt mr-2'></i>
+                    Keamanan Anda adalah amanah bagi kami.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+<section class="py-12 bg-gray-50 dark:bg-gray-800/30 px-6">
+    <div class="max-w-4xl mx-auto">
+        
+        <div class="mb-10">
+            <h2 class="text-xl md:text-2xl font-black text-teal-deep dark:text-white uppercase tracking-tight flex items-center gap-3">
+                Hak Anda Sebagai Pengguna
+            </h2>
+            <div class="h-1 w-20 bg-sky-blue mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="p-6 bg-white dark:bg-gray-900 rounded-3xl border border-gray-100 dark:border-gray-800">
+                <i class='bx bx-user-circle text-3xl text-gold-dark mb-4'></i>
+                <h4 class="text-xs font-black text-teal-deep dark:text-white uppercase mb-2">Akses Data</h4>
+                <p class="text-[11px] leading-relaxed text-gray-500 dark:text-gray-400">Anda berhak menanyakan informasi apa saja yang kami simpan terkait data pribadi Anda.</p>
+            </div>
+
+            <div class="p-6 bg-white dark:bg-gray-900 rounded-3xl border border-gray-100 dark:border-gray-800">
+                <i class='bx bx-edit text-3xl text-gold-dark mb-4'></i>
+                <h4 class="text-xs font-black text-teal-deep dark:text-white uppercase mb-2">Koreksi Data</h4>
+                <p class="text-[11px] leading-relaxed text-gray-500 dark:text-gray-400">Anda dapat meminta perubahan jika terdapat data yang tidak akurat atau sudah tidak berlaku.</p>
+            </div>
+
+            <div class="p-6 bg-white dark:bg-gray-900 rounded-3xl border border-gray-100 dark:border-gray-800">
+                <i class='bx bx-trash text-3xl text-gold-dark mb-4'></i>
+                <h4 class="text-xs font-black text-teal-deep dark:text-white uppercase mb-2">Penghapusan</h4>
+                <p class="text-[11px] leading-relaxed text-gray-500 dark:text-gray-400">Anda berhak meminta kami menghapus seluruh data Anda dari database Zisam secara permanen.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-20 bg-white dark:bg-gray-900 px-6">
+    <div class="max-w-4xl mx-auto text-center space-y-8">
+        <div class="inline-block p-4 bg-gold-light/10 rounded-full mb-4">
+            <i class='bx bx-support text-4xl text-gold-dark'></i>
+        </div>
+        
+        <h3 class="text-2xl md:text-4xl font-black text-teal-deep dark:text-white uppercase tracking-tighter">
+            Pertanyaan <span class="text-gold-dark italic font-serif lowercase">&</span> Masalah Privasi?
+        </h3>
+        
+        <p class="text-sm text-gray-500 dark:text-gray-400 max-w-lg mx-auto leading-relaxed font-medium">
+            Jika Anda memiliki kekhawatiran mengenai bagaimana kami mengelola data Anda, jangan ragu untuk menghubungi Tim Keamanan Data kami.
+        </p>
+
+        <div class="flex flex-col md:flex-row justify-center items-center gap-4 pt-6">
+            <a href="mailto:privacy@zisamcommunity.org" class="flex items-center gap-3 bg-teal-deep text-white px-8 py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-sky-blue transition-all">
+                <i class='bx bx-envelope text-lg'></i>
+                Email Privacy Team
+            </a>
+            <a href="#" class="flex items-center gap-3 border-2 border-gray-100 dark:border-gray-800 text-gray-500 dark:text-gray-400 px-8 py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:border-gold-light hover:text-gold-dark transition-all">
+                <i class='bx bxl-whatsapp text-lg'></i>
+                Hubungi Admin
+            </a>
+        </div>
+
+        <p class="pt-12 text-[9px] font-bold text-gray-400 uppercase tracking-[0.3em]">
+            Update Terakhir: 25 Februari 2026 • Versi Dokumen: PZ-2026-001
+        </p>
+    </div>
+</section>
+<section class="pb-24 px-6 bg-white dark:bg-gray-900">
+    <div class="max-w-4xl mx-auto">
+        <div class="relative p-1 bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-700 to-transparent mb-12"></div>
+        
+        <div class="flex flex-col items-center text-center space-y-6">
+            <div class="w-16 h-1 bg-gold-dark rounded-full"></div>
+            
+            <div class="max-w-2xl">
+                <p class="text-[11px] md:text-xs font-bold text-gray-500 dark:text-gray-400 leading-relaxed uppercase tracking-[0.15em]">
+                    Dengan melanjutkan akses, membaca, atau menggunakan layanan di website 
+                    <span class="text-teal-deep dark:text-teal-400">Zisam Community</span>, 
+                    Anda secara otomatis dianggap telah membaca, memahami, dan memberikan persetujuan penuh terhadap seluruh poin yang tertuang dalam 
+                    <a href="privacy.html" class="text-sky-blue hover:underline decoration-2">Kebijakan Privasi</a> 
+                    serta 
+                    <a href="terms.html" class="text-sky-blue hover:underline decoration-2">Syarat & Ketentuan</a> kami.
+                </p>
+            </div>
+
+            <div class="pt-4 flex items-center gap-3 opacity-50">
+                <i class='bx bx-check-shield text-xl text-gold-dark'></i>
+                <span class="text-[9px] font-black text-gray-400 uppercase tracking-widest text-left leading-tight">
+                    Data Anda Aman • <br> Amanah & Transparan
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<div x-data="{ html: '' }" 
+     x-init="fetch('./../components/footer.html').then(r => r.text()).then(t => html = t)" 
+     x-html="html">
+     </div>
+
+</body>
+</html>

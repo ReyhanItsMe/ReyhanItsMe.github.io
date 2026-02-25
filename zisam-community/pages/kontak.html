@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth" 
+    x-data="{ 
+        darkMode: localStorage.getItem('theme') === 'dark',
+        toggleTheme(mode) {
+            this.darkMode = mode;
+            localStorage.setItem('theme', mode ? 'dark' : 'light');
+        }
+    }" 
+    :class="{ 'dark': darkMode }">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zisam Community - Dark Mode Ready</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class', 
+            theme: {
+                extend: {
+                    colors: {
+                        'gold-light': '#F1BE63',
+                        'gold-dark': '#BD8A2F',
+                        'sky-blue': '#379AAF',
+                        'teal-deep': '#106172',
+                        'base-white': '#FAFAFA'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gold-gradient { background: linear-gradient(135deg, #F1BE63 0%, #BD8A2F 100%); }
+        .gold-divider { background: linear-gradient(to right, #BD8A2F, #F1BE63, #BD8A2F); }
+        body.menu-open { overflow: hidden; }
+    </style>
+</head>
+<body class="bg-base-white dark:bg-gray-900 font-sans text-gray-700 dark:text-gray-300 flex flex-col min-h-screen transition-colors duration-300" x-data="{ mobileMenuOpen: false }" :class="{'menu-open': mobileMenuOpen}">
+
+<div x-data="{ html: '' }" 
+     x-init="fetch('./../components/navbar.html').then(r => r.text()).then(t => html = t)" 
+     x-html="html">
+     </div>
+
+    <main id="" class="relative z-10 flex-grow pt-24 bg-texture transition-colors duration-300">
+<section class="relative pt-32 pb-20 px-6 overflow-hidden bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto relative z-10 text-center">
+        <div class="inline-flex items-center gap-2 bg-gold-light/10 px-4 py-2 rounded-2xl mb-6">
+            <i class='bx bxs-contact text-gold-dark'></i>
+            <span class="text-[10px] font-black uppercase tracking-[0.3em] text-gold-dark">Get In Touch</span>
+        </div>
+
+        <h1 class="text-4xl md:text-7xl font-black text-teal-deep dark:text-white uppercase tracking-tighter leading-none mb-6">
+            Mari <span class="text-gold-dark italic font-serif normal-case">Terhubung</span> <br>
+            <span class="text-sky-blue">Dengan Kami.</span>
+        </h1>
+        
+        <p class="max-w-2xl mx-auto text-sm md:text-base text-gray-500 dark:text-gray-400 font-medium leading-relaxed">
+            Punya pertanyaan seputar event, kolaborasi, atau ingin bergabung menjadi relawan Syabab? Tim admin kami siap menyambut pesanmu.
+        </p>
+    </div>
+</section>
+
+<section class="relative pb-24 pt-10 px-6 overflow-hidden bg-white dark:bg-gray-900">
+    
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none opacity-40 dark:opacity-20">
+        <div class="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] rounded-full bg-sky-blue/20 blur-[120px]"></div>
+        <div class="absolute top-[20%] -right-[5%] w-[30%] h-[50%] rounded-full bg-gold-light/20 blur-[100px]"></div>
+        <div class="absolute -bottom-[10%] left-[20%] w-[50%] h-[30%] rounded-full bg-teal-deep/10 blur-[120px]"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto relative">
+        
+        <div class="mb-12 text-center lg:text-left">
+            <h3 class="text-2xl font-black text-teal-deep dark:text-white uppercase tracking-tighter">
+                Kanal <span class="text-gold-dark italic font-serif normal-case">Komunikasi</span>
+            </h3>
+            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mt-2 leading-relaxed">Pilih cara ternyaman untuk menyapa kami</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            
+            <a href="#" class="group relative p-8 rounded-[3rem] bg-white dark:bg-gray-800 border-none shadow-xl shadow-gray-200/50 dark:shadow-none flex flex-col items-center text-center transition-all duration-500 hover:-translate-y-3 hover:bg-[#25D366]">
+                <div class="w-20 h-20 rounded-[2rem] bg-[#25D366]/10 flex items-center justify-center text-5xl text-[#25D366] mb-6 group-hover:bg-white group-hover:scale-110 transition-all duration-500">
+                    <i class='bx bxl-whatsapp'></i>
+                </div>
+                <h4 class="text-xs font-black text-teal-deep dark:text-white group-hover:text-white uppercase tracking-widest transition-colors">WhatsApp</h4>
+                <p class="text-[10px] font-bold text-gray-400 group-hover:text-white/80 mt-1 uppercase tracking-tighter transition-colors">Fast Response</p>
+            </a>
+
+            <a href="#" class="group relative p-[2px] rounded-[3rem] bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] transition-all duration-500 hover:-translate-y-3 shadow-lg">
+                <div class="h-full w-full bg-white dark:bg-gray-800 rounded-[3rem] p-8 flex flex-col items-center text-center">
+                    <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] flex items-center justify-center text-5xl text-white mb-6 group-hover:rotate-12 transition-transform duration-500 shadow-lg">
+                        <i class='bx bxl-instagram'></i>
+                    </div>
+                    <h4 class="text-xs font-black text-teal-deep dark:text-white uppercase tracking-widest">Instagram</h4>
+                    <p class="text-[10px] font-bold text-gray-400 mt-1 uppercase tracking-tighter">Update Harian</p>
+                </div>
+            </a>
+
+            <a href="#" class="group relative p-8 rounded-[3rem] bg-black dark:bg-white flex flex-col items-center text-center transition-all duration-500 hover:-translate-y-3 overflow-hidden shadow-2xl">
+                <div class="absolute -top-4 -right-4 w-16 h-16 bg-[#fe2c55]/20 rounded-full blur-xl group-hover:scale-150 transition-transform"></div>
+                <div class="w-20 h-20 rounded-2xl bg-white/10 dark:bg-black/5 flex items-center justify-center text-5xl text-white dark:text-black mb-6 group-hover:scale-110 transition-transform z-10">
+                    <i class='bx bxl-tiktok'></i>
+                </div>
+                <h4 class="text-xs font-black text-white dark:text-black uppercase tracking-widest z-10">TikTok</h4>
+                <p class="text-[10px] font-bold text-white/50 dark:text-black/50 mt-1 uppercase tracking-tighter z-10">Konten Kreatif</p>
+            </a>
+
+            <a href="#" class="group relative p-8 rounded-[3rem] bg-gray-50 dark:bg-gray-800/80 border-b-8 border-red-600 flex flex-col items-center text-center transition-all duration-500 hover:-translate-y-3 hover:bg-red-50 dark:hover:bg-red-900/20">
+                <div class="w-20 h-20 rounded-3xl bg-white dark:bg-gray-900 shadow-md flex items-center justify-center text-5xl text-[#FF0000] mb-6 group-hover:text-red-600 group-hover:shadow-red-200 transition-all">
+                    <i class='bx bxl-youtube'></i>
+                </div>
+                <h4 class="text-xs font-black text-teal-deep dark:text-white uppercase tracking-widest">YouTube</h4>
+                <p class="text-[10px] font-bold text-gray-400 mt-1 uppercase tracking-tighter">Video Dokumentasi</p>
+            </a>
+
+            <a href="mailto:zisamcommunity@gmail.com" class="group relative p-8 rounded-[3rem] bg-white dark:bg-gray-800 border-2 border-dashed border-gold-dark/30 flex flex-col items-center text-center transition-all duration-500 hover:-translate-y-3 hover:border-gold-dark hover:border-solid">
+                <div class="w-20 h-20 rounded-[2.5rem] bg-gold-dark text-white flex items-center justify-center text-5xl mb-6 shadow-xl shadow-gold-dark/20 group-hover:rotate-[360deg] transition-transform duration-700">
+                    <i class='bx bx-envelope'></i>
+                </div>
+                <h4 class="text-xs font-black text-teal-deep dark:text-white uppercase tracking-widest">Email</h4>
+                <p class="text-[10px] font-bold text-gray-400 mt-1 uppercase tracking-tighter">Surat Digital</p>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+
+<section class="pb-24 bg-white dark:bg-gray-900 px-6">
+    <div class="max-w-7xl mx-auto">
+        
+        <div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div class="text-center md:text-left">
+                <h3 class="text-2xl font-black text-teal-deep dark:text-white uppercase tracking-tighter">
+                    Lokasi <span class="text-gold-dark italic font-serif normal-case">Sekretariat Kami</span>
+                </h3>
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mt-2">Jl. Cisirung, Cangkuang Kulon, Kec. Dayeuhkolot, Bandung</p>
+            </div>
+            
+            <div class="flex justify-center">
+                <a href="https://www.google.com/maps?ll=-6.973557,107.598179&z=16&t=m&hl=id&gl=ID&mapclient=embed&cid=5007425488506143740" target="_blank" class="flex items-center gap-3 bg-gray-50 dark:bg-gray-800 px-6 py-3 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-gold-light transition-all group">
+                    <i class='bx bxs-directions text-2xl text-gold-dark group-hover:animate-bounce'></i>
+                    <span class="text-[10px] font-black text-teal-deep dark:text-white uppercase tracking-widest">Buka di Maps</span>
+                </a>
+            </div>
+        </div>
+
+<div class="relative w-full h-[450px] rounded-[3rem] overflow-hidden shadow-2xl shadow-gray-200/50 dark:shadow-none border-8 border-gray-50 dark:border-gray-800">
+    <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.297463566157!2d107.595604074205!3d-6.974191368288593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e91f63d91fd3%3A0x450eba1e4b93c1fc!2sMasjid%20Al-Kautsar!5e0!3m2!1sid!2sid!4v1708850000000!5m2!1sid!2sid" 
+        class="absolute inset-0 w-full h-full grayscale-[20%] dark:grayscale-[50%] dark:invert-[90%] dark:contrast-[80%]" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+</div>
+
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="flex items-center gap-4 p-6 bg-gray-50/50 dark:bg-gray-800/30 rounded-3xl border border-gray-100 dark:border-gray-700">
+                <i class='bx bxs-map-pin text-2xl text-sky-blue'></i>
+                <div>
+                    <p class="text-[9px] font-black text-gray-400 uppercase">Titik Presisi</p>
+                    <p class="text-xs font-bold text-teal-deep dark:text-white uppercase">Area Masjid Al-Kautsar</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4 p-6 bg-gray-50/50 dark:bg-gray-800/30 rounded-3xl border border-gray-100 dark:border-gray-700">
+                <i class='bx bxs-time-five text-2xl text-sky-blue'></i>
+                <div>
+                    <p class="text-[9px] font-black text-gray-400 uppercase">Waktu Kunjung</p>
+                    <p class="text-xs font-bold text-teal-deep dark:text-white uppercase">08:00 - 20:00 WIB</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4 p-6 bg-gray-50/50 dark:bg-gray-800/30 rounded-3xl border border-gray-100 dark:border-gray-700">
+                <i class='bx bxs-parking text-2xl text-sky-blue'></i>
+                <div>
+                    <p class="text-[9px] font-black text-gray-400 uppercase">Fasilitas</p>
+                    <p class="text-xs font-bold text-teal-deep dark:text-white uppercase">Parkir & Area Ibadah</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+</main>
+
+<div x-data="{ html: '' }" 
+     x-init="fetch('./../components/footer.html').then(r => r.text()).then(t => html = t)" 
+     x-html="html">
+     </div>
+
+</body>
+</html>
