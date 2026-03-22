@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pythagoras - Scrapbook Edition</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-brand': '#2563eb',   
+                        'accent-yellow': '#f59e0b',  
+                        'accent-green': '#10b981',   
+                        'accent-pink': '#f43f5e',    
+                        'soft-bg': '#f8fafc',        
+                    },
+                    fontFamily: {
+                        'fredoka': ['Fredoka', 'sans-serif'],
+                        'quicksand': ['Quicksand', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Background Kertas Kotak-kotak dengan Garis Merah */
+        .notebook-bg {
+            background-color: #f8fafc;
+            background-image: 
+                linear-gradient(to right, rgba(37, 99, 235, 0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(37, 99, 235, 0.08) 1px, transparent 1px),
+                linear-gradient(to right, transparent 50px, rgba(244, 63, 94, 0.2) 2px, transparent 52px);
+            background-size: 30px 30px, 30px 30px, 100% 100%;
+        }
+
+        /* Efek Sticker Outline untuk Judul */
+        .sticker-text {
+            -webkit-text-stroke: 10px white;
+            paint-order: stroke fill;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+
+        /* Animasi halus saat hover kartu */
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px) rotate(1deg);
+        }
+    </style>
+
+</head>
+<body class="bg-stone-100 min-h-screen flex items-center justify-center p-4">
+
+    <div class="w-full flex flex-col gap-4">
+
+    <div class="p-6 min-h-[200px]">
+        <div class="w-full max-w-5xl aspect-video bg-[#fffafb] shadow-[0_35px_60px_-15px_rgba(244,114,182,0.3)] flex flex-col gap-6 relative overflow-hidden p-10 font-quicksand">
+            
+            <i data-lucide="heart" class="absolute -top-10 -right-10 w-48 h-48 text-pink-200 opacity-20 rotate-12"></i>
+            <i data-lucide="sparkles" class="absolute -bottom-10 -left-10 w-40 h-40 text-rose-300 opacity-20 -rotate-12"></i>
+
+            <div class="-mt-16 w-full flex flex-col items-center justify-center pt-8 -mb-3 relative z-20">
+                <div class="relative group">
+                    <h1 class="font-fredoka font-bold text-5xl text-rose-500 uppercase tracking-tight text-center relative whitespace-nowrap">
+                        <span class="absolute inset-0 text-white select-none translate-y-1">
+                            Eksplorasi Teorema Pythagoras
+                        </span>
+                        <span class="relative">
+                            Eksplorasi Teorema Pythagoras
+                        </span>
+                    </h1>
+                </div>
+                <p class="mt-3 -ml-[500px] text-[10px] font-bold text-pink-300 uppercase tracking-[0.5em] opacity-80">
+                    Remedial Math Project ✨
+                </p>
+            </div>
+
+            <div class="flex-1 grid grid-cols-2 gap-8 px-4 mt-4 relative z-10">
+                
+                <div class="flex flex-col gap-5">
+                    <div class="flex-1 bg-white/80 backdrop-blur-sm p-6 rounded-[32px] border-4 border-dashed border-pink-200 shadow-xl rotate-[-1deg]">
+                        <h3 class="font-fredoka text-2xl text-pink-400 mb-3 flex items-center gap-3">
+                            <i data-lucide="book-heart" class="w-7 h-7"></i> Pengertian
+                        </h3>
+                        <p class="text-[13px] leading-relaxed text-slate-500 font-semibold">
+                            Teorema Pythagoras menyatakan bahwa dalam segitiga siku-siku, kuadrat sisi miring sama dengan jumlah kuadrat dari dua sisi lainnya.
+                        </p>
+                    </div>
+
+                    <div class="flex-1 bg-rose-50 backdrop-blur-sm p-6 rounded-[32px] border-4 border-dashed border-rose-200 shadow-xl rotate-[1deg]">
+                        <h3 class="font-fredoka text-2xl text-rose-400 mb-4 flex items-center gap-3">
+                            <i data-lucide="pencil-ruler" class="w-7 h-7"></i> Rumus Utama
+                        </h3>
+                        <div class="bg-white p-4 rounded-2xl shadow-inner border-2 border-rose-100 flex items-center justify-center">
+                            <p class="font-fredoka text-4xl text-rose-500 tracking-widest font-bold italic">
+                                a² + b² = c²
+                            </p>
+                        </div>
+                        <p class="text-[10px] mt-4 text-rose-300 font-bold uppercase text-center tracking-widest">
+                            c = Sisi Miring (Hypotenuse)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="-mt-10 bg-white/90 backdrop-blur-sm p-7 rounded-[40px] border-4 border-dashed border-pink-200 shadow-xl flex flex-col gap-4 relative overflow-hidden">
+                    <h3 class="font-fredoka text-2xl text-pink-400 flex items-center gap-3 border-b-2 border-rose-50 pb-3">
+                        <i data-lucide="stars" class="w-7 h-7"></i> Contoh Soal
+                    </h3>
+                    
+                    <div class="bg-rose-50/50 rounded-3xl p-4 border-2 border-pink-100">
+                        <p class="text-[13px] font-bold text-slate-600 leading-relaxed">
+                            "Jika lebar buku (a) = 6cm dan tinggi (b) = 8cm, berapakah panjang diagonalnya (c)?"
+                        </p>
+                    </div>
+
+                    <div class="flex-1 bg-white rounded-3xl p-4 shadow-inner border-2 border-pink-50 flex flex-col justify-center gap-2">
+                        <div class="flex items-center gap-3 text-sm font-bold text-pink-400">
+                            <span class="bg-pink-400 text-white w-6 h-6 rounded-full flex items-center justify-center text-[10px]">1</span>
+                            <span>c² = 6² + 8²</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm font-bold text-pink-400">
+                            <span class="bg-pink-400 text-white w-6 h-6 rounded-full flex items-center justify-center text-[10px]">2</span>
+                            <span>c² = 36 + 64 = 100</span>
+                        </div>
+                        <div class="mt-1 py-2 px-4 bg-rose-500 text-white rounded-2xl self-start font-fredoka text-lg shadow-lg rotate-[-2deg]">
+                            Hasil: 10 cm! ✨
+                        </div>
+                    </div>
+
+                    <div class="mt-2 p-4 bg-pink-50 rounded-[28px] border-[6px] border-double border-pink-200 relative">
+                        <div class="absolute -top-3 left-6 bg-pink-400 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md uppercase tracking-widest">
+                            Tips & Trick
+                        </div>
+                        <p class="text-[11px] text-pink-500 font-bold leading-tight mt-1">
+                            Gunakan <span class="underline">Triple Pythagoras</span> (3, 4, 5) untuk hitungan cepat! Cukup kalikan 2 jadi (6, 8, 10).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<div class="flex justify-center items-center">
+    <div class="px-4 py-1.5 bg-rose-100/50 border-2 border-rose-200 rounded-full shadow-sm hover:shadow-md transition-all duration-300 group">
+        <code class="font-mono text-[11px] font-bold text-rose-500 flex items-center gap-2">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-rose-400 group-hover:rotate-12 transition-transform"></i>
+            <span>by: Audrey & Kalana</span>
+            <i data-lucide="heart" class="w-3.5 h-3.5 text-rose-400 fill-rose-200 group-hover:scale-125 transition-transform"></i>
+        </code>
+    </div>
+</div>
+
+
+<div class="p-6 min-h-[200px]">
+    <div class="w-full max-w-5xl aspect-video bg-[#fffafb] shadow-[0_35px_60px_-15px_rgba(244,114,182,0.3)] flex flex-col gap-6 relative overflow-hidden p-10 font-quicksand">
+        
+        <i data-lucide="heart" class="absolute -top-10 -right-10 w-48 h-48 text-pink-200 opacity-20 rotate-12"></i>
+        <i data-lucide="sparkles" class="absolute -bottom-10 -left-10 w-40 h-40 text-rose-300 opacity-20 -rotate-12"></i>
+
+        <div class="-mt-16 w-full flex flex-col items-center justify-center pt-8 -mb-3 relative z-20">
+            <div class="relative group">
+                <h1 class="font-fredoka font-bold text-5xl text-rose-500 uppercase tracking-tight text-center relative whitespace-nowrap">
+                    <span class="absolute inset-0 text-white select-none translate-y-1">
+                        Exploring Pythagorean Theorem
+                    </span>
+                    <span class="relative">
+                        Exploring Pythagorean Theorem
+                    </span>
+                </h1>
+            </div>
+
+            <p class="mt-3 -ml-[480px] text-[10px] font-bold text-pink-300 uppercase tracking-[0.5em] opacity-80 italic">
+                Remedial Math Project ✨
+            </p>
+        </div>
+
+        <div class="flex-1 grid grid-cols-2 gap-8 px-4 mt-4 relative z-10">
+            
+            <div class="flex flex-col gap-5">
+                <div class="flex-1 bg-white/80 backdrop-blur-sm p-6 rounded-[32px] border-4 border-dashed border-pink-200 shadow-xl rotate-[-1deg] transition-transform hover:rotate-0">
+                    <h3 class="font-fredoka text-2xl text-pink-400 mb-3 flex items-center gap-3">
+                        <i data-lucide="book-heart" class="w-7 h-7"></i> Definition
+                    </h3>
+                    <p class="text-[13px] leading-relaxed text-slate-500 font-semibold">
+                        The Pythagorean theorem states that in a right-angled triangle, the square of the hypotenuse is equal to the sum of the squares of the other two sides.
+                    </p>
+                </div>
+
+                <div class="flex-1 bg-rose-50 backdrop-blur-sm p-6 rounded-[32px] border-4 border-dashed border-rose-200 shadow-xl rotate-[1deg] transition-transform hover:rotate-0">
+                    <h3 class="font-fredoka text-2xl text-rose-400 mb-4 flex items-center gap-3">
+                        <i data-lucide="pencil-ruler" class="w-7 h-7"></i> Core Formula
+                    </h3>
+                    
+                    <div class="bg-white p-4 rounded-2xl shadow-inner border-2 border-rose-100 flex items-center justify-center">
+                        <p class="font-fredoka text-4xl text-rose-500 tracking-widest font-bold italic">
+                            a² + b² = c²
+                        </p>
+                    </div>
+                    
+                    <p class="text-[10px] mt-4 text-rose-300 font-bold uppercase text-center tracking-[0.2em]">
+                        c = The Hypotenuse (Longest Side)
+                    </p>
+                </div>
+            </div>
+
+            <div class="-mt-10 bg-white/90 backdrop-blur-sm p-7 rounded-[40px] border-4 border-dashed border-pink-200 shadow-xl flex flex-col gap-4 relative overflow-hidden transition-all hover:scale-[1.01]">
+                
+                <h3 class="font-fredoka text-2xl text-pink-400 flex items-center gap-3 border-b-2 border-rose-50 pb-3">
+                    <i data-lucide="stars" class="w-7 h-7"></i> Practice Problem
+                </h3>
+                
+                <div class="bg-rose-50/50 rounded-3xl p-4 border-2 border-pink-100">
+                    <p class="text-[13px] font-bold text-slate-600 leading-relaxed italic">
+                        "If a book's width (a) = 6cm and height (b) = 8cm, calculate the length of its diagonal (c)."
+                    </p>
+                </div>
+
+                <div class="flex-1 bg-white rounded-3xl p-4 shadow-inner border-2 border-pink-50 flex flex-col justify-center gap-2">
+                    <div class="flex items-center gap-3 text-sm font-bold text-pink-400">
+                        <span class="bg-pink-400 text-white w-6 h-6 rounded-full flex items-center justify-center text-[10px]">1</span>
+                        <span>c² = 6² + 8²</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-sm font-bold text-pink-400">
+                        <span class="bg-pink-400 text-white w-6 h-6 rounded-full flex items-center justify-center text-[10px]">2</span>
+                        <span>c² = 36 + 64 = 100</span>
+                    </div>
+                    <div class="mt-1 py-2 px-6 bg-rose-500 text-white rounded-2xl self-start font-fredoka text-lg shadow-lg rotate-[-2deg] shadow-rose-200">
+                        Result: 10 cm! ✨
+                    </div>
+                </div>
+
+                <div class="mt-2 p-4 bg-pink-50 rounded-[28px] border-[6px] border-double border-pink-200 relative group">
+                    <div class="absolute -top-3 left-6 bg-pink-400 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md uppercase tracking-widest">
+                        Quick Trick
+                    </div>
+                    <p class="text-[11px] text-pink-500 font-bold leading-tight mt-1">
+                        Use <span class="underline">Pythagorean Triples</span> (3, 4, 5) for fast counting! Simply multiply by 2 to get (6, 8, 10).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
