@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Raihan Azhar | Calon Siswa SMK</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Diambil langsung dari gambar 1000005438.png
+                        brandLight: '#F4F1EA',  /* Latar belakang terang gading */
+                        brandDark: '#2B262C',   /* Teks, tombol, & komponen gelap */
+                        brandMuted: '#5C545E'   /* Teks sekunder/deskripsi */
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brandLight text-brandDark font-sans antialiased selection:bg-brandDark selection:text-brandLight">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-brandLight/80 backdrop-blur-md border-b border-brandDark/10">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <span class="text-lg font-bold tracking-tight text-brandDark uppercase">Raihan Azhar</span>
+                <div class="flex space-x-6 text-sm font-medium">
+                    <a href="#tentang" class="hover:opacity-70 transition-opacity">Tentang</a>
+                    <a href="#keahlian" class="hover:opacity-70 transition-opacity">Keahlian</a>
+                    <a href="#proyek" class="hover:opacity-70 transition-opacity">Proyek</a>
+                    <a href="#kontak" class="hover:opacity-70 transition-opacity">Kontak</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="max-w-4xl mx-auto px-6 py-20 md:py-32 flex flex-col justify-center min-h-[75vh]">
+        <p class="text-brandMuted font-mono text-xs uppercase tracking-widest mb-3">Halo, nama aku</p>
+        <h1 class="text-4xl sm:text-6xl font-black tracking-tight mb-4">
+            Raihan Azhar.
+        </h1>
+        <h2 class="text-2xl sm:text-4xl font-bold text-brandMuted mb-6 leading-tight">
+            Full Stack Developer yang fokus ke logika backend sama eksplorasi bahasa pemrograman.
+        </h2>
+        <p class="max-w-xl text-base sm:text-lg text-brandMuted/90 mb-4 leading-relaxed">
+            Mulai perjalanan dari kelas 8 awal mulanya cuma coba coba HTML dan CSS. Dari sana aku coba lompat belajar fundamental PHP duluan sampai paham konsepnya. Pas nyobain JavaScript rasanya jadi jauh lebih gampang, dari situ aku mulai fokus dalemin ekosistem kayak React, Laravel, dan Express. Selain ngoding, aku juga bisa di bidang desain grafis dan editing foto. Sekarang aku lagi asyik ngeksplor Dart dan Go buat nambah ilmu baru.
+        </p>
+        
+        <!-- Fun Fact Section -->
+        <p class="max-w-xl text-xs font-mono text-brandMuted/80 mb-8 border-l-2 border-brandDark/20 pl-4 italic">
+            <span class="font-bold uppercase tracking-wider not-italic block text-[10px] text-brandDark mb-1">Fun Fact:</span>
+            Pas lagi coding aku sering manfaatin AI atau vibe coding buat teman diskusi. Tapi prinsip aku tetep, sebelum nyentuh AI aku harus ngerti dulu alur logikanya jadi gak asal copas gitu aja.
+        </p>
+
+        <div>
+            <a href="#proyek" class="inline-block bg-brandDark hover:bg-brandDark/90 text-brandLight font-medium px-6 py-3 rounded transition-all duration-200 shadow-sm">
+                Lihat Proyek
+            </a>
+        </div>
+    </section>
+
+    <!-- Tentang Aku -->
+    <section id="tentang" class="max-w-4xl mx-auto px-6 py-16 border-t border-brandDark/10">
+        <h3 class="text-xl font-bold mb-6 flex items-center">
+            <span class="font-mono text-sm mr-2 opacity-50">01.</span> Tentang Aku
+        </h3>
+        <div class="max-w-2xl text-brandMuted space-y-6 text-base leading-relaxed">
+            <p>
+                Halo, panggil aja aku Raihan, atau bisa juga Rey, Zhar, atau Han. Lahir di Bandung, 16 Januari 2010. Perjalanan aku sampai di titik ini emang nggak lurus-lurus aja. Dulu sempat di pesantren, tapi jujur aku ngerasa kurang cocok sampai akhirnya mutusin buat fokus di sekolah biasa.
+            </p>
+            <p>
+                Awal mula aku terjun ke dunia coding sebenarnya simpel banget: cuma pengen kelihatan keren. Aku ngerasa orang yang bisa coding itu pinter banget. Akhirnya aku nyoba HTML & CSS. Waktu itu hasilnya emang masih amburadul, tapi rasanya seneng banget. Sempat ngerasa pusing pas belajar JS, eh malah mutusin buat nyemplung ke PHP duluan sampai paham fundamentalnya. Ternyata setelah balik lagi ke JS, semuanya jadi jauh lebih masuk akal.
+            </p>
+            <p>
+                Fun Fact: Semua aktivitas ngoding dan desain ini aku lakuin full di HP (smartphone only) lewat berbagai tools yang aku cari dan siapin sendiri. Keterbatasan device justru bikin aku makin kreatif nyari jalan keluar. Dari sana, rasa penasaran aku makin luas—aku sempat eksplorasi ke sisi lain internet (dark web) murni untuk kebutuhan riset personal dan belajar, bukan untuk hal yang negatif.
+            </p>
+            <p>
+                Nggak cuma di bidang software, aku juga suka ngulik hardware. Aku hobi bongkar pasang HP rusak buat cari tahu jeroannya, walaupun nggak terlalu fokus ke sana. Selain itu, aku juga sering oprek software sistem kayak rooting Android dan modifikasi ringan lainnya.
+            </p>
+            <p>
+                Aku banyak belajar otodidak dari mentor-mentor hebat kayak Bang Dea Afrizal dan Pak Sandhika (WPU). Berkat mereka, aku makin pede buat nekat belajar framework kayak React, Laravel, sampai Express.
+            </p>
+            <p>
+                Terus kenapa baru masuk SMK sekarang? Iya, aku sempat ambil jeda 1 tahun (gap year). Waktu itu aku pakai buat cari pengalaman hidup, mulai dari jaga warung sampai kerja di warkop & tempat PS. Jujur, mapel sekolah udah banyak yang lupa, tapi logic coding aku masih aman kok! Masuk RPL adalah keputusan bulat aku setelah diskusi panjang, karena emang ini yang aku suka. Oh iya, kalau butuh jasa "joki" coding, bisa kontak ya... eh, bercanda Pak/Bu! 🗿🙏
+            </p>
+        </div>
+    </section>
+
+    <!-- Keahlian / Tech Stack -->
+    <section id="keahlian" class="max-w-4xl mx-auto px-6 py-16 border-t border-brandDark/10">
+        <h3 class="text-xl font-bold mb-6 flex items-center">
+            <span class="font-mono text-sm mr-2 opacity-50">02.</span> Keahlian & Tools
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            
+            <!-- Card 1: Languages -->
+            <div class="p-4 border border-brandDark/20 rounded bg-brandDark/[0.02] hover:border-brandDark transition-colors flex flex-col justify-between">
+                <div>
+                    <div class="text-brandDark mb-2">
+                        <i data-lucide="code-2" class="w-4 h-4"></i>
+                    </div>
+                    <p class="font-bold text-sm">Languages</p>
+                    <p class="text-[11px] text-brandMuted mt-1 font-mono leading-relaxed">HTML, CSS, JS, PHP, Dart, Go</p>
+                </div>
+            </div>
+
+            <!-- Card 2: Frameworks & Libs -->
+            <div class="p-4 border border-brandDark/20 rounded bg-brandDark/[0.02] hover:border-brandDark transition-colors flex flex-col justify-between">
+                <div>
+                    <div class="text-brandDark mb-2">
+                        <i data-lucide="layers" class="w-4 h-4"></i>
+                    </div>
+                    <p class="font-bold text-sm">Framework & Lib</p>
+                    <p class="text-[11px] text-brandMuted mt-1 font-mono leading-relaxed">Laravel, React, Express, Tailwind, Alpine.js, Livewire, Baileys</p>
+                </div>
+            </div>
+
+            <!-- Card 3: Databases -->
+            <div class="p-4 border border-brandDark/20 rounded bg-brandDark/[0.02] hover:border-brandDark transition-colors flex flex-col justify-between">
+                <div>
+                    <div class="text-brandDark mb-2">
+                        <i data-lucide="database" class="w-4 h-4"></i>
+                    </div>
+                    <p class="font-bold text-sm">Databases</p>
+                    <p class="text-[11px] text-brandMuted mt-1 font-mono leading-relaxed">MySQL, PostgreSQL, NoSQL (MongoDB, Supabase)</p>
+                </div>
+            </div>
+
+            <!-- Card 4: Design & Video (Mobile) -->
+            <div class="p-4 border border-brandDark/20 rounded bg-brandDark/[0.02] hover:border-brandDark transition-colors flex flex-col justify-between">
+                <div>
+                    <div class="text-brandDark mb-2">
+                        <i data-lucide="palette" class="w-4 h-4"></i>
+                    </div>
+                    <p class="font-bold text-sm">Design Tools</p>
+                    <p class="text-[11px] text-brandMuted mt-1 font-mono leading-relaxed">Canva, PixelLab, Alight Motion, CapCut, Infinite Design</p>
+                </div>
+            </div>
+
+            <!-- Card 5: Deployment -->
+            <div class="p-4 border border-brandDark/20 rounded bg-brandDark/[0.02] hover:border-brandDark transition-colors flex flex-col justify-between">
+                <div>
+                    <div class="text-brandDark mb-2">
+                        <i data-lucide="globe" class="w-4 h-4"></i>
+                    </div>
+                    <p class="font-bold text-sm">Deployment</p>
+                    <p class="text-[11px] text-brandMuted mt-1 font-mono leading-relaxed">GitHub Pages, Vercel</p>
+                </div>
+            </div>
+
+            <!-- Card 6: Environment & Net -->
+            <div class="p-4 border border-brandDark/20 rounded bg-brandDark/[0.02] hover:border-brandDark transition-colors flex flex-col justify-between">
+                <div>
+                    <div class="text-brandDark mb-2">
+                        <i data-lucide="terminal" class="w-4 h-4"></i>
+                    </div>
+                    <p class="font-bold text-sm">Sys & Network</p>
+                    <p class="text-[11px] text-brandMuted mt-1 font-mono leading-relaxed">Git, GitHub, Linux, CLI, Termux, Tor & VPN</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Proyek -->
+    <section id="proyek" class="max-w-4xl mx-auto px-6 py-16 border-t border-brandDark/10 mb-12">
+        <h3 class="text-xl font-bold mb-6 flex items-center">
+            <span class="font-mono text-sm mr-2 opacity-50">03.</span> Karya & Proyek
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Proyek 1: Prixma Studio -->
+            <div class="border border-brandDark p-6 rounded flex flex-col justify-between bg-brandDark/[0.01]">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="text-brandDark">
+                            <i data-lucide="layout-grid" class="w-6 h-6"></i>
+                        </div>
+                        <span class="text-[10px] font-mono tracking-wider uppercase font-bold text-brandLight bg-brandDark px-2 py-0.5 rounded">Digital Studio</span>
+                    </div>
+                    <h4 class="text-lg font-bold mb-1">Prixma Studio</h4>
+                    <p class="text-brandMuted text-sm leading-relaxed mb-4">
+                        Studio agensi digital yang aku kembangkan sebagai owner, berkolaborasi bareng teman-teman yang ahli di bidangnya masing-masing. Kami fokus menyediakan berbagai solusi digital mulai dari pembuatan web, aplikasi, hingga kebutuhan desain grafis. Saat ini proyek Swagger Desixn juga sudah dilebur ke sini.
+                    </p>
+                </div>
+                <div class="text-[11px] font-mono text-brandMuted space-x-2">
+                    <span>#Agency</span> <span>#Web-App</span> <span>#Design-Solution</span>
+                </div>
+            </div>
+
+            <!-- Proyek 2: Multi-Platform Automation Bot -->
+            <div class="border border-brandDark/20 p-6 rounded flex flex-col justify-between hover:border-brandDark transition-colors">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="text-brandDark">
+                            <i data-lucide="bot" class="w-6 h-6"></i>
+                        </div>
+                        <span class="text-[10px] font-mono tracking-wider uppercase font-bold text-brandDark/60 bg-brandDark/10 px-2 py-0.5 rounded">Development</span>
+                    </div>
+                    <h4 class="text-lg font-bold mb-1">Multi Platform Automation Bot</h4>
+                    <p class="text-brandMuted text-sm leading-relaxed mb-4">
+                        Pengembangan framework bot otomatisasi berbasis Node.js yang gak cuma fokus di satu platform, tapi menyebar ke WhatsApp (Baileys), Telegram, dan Discord. Proyek ini dibangun bareng salah satu teman dekatku buat menangani sistem pesan terstruktur, manajemen database, dan perintah modular yang saling terintegrasi.
+                    </p>
+                </div>
+                <div class="text-[11px] font-mono text-brandMuted space-x-2">
+                    <span>#NodeJS</span> <span>#MultiPlatform</span> <span>#Automation</span> <span>#API</span>
+                </div>
+            </div>
+
+            <!-- Proyek 3: Seven Cultures (Brand Outfit) -->
+            <div class="border border-brandDark/20 p-6 rounded flex flex-col justify-between hover:border-brandDark transition-colors">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="text-brandDark">
+                            <i data-lucide="shirt" class="w-6 h-6"></i>
+                        </div>
+                        <span class="text-[10px] font-mono tracking-wider uppercase font-bold text-amber-800 bg-amber-500/10 px-2 py-0.5 rounded">Past Project</span>
+                    </div>
+                    <h4 class="text-lg font-bold mb-1">Seven Cultures</h4>
+                    <p class="text-brandMuted text-sm leading-relaxed mb-4">
+                        Brand outfit yang awalnya aku dirikan bareng teman dekatku dari nol. Di proyek ini aku sempat menghandle penuh bagian core design. Saat ini kepemilikan sudah dialihkan ke kakak temanku (sebagai owner baru) dan temanku sendiri (sebagai wakil), sedangkan aku pribadi memilih buat lepas total demi fokus memperdalam ilmu IT.
+                    </p>
+                </div>
+                <div class="text-[11px] font-mono text-brandMuted space-x-2">
+                    <span>#ClothingBrand</span> <span>#Co-Founder</span> <span>#GraphicDesign</span>
+                </div>
+            </div>
+
+            <!-- Proyek 4: Swagger Desixn (Merged to Prixma) -->
+            <div class="border border-brandDark/20 p-6 rounded flex flex-col justify-between hover:border-brandDark transition-colors">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="text-brandDark">
+                            <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+                        </div>
+                        <span class="text-[10px] font-mono tracking-wider uppercase font-bold text-blue-800 bg-blue-500/10 px-2 py-0.5 rounded">Merged</span>
+                    </div>
+                    <h4 class="text-lg font-bold mb-1">Swagger Desixn</h4>
+                    <p class="text-brandMuted text-sm leading-relaxed mb-4">
+                        Toko digital baru yang awalnya aku konsep lengkap dengan integrasi web dan aplikasi untuk keperluan layanan jual beli game serta kebutuhan desain. Untuk efisiensi manajemen dan skalabilitas layanan, seluruh operasional proyek ini sekarang sudah resmi dilebur masuk ke dalam ekosistem Prixma Studio.
+                    </p>
+                </div>
+                <div class="text-[11px] font-mono text-brandMuted space-x-2">
+                    <span>#DigitalStore</span> <span>#Merged</span> <span>#GameDesign</span>
+                </div>
+            </div>
+
+            <!-- Proyek 5: Reyhan Store (Closed) -->
+            <div class="border border-brandDark/20 p-6 rounded flex flex-col justify-between hover:border-brandDark transition-colors md:col-span-2">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="text-brandDark">
+                            <i data-lucide="store" class="w-6 h-6"></i>
+                        </div>
+                        <span class="text-[10px] font-mono tracking-wider uppercase font-bold text-red-800 bg-red-500/10 px-2 py-0.5 rounded">Closed</span>
+                    </div>
+                    <h4 class="text-lg font-bold mb-1">Reyhan Store</h4>
+                    <p class="text-brandMuted text-sm leading-relaxed mb-4">
+                        Proyek rintisan awal aku di dunia jual beli (JB) digital yang fokus pada transaksi akun game serta jasa desain grafis custom. Proyek store ini merupakan tempat pertamaku belajar memahami pasar digital, walaupun untuk saat ini statusnya sudah dihentikan total karena aku fokus mengembangkan inovasi baru.
+                    </p>
+                </div>
+                <div class="text-[11px] font-mono text-brandMuted space-x-2">
+                    <span>#JualBeliGame</span> <span>#FirstStep</span> <span>#Discontinued</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Hubungi Aku -->
+    <section id="kontak" class="max-w-4xl mx-auto px-6 py-16 border-t border-brandDark/10">
+        <h3 class="text-xl font-bold mb-6 flex items-center">
+            <span class="font-mono text-sm mr-2 opacity-50">04.</span> Hubungi Aku
+        </h3>
+        <div class="max-w-2xl text-brandMuted mb-8 text-base leading-relaxed">
+            <p>
+                Tertarik buat kolaborasi bikin project, nanya-nanya soal kodingan, atau mau ngobrol santai? Hubungi aku lewat beberapa platform di bawah ini aja ya. Rumah aku di daerah Bandung, Jawa Barat—kali aja ada yang sekampung!
+            </p>
+        </div>
+
+        <!-- Grid Kontak -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl">
+            
+            <!-- WhatsApp -->
+            <a href="https://wa.me/6283845587816" target="_blank" class="p-4 border border-brandDark/20 rounded bg-brandDark/[0.02] hover:border-brandDark transition-all flex items-center space-x-3 group">
+                <div class="text-brandDark group-hover:scale-110 transition-transform">
+                    <i data-lucide="message-square" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <p class="text-xs font-mono text-brandMuted/70 uppercase tracking-wider">WhatsApp</p>
+                    <p class="text-sm font-bold text-brandDark">+62 838-4558-7816</p>
+                </div>
+            </a>
+
+            <!-- Telegram -->
+            <a href="https://t.me/zizeiii_z" target="_blank" class="p-4 border border-brandDark/20 rounded bg-brandDark/[0.02] hover:border-brandDark transition-all flex items-center space-x-3 group">
+                <div class="text-brandDark group-hover:scale-110 transition-transform">
+                    <i data-lucide="send" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <p class="text-xs font-mono text-brandMuted/70 uppercase tracking-wider">Telegram</p>
+                    <p class="text-sm font-bold text-brandDark">@zizeiii_z</p>
+                </div>
+            </a>
+            
+            <!-- Instagram -->
+            <a href="https://instagram.com/reyhan.mean" target="_blank" class="p-4 border border-brandDark/20 rounded bg-brandDark/[0.02] hover:border-brandDark transition-all flex items-center space-x-3 group">
+                <div class="text-brandDark group-hover:scale-110 transition-transform">
+                    <i data-lucide="camera" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <p class="text-xs font-mono text-brandMuted/70 uppercase tracking-wider">Instagram</p>
+                    <p class="text-sm font-bold text-brandDark">@reyhan.mean</p>
+                </div>
+            </a>
+
+            <!-- Lokasi Rumah -->
+            <div class="p-4 border border-brandDark/20 rounded bg-brandDark/[0.02] flex items-center space-x-3">
+                <div class="text-brandDark">
+                    <i data-lucide="map-pin" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <p class="text-xs font-mono text-brandMuted/70 uppercase tracking-wider">Lokasi</p>
+                    <p class="text-sm font-bold text-brandDark">Bandung, Jawa Barat</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="max-w-4xl mx-auto px-6 py-8 border-t border-brandDark/10 text-center text-[11px] font-mono text-brandMuted">
+        <p>&copy; 2026 Raihan Azhar & Gemini. Dibuat dengan Tailwind CSS & Lucide Icons.</p>
+    </footer>
+
+
+    <!-- Script untuk merender semua icon Lucide -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
